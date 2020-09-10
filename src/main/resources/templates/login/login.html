@@ -1,0 +1,116 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" th:href="@{/img/logo.png}">
+
+    <title>Expedientes ETP - Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/dist/css/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/pagina/css/login.css}" rel="stylesheet">
+
+    <script th:src="@{/bootstrap/navbar/js/jquery-slim.min.js}"></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script th:src="@{/bootstrap/dist/js/bootstrap.js}"></script>
+
+    <!-- Alerta de error -->
+    <script>
+        function hide() {
+            document.getElementById("error").style = "display:none";
+        }
+
+        setInterval(hide, 4000);
+    </script>
+
+    <script>
+        function hide() {
+            document.getElementById("logout").style = "display:none";
+        }
+
+        setInterval(hide, 3000);
+    </script>
+
+    <script>
+        function hide() {
+            document.getElementById("expired").style = "display:none";
+        }
+
+        setInterval(hide, 8000);
+    </script>
+
+</head>
+<body>
+
+<div class="container-fluid fondo-login">
+
+    <div class="text-center">
+
+        <img th:src="@{/img/bienvenido.png}" class="img-responsive">
+
+        <div class="row text-left mt-4">
+
+            <div class="col-md-1 col-sm-0"></div>
+
+            <form class="form-signin col-md-5 col-sm-6 fondo-autenticar mt-4" th:action="@{/login}"
+                  method="post">
+
+                <label for="usuario"><strong>Usuario</strong></label>
+                <div class="form-group mb-3">
+                    <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario" required
+                           autofocus/>
+                </div>
+
+                <label for="password"><strong>Contraseña</strong></label>
+                <div class="form-group">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña"
+                           required/>
+                </div>
+
+                <input class="btn btn-primary btn-block mt-4" type="submit" value="Acceder"/>
+
+            </form>
+
+            <div class="col-md-6 col-sm-5"></div>
+        </div>
+    </div>
+
+    <div th:if="${param.error}" class="mt-3 container text-center">
+        <div id="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><span class="tipografia-error"/>Los datos de acceso no son correctos o quizás su cuenta ha sido
+                deshabilitada!</strong>
+            <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                    aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <div th:if="${param.logout}" class="mt-3 container text-center">
+        <div id="logout" class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><span class="tipografia-error"/>Usted ha cerrado sesión correctamente!</strong>
+            <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                    aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <div th:if="${param.session}" class="mt-3 container text-center ">
+        <div id="expired" class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong><span class="tipografia-error"/>Otra persona ya ha iniciado sesión en esta cuenta. Infórmelo de
+                inmediato a su Supervisor e intente cambiar su contraseña.</strong>
+            <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                    aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

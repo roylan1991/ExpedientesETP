@@ -1,0 +1,86 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina"></div>
+
+    <th:block th:include="plantillas/menu_opciones_centros"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>Listado de Centros Politécnicos</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="text-right col-12">
+
+                            <a th:href="@{/centros_pdf}"
+                               class="exportar btn-outline-warning" title="Exportar a PDF"><img
+                                    th:src="@{/img/pdf.png}"/>
+                            </a>
+
+                            <a th:href="@{/centros_excel}"
+                               class="exportar btn-outline-warning" title="Exportar a Excel"><img
+                                    th:src="@{/img/excel.png}"/>
+                            </a>
+
+                            <a th:href="@{/nuevo_centro}" class="ml-2 btn btn-success" title="Agregar Politécnico"
+                               th:hidden="${ocultar}">+
+                                Agregar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover table-striped text-center tipografia-contenido"
+                       id="tablaCentros">
+                    <thead>
+                    <tr class="estilo-tabla btn-primary">
+                        <th>No.</th>
+                        <th>Código</th>
+                        <th>Nombre del Centro</th>
+                        <th>Dirección Particular</th>
+                        <th>Municipio</th>
+                        <th>Provincia</th>
+                        <th>Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="lst,i : ${lst_centros}">
+                        <td th:text="${i.index+1}">Datos</td>
+                        <td th:text="${lst.getCodCentro()}">Datos</td>
+                        <td th:text="${lst.getNombCentro()}">Datos</td>
+                        <td th:text="${lst.getDireccion()}">Datos</td>
+                        <td th:text="${lst.getMcpio().getNombMunicipio()}">Datos</td>
+                        <td th:text="${lst.getMcpio().getProv().getNombProvincia()}">Datos</td>
+                        <td><a th:href="@{/editar_centro(idE=${lst.getIdCentro()})}"
+                               class="btn_accion btn-primary" title="Editar"><img th:src="@{/img/editar.png}"/></a> <a
+                                th:href="@{/especialidades_centros(idE=${lst.getIdCentro()})}"
+                                class="btn_accion btn-warning" title="Especialidades"><img
+                                th:src="@{/img/lista.png}"/></a> <a th:href="@{/del_centro(idE=${lst.getIdCentro()})}"
+                                                                    class="btn_accion btn-danger"
+                                                                    onclick="return confirmarEliminar()"
+                                                                    title="Eliminar"><img
+                                th:src="@{/img/eliminar.png}"/></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer"></div>
+
+</div>
+</body>
+</html>

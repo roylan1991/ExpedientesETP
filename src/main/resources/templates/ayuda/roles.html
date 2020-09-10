@@ -1,0 +1,114 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_error"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>[Ayuda] Roles de Usuarios</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div class="container-fluid">
+                    <table class="table table-bordered table-hover table-striped tipografia-contenido">
+                        <thead>
+                        <tr class="text-center">
+                            <td class="btn-primary">Logo</td>
+                            <td class="btn-primary">Rol</td>
+                            <td class="btn-primary">Descripción</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><img th:src="@{/img/Administrador.jpg}" style="height: 70px; width: 70px"></td>
+                            <td class="estilo-principal-ayuda text-center" style="vertical-align:middle">Administrador
+                            </td>
+                            <td class="estilo-ayuda" style="vertical-align:middle">Tiene la responsabilidad de la
+                                gestión
+                                general de las cuentas de los supervisores del sistema, además gestionará las
+                                especialidades
+                                de estudio vigentes que se impartirán en los diferentes centros politécnicos.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img th:src="@{/img/Supervisor.jpg}" style="height: 70px; width: 70px"></td>
+                            <td class="estilo-principal-ayuda text-center" style="vertical-align:middle">Supervisor</td>
+                            <td class="estilo-ayuda" style="vertical-align:middle">Tiene la responsabilidad de la
+                                gestión
+                                de los usuarios pertenecientes a su respectiva provincia. Como bien describe su rol,
+                                supervisarán y serán responsables de las tareas que desarrollen sus usuarios asociados.
+                            </td>
+                        </tr>
+                        <tr class="mt-4">
+                            <td><img th:src="@{/img/Usuario.jpg}" style="height: 70px; width: 70px"></td>
+                            <td class="estilo-principal-ayuda text-center" style="vertical-align:middle">Usuario</td>
+                            <td class="estilo-ayuda" style="vertical-align:middle">Tiene el papel protagónico en el
+                                sistema, estos podrán gestionar todos los centros de estudio, los datos que integran las
+                                planillas del Formulario 221-404-03, rangos de edades y lo relacionado con la
+                                composición
+                                del personal.
+                            </td>
+                        </tr>
+                        <tr class="estilo-principal-ayuda">
+                            <td colspan="3" class="table-primary">Para poder utilizar la aplicación es indispensable que
+                                el
+                                Administrador le haya creado una cuenta a cada Supervisor provincial, estos a su vez
+                                establecerán las de sus respectivos Usuarios municipales.
+                            </td>
+                        </tr>
+                        <tr class="estilo-principal-ayuda">
+                            <td colspan="3" class="table-primary">La gestión de los supervisores y usuarios estará
+                                limitada,
+                                ya que solo negociarán la información referente a su propia provincia y municipio
+                                respectivamente.
+                            </td>
+                        </tr>
+                        <tr class="estilo-principal-ayuda">
+                            <td colspan="3" class="table-primary">Los usuarios registrados tendrán acceso a los
+                                indicadores y al conjunto general de resúmenes que arroje el sistema, ya sea municipal,
+                                provincial o nacional.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="container-fluid mt-2">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error">Conocerás tu "Rol" si en la esquina superior derecha cliqueas en tu nombre de usuario!</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error">Si presentas rol de Supervisor puedes transmitir tu duda o inquietud al Administrador del sistema, si en cambio tienes rol de Usuario puedes comunicarte con tu Supervisor, él podrá ayudarte!</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+
+
+

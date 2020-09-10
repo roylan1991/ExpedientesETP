@@ -1,0 +1,76 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina"></div>
+
+    <th:block th:include="plantillas/menu_opciones_centros"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>Registro de Usuarios</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div class="text-right">
+                    <a th:href="@{/nuevo_usuario}" class="btn btn-success" title="Agregar usuario"
+                       th:hidden="${ocultar}">+ Agregar
+                    </a>
+                </div>
+
+                <table class="table table-bordered table-hover table-striped text-center tipografia-contenido mt-1"
+                       id="tablaUsuarios">
+                    <thead>
+                    <tr class="estilo-tabla btn-primary">
+                        <th>No.</th>
+                        <th>Usuario</th>
+                        <th>Nombre Descriptivo</th>
+                        <th>Rol</th>
+                        <th>Localidad</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-truncate" th:each="lst,i : ${usuarios}">
+                        <td th:text="${i.index+1}">Datos</td>
+                        <td th:text="${lst.getNombUsuario()}">Datos</td>
+                        <td th:text="${lst.getNombDescriptivo()}">Datos</td>
+                        <td th:text="${lst.getRol().getTipoRol()}">Datos</td>
+                        <td th:text="${lst.getMcpio().getNombMunicipio()} + ' [' + ${lst.getMcpio().getProv().getNombProvincia() + ']'}">
+                            Datos
+                        </td>
+                        <td th:if="${lst.getEstado()==true}"
+                            th:text="'Activo'">
+                        </td>
+                        <td th:if="${lst.getEstado()==false}"
+                            th:text="'Inactivo'">
+                        </td>
+                        <td>
+                            <a th:href="@{/editar_usuario(idU=${lst.getIdUsuario()})}"
+                               class="btn_accion btn-primary" title="Editar"><img th:src="@{/img/editar.png}"/></a> <a
+                                th:href="@{/del_usuario(idU=${lst.getIdUsuario()})}"
+                                class="btn_accion btn-danger" onclick="return confirmarEliminar()" title="Eliminar"><img
+                                th:src="@{/img/eliminar.png}"/>
+                        </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer"></div>
+
+</div>
+</body>
+</html>

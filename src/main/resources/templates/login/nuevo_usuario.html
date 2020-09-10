@@ -1,0 +1,107 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_centros"></th:block>
+
+    <div>
+        <section class="main-footer titulo">
+            <strong>Agregar nuevo usuario</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div th:if="${error}" class="container-fluid">
+                    <div id="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error" th:text="${mensaje_error}"/></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form th:action="@{/nuevo_usuario}" method="post">
+
+                    <div class="col-md-4 col-sm-4">
+                        <label for="usuario"> <strong>Usuario</strong></label>
+                        <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="new-text"
+                               required>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 mt-4">
+                        <label for="nombre"> <strong>Nombre Descriptivo</strong></label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="" required>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 mt-4">
+                        <label for="mcpios"><strong>Municipio</strong></label>
+                        <select class="form-control" id="mcpios" name="municipio" required>
+                            <option value="">Seleccione...</option>
+                            <option th:each="mcpio : ${lst_municipios}"
+                                    th:text="${mcpio.getNombMunicipio()} + ' [' + ${mcpio.getProv().getNombProvincia()} + ']'"
+                                    th:value="${mcpio.getIdMunicipio()}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="row container mt-4">
+
+                        <div class="col-md-4 col-sm-4 col-lg-4">
+                            <label for="estado"><strong>Estado</strong></label>
+                            <select class="form-control" id="estado" name="estado" required>
+                                <option value="">Seleccione...</option>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-lg-4">
+                            <label for="roles"><strong>Rol</strong></label>
+                            <select class="form-control" id="roles" name="rol" required>
+                                <option value="">Seleccione...</option>
+                                <option th:each="rol : ${lst_roles}"
+                                        th:text="${rol.getTipoRol()}"
+                                        th:value="${rol.getIdRol()}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row container mt-4">
+
+                        <div class="col-md-4 col-sm-4">
+                            <label for="password1"> <strong>Contraseña</strong></label>
+                            <input type="password" class="form-control" id="password1" name="password1"
+                                   autocomplete="new-password" required>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4">
+                            <label for="password2"> <strong>Confirme Contraseña</strong></label>
+                            <input type="password" class="form-control" id="password2" name="password2"
+                                   autocomplete="new-password" required>
+                        </div>
+
+                    </div>
+
+                    <div class="text-right col-md-12 mt-5">
+                        <button class="btn btn-success" type="submit">+ Agregar</button>
+                    </div>
+
+                </form>
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>

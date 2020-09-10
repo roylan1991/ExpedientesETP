@@ -1,0 +1,323 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="plantillas/plantilla :: css-js" th:remove="div"></div>
+
+    <script th:src="@{/bootstrap/graficas/js/jquery.flot.js}"></script>
+    <script th:src="@{/bootstrap/graficas/js/jquery.flot.categories.js}"></script>
+
+    <script>
+        $(function () {
+            var datos = [
+                ["Indt", [[${rama1}]]], ["Agrop", [[${rama2}]]], ["Contb", [[${rama3}]]], ["Infm", [[${rama4}]]], ["Serv", [[${rama5}]]]
+            ];
+
+            var datosN = [
+                ["Indt", [[${rama_1}]]], ["Agrop", [[${rama_2}]]], ["Contb", [[${rama_3}]]], ["Infm", [[${rama_4}]]], ["Serv", [[${rama_5}]]]
+            ];
+
+            $.plot("#graficaRamas", [datos], {
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.6,
+                        align: "center",
+                    }
+                },
+                xaxis: {
+                    mode: "categories",
+                    tickLength: 0
+                }
+            });
+
+            $.plot("#graficaRamasN", [datosN], {
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.6,
+                        align: "center",
+                    }
+                },
+                xaxis: {
+                    mode: "categories",
+                    tickLength: 0
+                }
+            });
+        });
+    </script>
+</head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_indicadores"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>Matrícula por ramas</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div class="row">
+                    <div class="col-sm-6 container">
+
+                        <table class="table table-bordered table-hover table-striped text-center tipografia-contenido mt-1">
+                            <thead>
+                            <tr class="estilo-tabla">
+                                <td colspan="4" class="table-primary">Curso Diurno</td>
+                            </tr>
+                            <tr>
+                                <td class="btn-primary">Rama</td>
+                                <td class="btn-primary">Familia</td>
+                                <td class="btn-primary">Matrícula</td>
+                                <td class="btn-primary">Total Rama</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="8" class="estilo-tabla">Industrial</td>
+                                <td class="estilo-tabla">Mécanica</td>
+                                <td class="estilo-tabla" th:text="${familia1}">Datos</td>
+                                <td style="vertical-align:middle" th:text="${rama1}" rowspan="8" class="estilo-tabla">
+                                    Datos
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Transporte</td>
+                                <td class="estilo-tabla" th:text="${familia2}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Industria Ligera</td>
+                                <td class="estilo-tabla" th:text="${familia3}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Eléctrica</td>
+                                <td class="estilo-tabla" th:text="${familia4}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Construcción</td>
+                                <td class="estilo-tabla" th:text="${familia5}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Geodesia y Cartografía</td>
+                                <td class="estilo-tabla" th:text="${familia6}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Petróleo</td>
+                                <td class="estilo-tabla" th:text="${familia7}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Quím, Azuc, Biolg y Alimenticia</td>
+                                <td class="estilo-tabla" th:text="${familia8}">Datos</td>
+                            </tr>
+
+
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="1" class="estilo-tabla">Agropecuaria</td>
+                                <td class="estilo-tabla">Agroindustrial</td>
+                                <td class="estilo-tabla" th:text="${familia9}">Datos</td>
+                                <td style="vertical-align:middle" th:text="${rama2}" rowspan="1" class="estilo-tabla">
+                                    Datos
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="1" class="estilo-tabla">Contabilidad</td>
+                                <td class="estilo-tabla">Economía</td>
+                                <td class="estilo-tabla" th:text="${familia11}">Datos</td>
+                                <td style="vertical-align:middle" th:text="${rama3}" rowspan="1" class="estilo-tabla">
+                                    Datos
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="1" class="estilo-tabla">Informática</td>
+                                <td class="estilo-tabla">Informática y Comunicaciones</td>
+                                <td class="estilo-tabla" th:text="${familia10}">Datos</td>
+                                <td style="vertical-align:middle" th:text="${rama4}" rowspan="1" class="estilo-tabla">
+                                    Datos
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="2" class="estilo-tabla">Servicio</td>
+                                <td class="estilo-tabla">Servicio</td>
+                                <td class="estilo-tabla" th:text="${familia12}">Datos</td>
+                                <td style="vertical-align:middle" th:text="${rama5}" rowspan="2" class="estilo-tabla">
+                                    Datos
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Servicios Sociales</td>
+                                <td class="estilo-tabla" th:text="${familia13}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="estilo-tabla table-info">Gráfico - Matrícula total por Ramas</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div id="graficaRamas" class="disenno_grafica"
+                                                 style="height: 250px; width: 350px"></div>
+                                            <div class="align-self-end disenno_grafica">
+                                                <div class="mb-1 mt-2"><u>Ramas</u></div>
+                                                <div th:text="'Industrial: '+ ${rama1}" class="mb-1">Datos</div>
+                                                <div th:text="'Agropecuaria: '+ ${rama2}" class="mb-1">Datos</div>
+                                                <div th:text="'Contabilidad: '+ ${rama3}" class="mb-1">Datos</div>
+                                                <div th:text="'Informática: '+ ${rama4}" class="mb-1">Datos</div>
+                                                <div th:text="'Servicio: '+ ${rama5}" class="mb-4">Datos</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <div class="col-sm-6 container">
+                        <table class="table table-bordered table-hover table-striped text-center tipografia-contenido mt-1">
+                            <thead>
+                            <tr class="estilo-tabla">
+                                <td colspan="4" class="table-warning">Curso V/Nocturno</td>
+                            </tr>
+                            <tr>
+                                <td class="btn-primary">Rama</td>
+                                <td class="btn-primary">Familia</td>
+                                <td class="btn-primary">Matrícula</td>
+                                <td class="btn-primary">Total Rama</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="8" class="estilo-tabla">Industrial</td>
+                                <td class="estilo-tabla">Mécanica</td>
+                                <td class="estilo-tabla" th:text="${familia_1}">Datos</td>
+                                <td style="vertical-align:middle" th:text="${rama_1}" rowspan="8" class="estilo-tabla">
+                                    Datos
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Transporte</td>
+                                <td class="estilo-tabla" th:text="${familia_2}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Industria Ligera</td>
+                                <td class="estilo-tabla" th:text="${familia_3}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Eléctrica</td>
+                                <td class="estilo-tabla" th:text="${familia_4}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Construcción</td>
+                                <td class="estilo-tabla" th:text="${familia_5}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Geodesia y Cartografía</td>
+                                <td class="estilo-tabla" th:text="${familia_6}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Petróleo</td>
+                                <td class="estilo-tabla" th:text="${familia_7}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Quím, Azuc, Biolg y Alimenticia</td>
+                                <td class="estilo-tabla" th:text="${familia_8}">Datos</td>
+                            </tr>
+
+
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="1" class="estilo-tabla">Agropecuaria</td>
+                                <td class="estilo-tabla">Agroindustrial</td>
+                                <td class="estilo-tabla" th:text="${familia_9}">Datos</td>
+                                <td style="vertical-align:middle" th:text="${rama_2}" rowspan="1" class="estilo-tabla">
+                                    Datos
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="1" class="estilo-tabla">Contabilidad</td>
+                                <td class="estilo-tabla">Economía</td>
+                                <td class="estilo-tabla" th:text="${familia_11}">Datos</td>
+                                <td style="vertical-align:middle" th:text="${rama_3}" rowspan="1" class="estilo-tabla">
+                                    Datos
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="1" class="estilo-tabla">Informática</td>
+                                <td class="estilo-tabla">Informática y Comunicaciones</td>
+                                <td class="estilo-tabla" th:text="${familia_10}">Datos</td>
+                                <td style="vertical-align:middle" th:text="${rama_4}" rowspan="1" class="estilo-tabla">
+                                    Datos
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="2" class="estilo-tabla">Servicio</td>
+                                <td class="estilo-tabla">Servicio</td>
+                                <td class="estilo-tabla" th:text="${familia_12}">Datos</td>
+                                <td style="vertical-align:middle" th:text="${rama_5}" rowspan="2" class="estilo-tabla">
+                                    Datos
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Servicios Sociales</td>
+                                <td class="estilo-tabla" th:text="${familia_13}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="estilo-tabla table-info">Gráfico - Matrícula total por Ramas</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div id="graficaRamasN" class="disenno_grafica"
+                                                 style="height: 250px; width: 350px"></div>
+                                            <div class="align-self-end disenno_grafica">
+                                                <div class="mb-1 mt-2"><u>Ramas</u></div>
+                                                <div th:text="'Industrial: '+ ${rama_1}" class="mb-1">Datos</div>
+                                                <div th:text="'Agropecuaria: '+ ${rama_2}" class="mb-1">Datos</div>
+                                                <div th:text="'Contabilidad: '+ ${rama_3}" class="mb-1">Datos</div>
+                                                <div th:text="'Informática: '+ ${rama_4}" class="mb-1">Datos</div>
+                                                <div th:text="'Servicio: '+ ${rama_5}" class="mb-4">Datos</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+

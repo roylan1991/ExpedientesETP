@@ -1,0 +1,116 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_centros"></th:block>
+
+    <div>
+        <section class="main-footer titulo">
+            <strong><span th:text="'Editar usuario: ' + ${datos_usuario.getNombUsuario()}"/></strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div th:if="${error}" class="container-fluid">
+                    <div id="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error" th:text="${mensaje_error}"/></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form th:action="@{/editar_usuario(idU=${datos_usuario.getIdUsuario()})}" method="post">
+
+                    <div class="col-md-4 col-sm-4">
+                        <label for="usuario"> <strong>Usuario</strong></label>
+                        <input type="text" disabled="true" class="form-control" id="usuario" name="usuario"
+                               th:value="${datos_usuario.getNombUsuario()}"
+                               required>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 mt-4">
+                        <label for="nombre"> <strong>Nombre Descriptivo</strong></label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" th:disabled="${bloquear}"
+                               th:placeholder="${datos_usuario.getNombDescriptivo()}"
+                               th:value="${datos_usuario.getNombDescriptivo()}"
+                               required>
+                    </div>
+
+                    <div class="col-md-7 col-sm-7 mt-4">
+                        <label for="mcpios"><strong>Municipio</strong></label>
+                        <select class="form-control" id="mcpios" name="municipio" th:disabled="${bloquear}" required>
+                            <option th:text="${datos_usuario.getMcpio().getNombMunicipio()} + ' (Seleccionado)'"
+                                    th:value="${datos_usuario.getMcpio().getIdMunicipio()}">
+                                Seleccione...
+                            </option>
+                            <option th:each="mcpio : ${lst_municipios}"
+                                    th:text="${mcpio.getNombMunicipio()} + ' [' + ${mcpio.getProv().getNombProvincia()} + ']'"
+                                    th:value="${mcpio.getIdMunicipio()}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="row container mt-4">
+
+                        <div class="col-md-4 col-sm-4 col-lg-4">
+                            <label for="estado"><strong>Estado</strong></label>
+                            <select class="form-control" id="estado" th:disabled="${!ocultarPassword}" name="estado"
+                                    required>
+                                <option th:if="${datos_usuario.getEstado()==true}"
+                                        th:text="'Activo (Seleccionado)'"
+                                        th:value="${datos_usuario.getEstado()}">
+                                </option>
+                                <option th:if="${datos_usuario.getEstado()==false}"
+                                        th:text="'Inactivo (Seleccionado)'"
+                                        th:value="${datos_usuario.getEstado()}">
+                                </option>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-lg-4">
+                            <label for="roles"><strong>Rol</strong></label>
+                            <select class="form-control" disabled="true" id="roles" name="rol" required>
+                                <option th:text="${datos_usuario.getRol().getTipoRol()}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row mt-5">
+                            <div class="text-left col-md-6 col-sm-3">
+                                <a th:href="@{/cambiar_password(idU=${datos_usuario.getIdUsuario()})}"
+                                   class="btn btn-danger" th:hidden="${ocultarPassword}"><img
+                                        th:src="@{/img/editar.png}"/>
+                                    Editar Contraseña</span>
+                                </a>
+                            </div>
+
+                            <div class="text-right col-md-6 col-sm-9" th:hidden="${bloquear}">
+                                <button class="btn btn-primary" type="submit"><img th:src="@{/img/editar.png}"/> Editar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,589 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_resumen"></th:block>
+
+    <div>
+        <section class="main-footer titulo">
+            <strong><span th:text="'[ Resumen Municipal ] - Ficha Turquino' + ${titulo}"/></strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div th:if="${error}" class="container-fluid">
+                    <div id="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error" th:text="${mensaje_error}"/></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="text-right col-12">
+
+                            <a th:href="@{/ficha_turquino_mcpal_pdf}"
+                               class="exportar btn-outline-warning" title="Exportar a PDF"><img
+                                    th:src="@{/img/pdf.png}"/>
+                            </a>
+
+                            <a th:href="@{/ficha_turquino_mcpal_excel}"
+                               class="exportar btn-outline-warning" title="Exportar a Excel"><img
+                                    th:src="@{/img/excel.png}"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/ficha_turquino_mcpal}" method="post">
+
+                    <div class="container-fluid" th:hidden="${ocultar}">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-9 col-lg-9">
+                                <label for="mcpios"><strong>Municipio</strong></label>
+                                <select class="form-control" id="mcpios" name="mcpios" required>
+                                    <option value="">Seleccione...</option>
+                                    <option th:each="mcpio : ${municipios}"
+                                            th:text="${mcpio.getNombMunicipio()} + ' ['+ ${mcpio.getProv().getNombProvincia()} + ']'"
+                                            th:value="${mcpio.getIdMunicipio()}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                <button class="text-right btn btn-info mt-4" type="submit">
+                                    <img th:src="@{/img/ficha.png}"> Ver Ficha Turquino
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 container-fluid" th:hidden="${oculto}">
+                        <div id="tabs12">
+                            <ul>
+                                <li><a href="#tabs12-1">Total Politécnico</a></li>
+                                <li><a href="#tabs12-2">Curso Diurno</a></li>
+                                <li><a href="#tabs12-3">Curso V/Nocturno</a></li>
+                            </ul>
+
+                            <div id="tabs12-1">
+
+                                <div class="mt-2 container-fluid">
+
+                                    <div class="container-fluid text-center">
+
+                                        <div class="row mt-2">
+                                            <div class="col">
+                                                <label for="matriculaTotal"> <strong>Matrícula Total</strong></label>
+                                                <input type="text" class="form-control" id="matriculaTotal"
+                                                       name="matriculaTotal"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(0).getTotal()}"
+                                                       th:value="${lst_fichas.get(0).getTotal()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="matriculaHembrasTotal"> <strong>Matrícula Hembras
+                                                    Total</strong></label>
+                                                <input type="text" class="form-control" id="matriculaHembrasTotal"
+                                                       name="matriculaHembrasTotal"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(0).getHembras()}"
+                                                       th:value="${lst_fichas.get(0).getHembras()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="nuevosIngresosTotal"> <strong>Total Nuevos
+                                                    Ingresos</strong></label>
+                                                <input type="text" class="form-control" id="nuevosIngresosTotal"
+                                                       name="nuevosIngresosTotal"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(0).getNuevosIngresos()}"
+                                                       th:value="${lst_fichas.get(0).getNuevosIngresos()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-4">
+                                            <div class="col-sm-5 col-md-4">
+                                                <label for="internosTotal"> <strong>Total Internos</strong></label>
+                                                <input type="text" class="form-control" id="internosTotal"
+                                                       name="internosTotal"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(0).getInternos()}"
+                                                       th:value="${lst_fichas.get(0).getInternos()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col-sm-5 col-md-4">
+                                                <label for="seminternosTotal"> <strong>Total
+                                                    Seminternos</strong></label>
+                                                <input type="text" class="form-control" id="seminternosTotal"
+                                                       name="seminternosTotal"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(0).getSeminternos()}"
+                                                       th:value="${lst_fichas.get(0).getSeminternos()}"
+                                                       required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="mt-4 rayita">
+
+                                <div class="container-fluid mt-4">
+                                    <div class="text-center">
+
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <label for="personalDocenteTotal"> <strong>Docentes
+                                                    Total</strong></label>
+                                                <input type="text" class="form-control" id="personalDocenteTotal"
+                                                       name="personalDocenteTotal"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(0).getDocentesTotal()}"
+                                                       th:value="${lst_fichas.get(0).getDocentesTotal()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="personalDocenteHembrasTotal"> <strong>Docentes Hembras
+                                                    Total</strong></label>
+                                                <input type="text" class="form-control" id="personalDocenteHembrasTotal"
+                                                       name="personalDocenteHembrasTotal"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(0).getDocentesHembras()}"
+                                                       th:value="${lst_fichas.get(0).getDocentesHembras()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="frenteAulaTotal"> <strong>Frente Aulas
+                                                    Total</strong></label>
+                                                <input type="text" class="form-control" id="frenteAulaTotal"
+                                                       name="frenteAulaTotal"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(0).getFrenteAula()}"
+                                                       th:value="${lst_fichas.get(0).getFrenteAula()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="relAlumProf"><strong>Relación
+                                                    Alumnos/Profesor</strong></label>
+                                                <input type="text" class="form-control" id="relAlumProf"
+                                                       name="relAlumProf"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(0).getRelacionAlumProf()}"
+                                                       th:value="${lst_fichas.get(0).getRelacionAlumProf()}"
+                                                       required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="tabs12-2">
+                                <div class="mt-2 container-fluid">
+
+                                    <div class="container-fluid text-center">
+
+                                        <div class="row mt-2">
+                                            <div class="col">
+                                                <label for="matriculaTotalDiurno"> <strong>Matrícula
+                                                    Total</strong></label>
+                                                <input type="text" class="form-control" id="matriculaTotalDiurno"
+                                                       name="matriculaTotalDiurno"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(1).getTotal()}"
+                                                       th:value="${lst_fichas.get(1).getTotal()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="matriculaHembrasTotalDiurno"> <strong>Matrícula Hembras
+                                                    Total</strong></label>
+                                                <input type="text" class="form-control" id="matriculaHembrasTotalDiurno"
+                                                       name="matriculaHembrasTotalDiurno"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(1).getHembras()}"
+                                                       th:value="${lst_fichas.get(1).getHembras()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="nuevosIngresosTotalDiurno"> <strong>Total Nuevos
+                                                    Ingresos</strong></label>
+                                                <input type="text" class="form-control" id="nuevosIngresosTotalDiurno"
+                                                       name="nuevosIngresosTotalDiurno"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(1).getNuevosIngresos()}"
+                                                       th:value="${lst_fichas.get(1).getNuevosIngresos()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-4">
+                                            <div class="col-sm-5 col-md-4">
+                                                <label for="internosTotalDiurno"> <strong>Total
+                                                    Internos</strong></label>
+                                                <input type="text" class="form-control" id="internosTotalDiurno"
+                                                       name="internosTotalDiurno"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(1).getInternos()}"
+                                                       th:value="${lst_fichas.get(1).getInternos()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col-sm-5 col-md-4">
+                                                <label for="seminternosTotalDiurno"> <strong>Total
+                                                    Seminternos</strong></label>
+                                                <input type="text" class="form-control" id="seminternosTotalDiurno"
+                                                       name="seminternosTotalDiurno"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(1).getSeminternos()}"
+                                                       th:value="${lst_fichas.get(1).getSeminternos()}"
+                                                       required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid text-center mt-4">
+                                    <div class="row mt-1 marco">
+
+                                        <div class="col-3 mt-4">
+                                            <label><strong>Rama Industrial</strong></label>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="totalIndustrial"> <strong>Matrícula Total</strong></label>
+                                            <input type="text" class="form-control" id="totalIndustrial"
+                                                   name="totalIndustrial"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(2).getTotal()}"
+                                                   th:value="${lst_fichas.get(2).getTotal()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="totalHembrasIndustrial"> <strong>Matrícula Hembras
+                                                Total</strong></label>
+                                            <input type="text" class="form-control" id="totalHembrasIndustrial"
+                                                   name="totalHembrasIndustrial"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(2).getHembras()}"
+                                                   th:value="${lst_fichas.get(2).getHembras()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="nuevoIngresoIndustrial"> <strong>Total Nuevos
+                                                Ingresos</strong></label>
+                                            <input type="text" class="form-control" id="nuevoIngresoIndustrial"
+                                                   name="nuevoIngresoIndustrial"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(2).getNuevosIngresos()}"
+                                                   th:value="${lst_fichas.get(2).getNuevosIngresos()}"
+                                                   required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid text-center">
+                                    <div class="row mt-1 marco">
+
+                                        <div class="col-3 mt-4">
+                                            <label><strong>Rama Agropecuaria</strong></label>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="totalAgropecuaria"> <strong>Matrícula Total</strong></label>
+                                            <input type="text" class="form-control" id="totalAgropecuaria"
+                                                   name="totalAgropecuaria"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(3).getTotal()}"
+                                                   th:value="${lst_fichas.get(3).getTotal()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="totalHembrasAgropecuaria"> <strong>Matrícula Hembras
+                                                Total</strong></label>
+                                            <input type="text" class="form-control" id="totalHembrasAgropecuaria"
+                                                   name="totalHembrasAgropecuaria"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(3).getHembras()}"
+                                                   th:value="${lst_fichas.get(3).getHembras()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="nuevoIngresoAgropecuaria"> <strong>Total Nuevos
+                                                Ingresos</strong></label>
+                                            <input type="text" class="form-control" id="nuevoIngresoAgropecuaria"
+                                                   name="nuevoIngresoAgropecuaria"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(3).getNuevosIngresos()}"
+                                                   th:value="${lst_fichas.get(3).getNuevosIngresos()}"
+                                                   required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid text-center">
+                                    <div class="row mt-1 marco">
+
+                                        <div class="col-3 mt-4">
+                                            <label><strong>Rama Contabilidad</strong></label>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="totalContabilidad"> <strong>Matrícula Total</strong></label>
+                                            <input type="text" class="form-control" id="totalContabilidad"
+                                                   name="totalContabilidad"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(4).getTotal()}"
+                                                   th:value="${lst_fichas.get(4).getTotal()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="totalHembrasContabilidad"> <strong>Matrícula Hembras
+                                                Total</strong></label>
+                                            <input type="text" class="form-control" id="totalHembrasContabilidad"
+                                                   name="totalHembrasContabilidad"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(4).getHembras()}"
+                                                   th:value="${lst_fichas.get(4).getHembras()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="nuevoIngresoContabilidad"> <strong>Total Nuevos
+                                                Ingresos</strong></label>
+                                            <input type="text" class="form-control" id="nuevoIngresoContabilidad"
+                                                   name="nuevoIngresoContabilidad"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(4).getNuevosIngresos()}"
+                                                   th:value="${lst_fichas.get(4).getNuevosIngresos()}"
+                                                   required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid text-center">
+                                    <div class="row mt-1 marco">
+
+                                        <div class="col-3 mt-4">
+                                            <label><strong>Rama Informática</strong></label>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="totalInformatica"> <strong>Matrícula Total</strong></label>
+                                            <input type="text" class="form-control" id="totalInformatica"
+                                                   name="totalInformatica"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(5).getTotal()}"
+                                                   th:value="${lst_fichas.get(5).getTotal()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="totalHembrasInformatica"> <strong>Matrícula Hembras
+                                                Total</strong></label>
+                                            <input type="text" class="form-control" id="totalHembrasInformatica"
+                                                   name="totalHembrasInformatica"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(5).getHembras()}"
+                                                   th:value="${lst_fichas.get(5).getHembras()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="nuevoIngresoInformatica"> <strong>Total Nuevos
+                                                Ingresos</strong></label>
+                                            <input type="text" class="form-control" id="nuevoIngresoInformatica"
+                                                   name="nuevoIngresoInformatica"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(5).getNuevosIngresos()}"
+                                                   th:value="${lst_fichas.get(5).getNuevosIngresos()}"
+                                                   required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid text-center">
+                                    <div class="row mt-1 marco">
+
+                                        <div class="col-3 mt-4">
+                                            <label><strong>Rama Servicios</strong></label>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="totalServicios"> <strong>Matrícula Total</strong></label>
+                                            <input type="text" class="form-control" id="totalServicios"
+                                                   name="totalServicios"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(6).getTotal()}"
+                                                   th:value="${lst_fichas.get(6).getTotal()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="totalHembrasServicios"> <strong>Matrícula Hembras
+                                                Total</strong></label>
+                                            <input type="text" class="form-control" id="totalHembrasServicios"
+                                                   name="totalHembrasServicios"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(6).getHembras()}"
+                                                   th:value="${lst_fichas.get(6).getHembras()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col mt-2 mb-2">
+                                            <label for="nuevoIngresoServicios"> <strong>Total Nuevos
+                                                Ingresos</strong></label>
+                                            <input type="text" class="form-control" id="nuevoIngresoServicios"
+                                                   name="nuevoIngresoServicios"
+                                                   disabled="true"
+                                                   th:placeholder="${lst_fichas.get(6).getNuevosIngresos()}"
+                                                   th:value="${lst_fichas.get(6).getNuevosIngresos()}"
+                                                   required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div id="tabs12-3">
+                                <div class="mt-2 container-fluid">
+
+                                    <div class="container-fluid text-center">
+
+                                        <div class="row mt-2">
+                                            <div class="col">
+                                                <label for="matriculaTotalCPT"> <strong>Matrícula
+                                                    Total</strong></label>
+                                                <input type="text" class="form-control" id="matriculaTotalCPT"
+                                                       name="matriculaTotalCPT"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(7).getTotal()}"
+                                                       th:value="${lst_fichas.get(7).getTotal()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="matriculaHembrasTotalCPT"> <strong>Matrícula Hembras
+                                                    Total</strong></label>
+                                                <input type="text" class="form-control" id="matriculaHembrasTotalCPT"
+                                                       name="matriculaHembrasTotalCPT"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(7).getHembras()}"
+                                                       th:value="${lst_fichas.get(7).getHembras()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="nuevosIngresosTotalCPT"> <strong>Total Nuevos
+                                                    Ingresos</strong></label>
+                                                <input type="text" class="form-control" id="nuevosIngresosTotalCPT"
+                                                       name="nuevosIngresosTotalCPT"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(7).getNuevosIngresos()}"
+                                                       th:value="${lst_fichas.get(7).getNuevosIngresos()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-4">
+                                            <div class="col-sm-5 col-md-4">
+                                                <label for="internosTotalCPT"> <strong>Total
+                                                    Internos</strong></label>
+                                                <input type="text" class="form-control" id="internosTotalCPT"
+                                                       name="internosTotalCPT"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(7).getInternos()}"
+                                                       th:value="${lst_fichas.get(7).getInternos()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col-sm-5 col-md-4">
+                                                <label for="seminternosTotalCPT"> <strong>Total
+                                                    Seminternos</strong></label>
+                                                <input type="text" class="form-control" id="seminternosTotalCPT"
+                                                       name="seminternosTotalCPT"
+                                                       disabled="true"
+                                                       th:placeholder="${lst_fichas.get(7).getSeminternos()}"
+                                                       th:value="${lst_fichas.get(7).getSeminternos()}"
+                                                       required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row mt-4 container">
+                            <a th:href="@{/caratula_mcpal}"
+                               class="btn btn-success ml-2">
+                                <img th:src="@{/img/caratula.png}"> Carátula</span>
+                            </a>
+
+                            <a th:href="@{/personal_mcpal}"
+                               class="btn btn-danger ml-2">
+                                <img th:src="@{/img/personal.png}"> Personal</span>
+                            </a>
+
+                            <a th:href="@{/rango_mcpal}"
+                               class="btn btn-warning ml-2">
+                                <img th:src="@{/img/rangoEdades.png}"> R. Edades</span>
+                            </a>
+
+                            <a th:href="@{/ficha_mcpal}"
+                               class="btn btn-primary ml-2">
+                                <img th:src="@{/img/ficha.png}"> Ficha</span>
+                            </a>
+
+                            <a th:href="@{/terminado_mcpal}"
+                               class="btn btn-outline-danger ml-2">
+                                <img th:src="@{/img/graduados.png}"> A. Terminado</span>
+                            </a>
+
+                            <a th:href="@{/iniciado_mcpal}"
+                               class="btn btn-outline-success ml-2">
+                                <img th:src="@{/img/iniciado.png}"> A. Iniciado</span>
+                            </a>
+
+                            <a th:href="@{/mat_inicial_mcpal}"
+                               class="btn btn-outline-info ml-2">
+                                <img th:src="@{/img/mat_inicial.png}"> Mat. Inicial</span>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+

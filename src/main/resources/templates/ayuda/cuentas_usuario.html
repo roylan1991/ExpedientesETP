@@ -1,0 +1,109 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_error"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>[Ayuda] Cuentas de usuarios</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div class="container-fluid">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong><span
+                                class="tipografia-error">Ejemplo del formulario donde se registran nuevos usuarios.</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form>
+                    <div class="col-md-4 col-sm-4">
+                        <label for="usuario"> <strong>Usuario</strong></label>
+                        <input type="text" class="form-control" id="usuario" name="usuario" disabled="true" required>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 mt-2">
+                        <label for="nombre"> <strong>Nombre Descriptivo</strong></label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" disabled="true" required>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 mt-2">
+                        <label for="mcpios"><strong>Municipio</strong></label>
+                        <select class="form-control" id="mcpios" name="municipio" required>
+                            <option value="">Seleccione...</option>
+                            <option th:each="mcpio : ${lst_municipios}"
+                                    th:text="${mcpio.getNombMunicipio()} + ' [' + ${mcpio.getProv().getNombProvincia()} + ']'"
+                                    th:value="${mcpio.getIdMunicipio()}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="row container mt-2">
+
+                        <div class="col-md-4 col-sm-4 col-lg-4">
+                            <label for="estado"><strong>Estado</strong></label>
+                            <select class="form-control" id="estado" name="estado" required>
+                                <option value="">Seleccione...</option>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-lg-4">
+                            <label for="roles"><strong>Rol</strong></label>
+                            <select class="form-control" id="roles" name="rol" required>
+                                <option value="">Seleccione...</option>
+                                <option th:each="rol : ${lst_roles}"
+                                        th:text="${rol.getTipoRol()}"
+                                        th:value="${rol.getIdRol()}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="container-fluid mt-4">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error">Para agregar/editar usuarios, cliquea tu nombre de usuario en la esquina superior derecha y luego en [Editar Perfiles].
+                            Es importante conocer que sus respectivos datos serán completados por Administradores y Supervisores, lamentablemente los Usuarios solo podrán editar su respectiva contraseña!</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error">El "Estado" permitirá desahabilitar temporalmente el acceso al sistema. Útil luego de que un usuario haya completado correctamente toda su información!</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+
+
+

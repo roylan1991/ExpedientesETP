@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina"></div>
+
+    <th:block th:include="plantillas/menu_opciones_captaciones"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong><span
+                    th:text="'[ Especialidades Anteriores ] - Politécnico ' + ${datos_centro.getNombCentro()}"/></strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <table class="table table-bordered table-hover table-striped text-center tipografia-contenido mt-1"  id="tablaEspAnteriores">
+                    <thead>
+                    <tr class="estilo-tabla btn-primary">
+                        <th>Nivel</th>
+                        <th>Especialidad</th>
+                        <th>Duración</th>
+                        <th>Año</th>
+                        <th>M. Inicial</th>
+                        <th>Altas</th>
+                        <th>M. Ajust</th>
+                        <th>M. Final</th>
+                        <th>Aprob</th>
+                        <th>Bajas</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-truncate" th:each="esp : ${especialidades}">
+                        <td th:text="${esp.getPlanilla().getEspecialidadCentro().getEspecialidad().getNivel().getTipoNivel()}">
+                            Datos
+                        </td>
+                        <td th:text="${esp.getPlanilla().getEspecialidadCentro().getEspecialidad().getNombEspecialidad()}">
+                            Datos
+                        </td>
+                        <td th:text="${esp.getPlanilla().getEspecialidadCentro().getDuracion().getTipoDuracion()}">
+                            Datos
+                        </td>
+                        <td th:text="${esp.getAnnoEstudio().getTipoAnno()}">Datos</td>
+                        <td th:text="${esp.getMatriculaInicial()}">Datos</td>
+                        <td th:text="${esp.getAltasTotal()}">Datos</td>
+                        <td th:text="${esp.getMatricInicialAjustada()}">Datos</td>
+                        <td th:text="${esp.getMatriculaFinal()}">Datos</td>
+                        <td th:text="${esp.getAprobados()}">Datos</td>
+                        <td th:text="${esp.getBajasTotal()}">Datos</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer"></div>
+
+</div>
+</body>
+</html>

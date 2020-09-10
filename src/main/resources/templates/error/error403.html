@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina"></div>
+
+    <th:block th:include="plantillas/menu_opciones_error"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>Advertencia: Error 403</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido d-flex justify-content-center">
+
+                <div class="text-center mt-4">
+                    <div>
+                        <img th:src="@{/img/error403.png}">
+                    </div>
+
+                    <div class="acceso-denegado mt-4">
+                        <label>[ACCESO DENEGADO]</label>
+                    </div>
+
+                    <div class="h4 mt-4">
+                        <hr>
+                        <label>¡Usted no tiene autorización para realizar esta operación!</label>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer"></div>
+
+</div>
+</body>
+</html>

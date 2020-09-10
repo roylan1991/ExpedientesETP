@@ -1,0 +1,305 @@
+<html class=""><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><!-- base href="zim://A/Anexo:C%C3%B3digos_de_estado_HTTP.html" -->
+    <meta charset="UTF-8">
+    <title>Anexo:Códigos de estado HTTP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="HTTP%20Status_files/a">
+    <script src="HTTP%20Status_files/a_002"></script><script src="HTTP%20Status_files/a_005"></script>
+  </head>
+  <body class="mw-body mw-body-content mediawiki" style="background-color: white; margin: 0; border-width: 0px; padding: 0px;">
+    <div id="content" class="mw-body" style="padding: 1em; border-width: 0px; max-width: 55.8em; margin: 0 auto 0 auto">
+      <a id="top"></a>
+      <h1 id="titleHeading" style="background-color: white; margin: 0;">Anexo:Códigos de estado HTTP</h1>
+      <div id="mw-content-text"><p id="mwAQ">La siguiente es una lista de códigos de respuesta del <a href="zim://A/Hypertext_Transfer_Protocol.html" title="Hypertext Transfer Protocol" id="mwAg">HTTP</a>
+ y, separadas por un guion, la frase estándar asociadas a ese código de 
+respuesta en el protocolo HTTP. Estas frases estándares destinadas a dar
+ una descripción intuitiva del estatus. Los códigos de estatus están 
+especificados por el <a href="http://tools.ietf.org/html/rfc2616" id="mwAw" class="external">RFC 2616</a> (actualmente obsoleto), y algunos fragmentos en los estándares <a href="http://tools.ietf.org/html/rfc2518" id="mwBA" class="external">RFC 2518</a> (también obsoleto), <a href="http://tools.ietf.org/html/rfc2817" id="mwBQ" class="external">RFC 2817</a>, <a href="http://tools.ietf.org/html/rfc2295" id="mwBg" class="external">RFC 2295</a> (experimental), <a href="http://tools.ietf.org/html/rfc2774" id="mwBw" class="external">RFC 2774</a> (también experimental) y <a href="http://tools.ietf.org/html/rfc4918" id="mwCA" class="external">RFC 4918</a>; otros no están estandarizados, pero son comúnmente utilizados.</p>
+
+<p id="mwCQ">El primer dígito del código de respuesta especifica una de las cinco clases de respuesta.</p>
+
+<h2 id="1xx:_Respuestas_informativas"> 1xx: Respuestas informativas </h2>
+<p id="mwCg">Petición recibida, continuando proceso.
+Esta respuesta significa que el servidor ha recibido los encabezados de 
+la petición, y que el cliente debería proceder a enviar el cuerpo de la 
+misma (en el caso de peticiones para las cuales el cuerpo necesita ser 
+enviado; por ejemplo, una petición <a href="zim://A/Hypertext_Transfer_Protocol.html" title="Hypertext Transfer Protocol" id="mwCw">Hypertext Transfer Protocol</a>).
+ Si el cuerpo de la petición es largo, es ineficiente enviarlo a un 
+servidor, cuando la petición ha sido ya rechazada, debido a encabezados 
+inapropiados. Para hacer que un servidor cheque si la petición podría 
+ser aceptada basada únicamente en los encabezados de la petición, el 
+cliente debe enviar <code id="mwDA">Expect: 100-continue</code> como un encabezado en su petición inicial (vea Plantilla:Web-RFC: Expect header) y verificar si un código de estado <code id="mwDg">100 Continue</code> es recibido en respuesta, antes de continuar (o recibir <code id="mwDw">417 Expectation Failed</code> y no continuar).<sup id="cite_ref-1"><a href="#cite_note-1" style="counter-reset: mw-Ref 1;"><span class="mw-reflink-text">[1]</span></a></sup></p>
+<dl id="mwEA"><dt id="mwEQ"> 100 - Continue</dt>
+<dd id="mwEg"> El navegador puede continuar realizando su petición (se 
+utiliza para indicar que la primera parte de la petición del navegador 
+se ha recibido correctamente).<sup id="cite_ref-LibrosWeb_2-0"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwEw"> 101 - Switching Protocols</dt>
+<dd id="mwFA"> El servidor acepta el cambio de protocolo propuesto por el navegador (puede ser por ejemplo un cambio de <code id="mwFQ">HTTP 1.0</code> a <code id="mwFg">HTTP 1.1</code>).<sup id="cite_ref-LibrosWeb_2-1"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwFw"> 102 - Processing (WebDAV - <a href="http://tools.ietf.org/html/rfc2518" id="mwGA" class="external">RFC 2518</a>)</dt>
+<dd id="mwGQ"> El servidor está procesando la petición del navegador 
+pero todavía no ha terminado (esto evita que el navegador piense que la 
+petición se ha perdido cuando no recibe ninguna respuesta).<sup id="cite_ref-LibrosWeb_2-2"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwGg"> 103 - Checkpoint</dt>
+<dd id="mwGw"> Se va a reanudar una petición <code id="mwHA">POST</code> o <code id="mwHQ">PUT</code> que fue abortada previamente.<sup id="cite_ref-LibrosWeb_2-3"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd></dl>
+
+<h2 id="2xx:_Peticiones_correctas"> 2xx: Peticiones correctas </h2>
+<p id="mwHg">Esta clase de código de estado indica que la petición fue recibida correctamente, entendida y aceptada.</p>
+
+<dl id="mwHw"><dt id="mwIA"> 200 - OK</dt>
+<dd id="mwIQ"> Respuesta estándar para peticiones correctas.</dd>
+<dt id="mwIg"> 201 - Created</dt>
+<dd id="mwIw"> La petición ha sido completada y ha resultado en la creación de un nuevo recurso.</dd>
+<dt id="mwJA"> 202 - Accepted</dt>
+<dd id="mwJQ"> La petición ha sido aceptada para procesamiento, pero 
+este no ha sido completado. La petición eventualmente pudiere no ser 
+satisfecha, ya que podría ser no permitida o prohibida cuando el 
+procesamiento tenga lugar.</dd>
+<dt id="mwJg"> 203 - Non-Authoritative Information (desde HTTP/1.1)</dt>
+<dd id="mwJw"> La petición se ha completado con éxito, pero su contenido
+ no se ha obtenido de la fuente originalmente solicitada sino de otro 
+servidor.<sup id="cite_ref-LibrosWeb_2-4"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwKA"> 204 - No Content</dt>
+<dd id="mwKQ"> La petición se ha completado con éxito pero su respuesta 
+no tiene ningún contenido (la respuesta sí que puede incluir información
+ en sus cabeceras HTTP).<sup id="cite_ref-LibrosWeb_2-5"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwKg"> 205 - Reset Content</dt>
+<dd id="mwKw"> La petición se ha completado con éxito, pero su respuesta
+ no tiene contenidos y además, el navegador tiene que inicializar la 
+página desde la que se realizó la petición (este código es útil por 
+ejemplo para páginas con formularios cuyo contenido debe borrarse 
+después de que el usuario lo envíe).<sup id="cite_ref-LibrosWeb_2-6"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwLA"> 206 - Partial Content</dt>
+<dd id="mwLQ"> La petición servirá parcialmente el contenido solicitado. Esta característica es utilizada por herramientas de descarga como <a href="zim://A/Wget.html" title="Wget" id="mwLg">wget</a>
+ para continuar la transferencia de descargas anteriormente 
+interrumpidas, o para dividir una descarga y procesar las partes 
+simultáneamente.</dd>
+<dt id="mwLw"> 207 - Multi-Status (Multi-Status, WebDAV)</dt>
+<dd id="mwMA"> El cuerpo del mensaje que sigue es un mensaje <a href="zim://A/XML.html" title="XML" id="mwMQ">XML</a> y puede contener algún número de códigos de respuesta separados, dependiendo de cuántas sub-peticiones sean hechas.</dd>
+<dt id="mwMg"> 208 - Already Reported (WebDAV)</dt>
+<dd id="mwMw"> El listado de elementos DAV ya se notificó previamente, por lo que no se van a volver a listar.<sup id="cite_ref-LibrosWeb_2-7"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd></dl>
+
+<h2 id="3xx:_Redirecciones"> 3xx: Redirecciones </h2>
+<p id="mwNA">El cliente tiene que tomar una acción adicional para completar la petición.</p>
+
+<p id="mwNQ">Esta clase de código de estado indica que una acción subsecuente necesita efectuarse por el <a href="zim://A/User_agent.html" title="User agent" id="mwNg">agente de usuario</a> para completar la petición. La acción requerida <i id="mwNw">puede</i> ser llevada a cabo por el <b id="mwOA">agente de usuario</b> sin interacción con el usuario si y solo si el método utilizado en la segunda petición es <code id="mwOQ">GET</code> o <code id="mwOg">HEAD</code>. El agente de usuario <i id="mwOw">no debe</i> redirigir automáticamente una petición más de 5 veces, dado que tal funcionamiento indica usualmente un <a href="zim://A/Bucle_infinito.html" title="Bucle infinito" id="mwPA">Bucle infinito</a>.</p>
+
+<dl id="mwPQ"><dt id="mwPg"> 300 - Multiple Choices</dt>
+<dd id="mwPw"> Indica opciones múltiples para el <a href="zim://A/Uniform_Resource_Identifier.html" title="Uniform Resource Identifier" id="mwQA">URI</a>
+ que el cliente podría seguir. Esto podría ser utilizado, por ejemplo, 
+para presentar distintas opciones de formato para video, listar archivos
+ con distintas extensiones o word sense disambiguation.</dd></dl>
+
+<dl id="mwQg"><dt id="mwQw"> <a href="zim://A/HTTP_301.html" title="HTTP 301" id="mwRA">301 - Moved Permanently</a></dt>
+<dd id="mwRQ"> Esta y todas las peticiones futuras deberían ser dirigidas a la URI dada.</dd>
+<dt id="mwRg"> 302 - Found</dt>
+<dd id="mwSA"> Este es el código de redirección más popular, pero 
+también un ejemplo de las prácticas de la industria contradiciendo el 
+estándar. La especificación HTTP/1.0 (<a href="http://tools.ietf.org/html/rfc1945" id="mwSQ" class="external">RFC 1945</a>)
+ requería que el cliente realizara una redirección temporal (la frase 
+descriptiva original fue "Moved Temporarily"), pero los navegadores 
+populares lo implementaron como <b id="mwSg">303 See Other</b>. Por 
+tanto, HTTP/1.1 añadió códigos de estado 303 y 307 para eliminar la 
+ambigüedad entre ambos comportamientos. Sin embargo, la mayoría de 
+aplicaciones web y bibliotecas de desarrollo aún utilizan el código de 
+respuesta 302 como si fuera el 303.</dd></dl>
+
+<dl id="mwSw"><dt id="mwTA"> 303 -  See Other (desde HTTP/1.1)</dt>
+<dd id="mwTQ"> La respuesta a la petición puede ser encontrada bajo otra URI utilizando el método GET.</dd></dl>
+
+<dl id="mwTg"><dt id="mwTw"> 304 - Not Modified</dt>
+<dd id="mwUA"> Indica que la petición a la URL no ha sido modificada 
+desde que fue requerida por última vez. Típicamente, el cliente HTTP 
+provee un encabezado como If-Modified-Since para indicar una fecha y 
+hora contra la cual el servidor pueda comparar. El uso de este 
+encabezado ahorra ancho de banda y reprocesamiento tanto del servidor 
+como del cliente.</dd></dl>
+
+<dl id="mwUQ"><dt id="mwUg"> 305 - Use Proxy (desde HTTP/1.1)</dt>
+<dd id="mwUw"> Muchos clientes HTTP (como <a href="zim://A/Mozilla_Application_Suite.html" title="Mozilla Application Suite" id="mwVA">Mozilla</a><sup id="cite_ref-mozilla_client_3-0"><a href="#cite_note-mozilla_client-3" style="counter-reset: mw-Ref 3;"><span class="mw-reflink-text">[3]</span></a></sup> e <a href="zim://A/Internet_Explorer.html" title="Internet Explorer" id="mwVQ">Internet Explorer</a>) no se apegan al estándar al procesar respuestas con este código, principalmente por motivos de seguridad.</dd></dl>
+
+<dl id="mwVg"><dt id="mwVw"> 306 - Switch Proxy</dt>
+<dd id="mwWA"> Este código se utilizaba en las versiones antiguas de HTTP pero ya no se usa (aunque está reservado para usos futuros).<sup id="cite_ref-LibrosWeb_2-8"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd></dl>
+
+<dl id="mwWQ"><dt id="mwWg"> 307 - Temporary Redirect (desde HTTP/1.1)</dt>
+<dd id="mwWw"> Se trata de una redirección que debería haber sido hecha 
+con otra URI, sin embargo aún puede ser procesada con la URI 
+proporcionada. En contraste con el código 303, el método de la petición 
+no debería ser cambiado cuando el cliente repita la solicitud. Por 
+ejemplo, una solicitud POST tiene que ser repetida utilizando otra 
+petición POST.</dd></dl>
+
+<dl id="mwXA"><dt id="mwXQ"> 308 - Permanent Redirect</dt>
+<dd id="mwXg"> El recurso solicitado por el navegador se encuentra en 
+otro lugar y este cambio es permanente. A diferencia del código 301, no 
+se permite cambiar el método HTTP para la nueva petición (así por 
+ejemplo, si envías un formulario a un recurso que ha cambiado de lugar, 
+todo seguirá funcionando bien).<sup id="cite_ref-LibrosWeb_2-9"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd></dl>
+
+<p id="mwXw"></p>
+
+<h2 id="4xx_Errores_del_cliente"> 4xx Errores del cliente </h2>
+<div class="thumb tright"><div class="thumbinner" style="width:402px"><img src="HTTP%20Status_files/a_003" data-file-width="1394" data-file-height="835" data-file-type="bitmap" id="mwYg" height="240" width="400"><div class="thumbcaption" style="text-align: left">El error 404 en Wikipedia</div></div></div>
+<p id="mwZA">La solicitud contiene sintaxis incorrecta o no puede procesarse.</p>
+
+<p id="mwZQ">La intención de la clase de códigos de respuesta 4xx es 
+para casos en los cuales el cliente parece haber errado la petición. 
+Excepto cuando se responde a una petición HEAD, el servidor <b id="mwZg">debe</b>
+ incluir una entidad que contenga una explicación a la situación de 
+error, y si es una condición temporal o permanente. Estos códigos de 
+estado son aplicables a cualquier método de solicitud (como GET o POST).
+ Los agentes de usuario <i id="mwZw">deben</i> desplegar cualquier entidad al usuario. Estos son típicamente los códigos de respuesta de error más comúnmente encontrados.</p>
+
+<dl id="mwaA"><dt id="mwaQ"> 400 - Bad Request</dt>
+<dd id="mwag"> La solicitud contiene sintaxis errónea y no debería repetirse.</dd>
+<dt id="mwaw"> 401 - Unauthorized</dt>
+<dd id="mwbA"> Similar al <i id="mwbQ">403 Forbidden</i>, pero específicamente para su uso cuando la autentificación es posible pero ha fallado o aún no ha sido provista. Vea <a href="zim://A/Autenticaci%C3%B3n_de_acceso_b%C3%A1sica.html" title="Autenticación de acceso básica" id="mwbg">autenticación HTTP básica</a> y <a href="zim://A/Digest_access_authentication.html" title="Digest access authentication" id="mwbw">Digest access authentication</a>.</dd>
+<dt id="mwcA"> 402 - Payment Required</dt>
+<dd id="mwcQ"> La intención original era que este código pudiese ser usado como parte de alguna forma o esquema de <a href="zim://A/Dinero_electr%C3%B3nico.html" title="Dinero electrónico" id="mwcg">Dinero electrónico</a> o <a href="zim://A/Micropago.html" title="Micropago" id="mwcw">micropagos</a>, pero eso no sucedió, y este código nunca se utilizó.</dd>
+<dt id="mwdA"> <a href="zim://A/HTTP_403.html" title="HTTP 403" id="mwdQ">403 - Forbidden</a></dt>
+<dd id="mwdg"> La solicitud fue legal, pero el servidor rehúsa 
+responderla dado que el cliente no tiene los privilegios para hacerla. 
+En contraste a una respuesta <i id="mwdw">401 No autorizado</i>, la autenticación no haría la diferencia.</dd>
+<dt id="mweA"> <a href="zim://A/HTTP_404.html" title="HTTP 404" id="mweQ">404 - Not Found</a></dt>
+<dd id="mweg"> Recurso no encontrado. Se utiliza cuando el servidor web no encuentra la página o recurso solicitado.</dd>
+<dt id="mwew"> 405 - Method Not Allowed</dt>
+<dd id="mwfA"> Una petición fue hecha a una URI utilizando un método de 
+solicitud no soportado por dicha URI; por ejemplo, cuando se utiliza GET
+ en un formulario que requiere que los datos sean presentados vía POST, o
+ utilizando PUT en un recurso de solo lectura.</dd>
+<dt id="mwfQ"> 406 - Not Acceptable</dt>
+<dd id="mwfg"> El servidor no es capaz de devolver los datos en ninguno 
+de los formatos aceptados por el cliente, indicados por éste en la 
+cabecera "Accept" de la petición.</dd>
+<dt id="mwfw"> 407 - Proxy Authentication Required</dt>
+<dt id="mwgA"> 408 - Request Timeout</dt>
+<dd id="mwgQ"> El cliente falló al continuar la petición - excepto 
+durante la ejecución de videos Adobe Flash cuando solo significa que el 
+usuario cerró la ventana de video o se movió a otro. <a href="http://livedocs.adobe.com/fms/2/docs/00000338.html" id="mwgg" class="external">ref</a></dd>
+<dt id="mwgw"> 409 - Conflict</dt>
+<dd id="mwhA"> Indica que la solicitud no pudo ser procesada debido a un conflicto con el estado actual del recurso que esta identifica.</dd>
+<dt id="mwhQ"> <a href="zim://A/HTTP_410.html" title="HTTP 410" id="mwhg">410 - Gone</a></dt>
+<dd id="mwhw"> Indica que el recurso solicitado ya no está disponible y 
+no lo estará de nuevo. Debería ser utilizado cuando un recurso ha sido 
+quitado de forma permanente.</dd>
+<dd id="mwiA"> Si un cliente recibe este código no debería volver a 
+solicitar el recurso en el futuro. Por ejemplo un buscador lo eliminará 
+de sus índices y lo hará más rápidamente que utilizando un código 404.</dd>
+<dt id="mwiQ"> 411 - Length Required</dt>
+<dd id="mwig"> El servidor rechaza la petición del navegador porque no incluye la cabecera <code id="mwiw">Content-Length</code> adecuada.<sup id="cite_ref-LibrosWeb_2-10"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwjA"> 412 - Precondition Failed</dt>
+<dd id="mwjQ"> El servidor no es capaz de cumplir con algunas de las condiciones impuestas por el navegador en su petición.<sup id="cite_ref-LibrosWeb_2-11"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwjg"> 413 - Request Entity Too Large</dt>
+<dd id="mwjw"> La petición del navegador es demasiado grande y por ese motivo el servidor no la procesa<sup id="cite_ref-LibrosWeb_2-12"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwkA"> 414 - Request-URI Too Long</dt>
+<dd id="mwkQ"> La URI de la petición del navegador es demasiado grande y
+ por ese motivo el servidor no la procesa (esta condición se produce en 
+muy raras ocasiones y casi siempre porque el navegador envía como <code id="mwkg">GET</code> una petición que debería ser <code id="mwkw">POST</code>).<sup id="cite_ref-LibrosWeb_2-13"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwlA"> 415 - Unsupported Media Type</dt>
+<dd id="mwlQ"> La petición del navegador tiene un formato que no entiende el servidor y por eso no se procesa.<sup id="cite_ref-LibrosWeb_2-14"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwlg"> 416 - Requested Range Not Satisfiable</dt>
+<dd id="mwlw"> El cliente ha preguntado por una parte de un archivo, 
+pero el servidor no puede proporcionar esa parte, por ejemplo, si el 
+cliente preguntó por una parte de un archivo que está más allá de los 
+límites del fin del archivo.</dd>
+<dt id="mwmA"> 417 - Expectation Failed</dt>
+<dd id="mwmQ"> La petición del navegador no se procesa porque el 
+servidor no es capaz de cumplir con los requerimientos de la cabecera 
+Expect de la petición.<sup id="cite_ref-LibrosWeb_2-15"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwmg"> 418 - I'm a teapot</dt>
+<dd id="mwmw"> Soy una tetera.</dd>
+<dt id="mwnA"> 422 - Unprocessable Entity (WebDAV - <a href="http://tools.ietf.org/html/rfc4918" id="mwnQ" class="external">RFC 4918</a>)</dt>
+<dd id="mwng"> La solicitud está bien formada pero fue imposible seguirla debido a errores semánticos.</dd>
+<dt id="mwnw"> 423 - Locked (WebDAV - <a href="http://tools.ietf.org/html/rfc4918" id="mwoA" class="external">RFC 4918</a>)</dt>
+<dd id="mwoQ"> El recurso al que se está teniendo acceso está bloqueado.</dd>
+<dt id="mwog"> 424 - Failed Dependency (WebDAV) (<a href="http://tools.ietf.org/html/rfc4918" id="mwow" class="external">RFC 4918</a>)</dt>
+<dd id="mwpA"> La solicitud falló debido a una falla en la solicitud previa.</dd>
+<dt id="mwpQ"> 425 - Unassigned</dt>
+<dd id="mwpg"> Definido en los <b id="mwpw">drafts</b> de <a href="http://tools.ietf.org/html/draft-ietf-webdav-collection-protocol-04#section-5.3.2" id="mwqA" class="external">WebDav Advanced Collections</a>, pero no está presente en "Web Distributed Authoring and Versioning (WebDAV) Ordered Collections Protocol" (<a href="http://tools.ietf.org/html/rfc3648" id="mwqQ" class="external">RFC 3648</a>).</dd>
+<dt id="mwqg"> 426 - Upgrade Required (<a href="http://tools.ietf.org/html/rfc7231" id="mwqw" class="external">RFC 7231</a>)</dt>
+<dd id="mwrA"> El cliente debería cambiarse a <a href="zim://A/Transport_Layer_Security.html" title="Transport Layer Security" id="mwrQ">TLS/1.0</a>.</dd>
+<dt id="mwrg"> 428 - Precondition Required</dt>
+<dd id="mwrw"> Ell servidor requiere que la petición del navegador sea 
+condicional (este tipo de peticiones evitan los problemas producidos al 
+modificar con PUT un recurso que ha sido modificado por otra parte).<sup id="cite_ref-LibrosWeb_2-16"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwsA"> 429 - Too Many Requests</dt>
+<dd id="mwsQ"> Hay muchas conexiones desde esta dirección de internet.</dd>
+<dt id="mwsg"> 431 Request Header Fileds Too Large)</dt>
+<dd id="mwsw"> El servidor no puede procesar la petición porque una de 
+las cabeceras de la petición es demasiado grande. Este error también se 
+produce cuando la suma del tamaño de todas las peticiones es demasiado 
+grande.<sup id="cite_ref-LibrosWeb_2-17"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwtA"> 449  </dt>
+<dd id="mwtQ"> Una extensión de Microsoft: <i id="mwtg">La petición debería ser reintentada después de hacer la acción apropiada</i>.</dd>
+<dt id="mwtw"> <a href="zim://A/HTTP_451.html" title="HTTP 451" id="mwuA">451 - Unavailable for Legal Reasons</a></dt>
+<dd id="mwuQ"> El contenido ha sido eliminado como consecuencia de una orden judicial o sentencia emitida por un tribunal.</dd></dl>
+
+<h2 id="5xx_Errores_de_servidor"> 5xx Errores de servidor </h2>
+<p id="mwug">El servidor falló al completar una solicitud aparentemente válida.</p>
+
+<p id="mwuw">Los códigos de respuesta que comienzan con el dígito "5" 
+indican casos en los cuales el servidor tiene registrado aún antes de 
+servir la solicitud, que está errado o es incapaz de ejecutar la 
+petición. Excepto cuando está respondiendo a un método HEAD, el servidor
+ <i id="mwvA">debe</i> incluir una entidad que contenga una explicación 
+de la situación de error, y si es una condición temporal o permanente. 
+Los agentes de usuario <i id="mwvQ">deben</i> desplegar cualquier entidad incluida al usuario. Estos códigos de respuesta son aplicables a cualquier método de petición.</p>
+
+<dl id="mwvg"><dt id="mwvw"> 500 - Internal Server Error</dt>
+<dd id="mwwA"> Es un código comúnmente emitido por aplicaciones 
+empotradas en servidores web, mismas que generan contenido 
+dinámicamente, por ejemplo aplicaciones montadas en <a href="zim://A/IIS.html" title="IIS" id="mwwQ">IIS</a> o <a href="zim://A/Tomcat.html" title="Tomcat" id="mwwg">Tomcat</a>, cuando se encuentran con situaciones de error ajenas a la naturaleza del servidor web.</dd>
+<dt id="mwww"> 501 - Not Implemented</dt>
+<dd id="mwxA"> El servidor no soporta alguna funcionalidad necesaria 
+para responder a la solicitud del navegador (como por ejemplo el método 
+utilizado para la petición).<sup id="cite_ref-LibrosWeb_2-18"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwxQ"> 502 - Bad Gateway</dt>
+<dd id="mwxg"> El servidor está actuando de proxy o gateway y ha 
+recibido una respuesta inválida del otro servidor, por lo que no puede 
+responder adecuadamente a la petición del navegador.<sup id="cite_ref-LibrosWeb_2-19"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwxw"> 503 - Service Unavailable</dt>
+<dd id="mwyA"> El servidor no puede responder a la petición del navegador porque está congestionado o está realizando tareas de mantenimiento.<sup id="cite_ref-LibrosWeb_2-20"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwyQ"> 504 - Gateway Timeout</dt>
+<dd id="mwyg"> El servidor está actuando de proxy o gateway y no ha 
+recibido a tiempo una respuesta del otro servidor, por lo que no puede 
+responder adecuadamente a la petición del navegador.<sup id="cite_ref-LibrosWeb_2-21"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwyw"> 505 - HTTP Version Not Supported</dt>
+<dd id="mwzA"> El servidor no soporta o no quiere soportar la versión del protocolo HTTP utilizada en la petición del navegador.<sup id="cite_ref-LibrosWeb_2-22"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mwzQ"> 506 - Variant Also Negotiates (<a href="http://tools.ietf.org/html/rfc2295" id="mwzg" class="external">RFC 2295</a>)</dt>
+<dd id="mwzw"> El servidor ha detectado una referencia circular al procesar la parte de la negociación del contenido de la petición.<sup id="cite_ref-LibrosWeb_2-23"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mw0A"> 507 - Insufficient Storage (WebDAV - <a href="http://tools.ietf.org/html/rfc4918" id="mw0Q" class="external">RFC 4918</a>)</dt>
+<dd id="mw0g"> El servidor no puede crear o modificar el recurso solicitado porque no hay suficiente espacio de almacenamiento libre.<sup id="cite_ref-LibrosWeb_2-24"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mw0w"> 508 - Loop Detected (WebDAV)</dt>
+<dd id="mw1A"> La petición no se puede procesar porque el servidor ha encontrado un bucle infinito al intentar procesarla.<sup id="cite_ref-LibrosWeb_2-25"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mw1Q"> 509 - Bandwidth Limit Exceeded </dt>
+<dd id="mw1g"> Límite de ancho de banda excedido. Este código de estatus, a pesar de ser utilizado por muchos servidores, no es oficial.</dd>
+<dt id="mw1w"> 510 - Not Extended (<a href="http://tools.ietf.org/html/rfc2774" id="mw2A" class="external">RFC 2774</a>)</dt>
+<dd id="mw2Q"> La petición del navegador debe añadir más extensiones para que el servidor pueda procesarla.<sup id="cite_ref-LibrosWeb_2-26"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd>
+<dt id="mw2g"> 511 - Network Authentication Required</dt>
+<dd id="mw2w"> El navegador debe autenticarse para poder realizar 
+peticiones (se utiliza por ejemplo con los portales cautivos que te 
+obligan a autenticarte antes de empezar a navegar).<sup id="cite_ref-LibrosWeb_2-27"><a href="#cite_note-LibrosWeb-2" style="counter-reset: mw-Ref 2;"><span class="mw-reflink-text">[2]</span></a></sup></dd></dl>
+
+<h2 id="V.C3.A9ase_tambi.C3.A9n"> Véase también </h2>
+<ul id="mw3A"><li id="mw3Q"> <a href="zim://A/Hypertext_Transfer_Protocol.html" title="Hypertext Transfer Protocol" id="mw3g">Hypertext Transfer Protocol</a></li></ul>
+
+<h2 id="Referencias"> Referencias </h2>
+<div class="listaref" style=" list-style-type: decimal;" id="mw3w"><ol class="mw-references"><li id="cite_note-1"><a href="#cite_ref-1"><span class="mw-linkback-text">↑ </span></a> <span id="mw-reference-text-cite_note-1" class="mw-reference-text"><a href="http://tools.ietf.org/html/rfc2616#section-8.2.3" id="mw4A" class="external">RFC 2616, section 8.2.3</a> — Use of the 100 (Continue) Status</span></li><li id="cite_note-LibrosWeb-2"><span><a href="#cite_ref-LibrosWeb_2-0"><span class="mw-linkback-text">1 </span></a><a href="#cite_ref-LibrosWeb_2-1"><span class="mw-linkback-text">2 </span></a><a href="#cite_ref-LibrosWeb_2-2"><span class="mw-linkback-text">3 </span></a><a href="#cite_ref-LibrosWeb_2-3"><span class="mw-linkback-text">4 </span></a><a href="#cite_ref-LibrosWeb_2-4"><span class="mw-linkback-text">5 </span></a><a href="#cite_ref-LibrosWeb_2-5"><span class="mw-linkback-text">6 </span></a><a href="#cite_ref-LibrosWeb_2-6"><span class="mw-linkback-text">7 </span></a><a href="#cite_ref-LibrosWeb_2-7"><span class="mw-linkback-text">8 </span></a><a href="#cite_ref-LibrosWeb_2-8"><span class="mw-linkback-text">9 </span></a><a href="#cite_ref-LibrosWeb_2-9"><span class="mw-linkback-text">10 </span></a><a href="#cite_ref-LibrosWeb_2-10"><span class="mw-linkback-text">11 </span></a><a href="#cite_ref-LibrosWeb_2-11"><span class="mw-linkback-text">12 </span></a><a href="#cite_ref-LibrosWeb_2-12"><span class="mw-linkback-text">13 </span></a><a href="#cite_ref-LibrosWeb_2-13"><span class="mw-linkback-text">14 </span></a><a href="#cite_ref-LibrosWeb_2-14"><span class="mw-linkback-text">15 </span></a><a href="#cite_ref-LibrosWeb_2-15"><span class="mw-linkback-text">16 </span></a><a href="#cite_ref-LibrosWeb_2-16"><span class="mw-linkback-text">17 </span></a><a href="#cite_ref-LibrosWeb_2-17"><span class="mw-linkback-text">18 </span></a><a href="#cite_ref-LibrosWeb_2-18"><span class="mw-linkback-text">19 </span></a><a href="#cite_ref-LibrosWeb_2-19"><span class="mw-linkback-text">20 </span></a><a href="#cite_ref-LibrosWeb_2-20"><span class="mw-linkback-text">21 </span></a><a href="#cite_ref-LibrosWeb_2-21"><span class="mw-linkback-text">22 </span></a><a href="#cite_ref-LibrosWeb_2-22"><span class="mw-linkback-text">23 </span></a><a href="#cite_ref-LibrosWeb_2-23"><span class="mw-linkback-text">24 </span></a><a href="#cite_ref-LibrosWeb_2-24"><span class="mw-linkback-text">25 </span></a><a href="#cite_ref-LibrosWeb_2-25"><span class="mw-linkback-text">26 </span></a><a href="#cite_ref-LibrosWeb_2-26"><span class="mw-linkback-text">27 </span></a><a href="#cite_ref-LibrosWeb_2-27"><span class="mw-linkback-text">28 </span></a></span> <span id="mw-reference-text-cite_note-LibrosWeb-2" class="mw-reference-text"><a href="http://librosweb.es/tutorial/los-codigos-de-estado-de-http/" id="mw4Q" class="external">Los códigos de estado de HTTP - LibrosWeb</a></span></li><li id="cite_note-mozilla_client-3"><a href="#cite_ref-mozilla_client_3-0"><span class="mw-linkback-text">↑ </span></a> <span id="mw-reference-text-cite_note-mozilla_client-3" class="mw-reference-text"><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=187996" id="mw4g" class="external">Bugzilla</a></span></li></ol></div>
+
+<h2 id="Enlaces_externos"> Enlaces externos </h2>
+<ul id="mw4w"><li id="mw5A"> <a href="http://tools.ietf.org/html/rfc2616#section-10" id="mw5Q" class="external">HTTP specification, Section 10</a></li>
+<li id="mw5g"> <a href="http://tools.ietf.org/html/rfc4918#section-11" id="mw5w" class="external">WebDAV specification, Section 11</a></li>
+<li id="mw6A"> <a href="http://tools.ietf.org/html/rfc2817#section-4" id="mw6Q" class="external">TLS Upgrade within HTTP specification, Section 4</a></li>
+<li id="mw6g"> <a href="http://tools.ietf.org/html/rfc2817#section-7.1" id="mw6w" class="external">HTTP Status Code Registry</a></li>
+<li id="mw7A"> <a href="http://www.iana.org/assignments/http-status-codes" id="mw7Q" class="external">IANA registry</a></li>
+<li id="mw7g"> <a href="http://support.microsoft.com/?id=318380" id="mw7w" class="external">Microsoft Internet Information Server Status Codes and Sub-Codes</a></li>
+<li id="mw8A"> <a href="http://livedocs.adobe.com/fms/2/docs/00000338.html" id="mw8Q" class="external"><b id="mw8g">Adobe Flash status code definitions (ie 408)</b></a></li></ul>
+
+<meta property="mw:PageProp/categorydefaultsort" content="Http Codigo De Estado" id="mw8w">
+
+
+<!--htdig_noindex--><div><div style="clear:both; background-image:linear-gradient(180deg, #E8E8E8, white); border-top: dashed 2px #AAAAAA; padding: 0.5em 0.5em 2em 0.5em; margin-top: 1em; direction: ltr;">This article is issued from <a class="external text" href="https://es.wikipedia.org/wiki/Anexo%3AC%C3%B3digos_de_estado_HTTP?oldid=95850506">Wikipedia</a> - version of the 12/26/2016. The text is available under the <a class="external text" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution/Share Alike</a> but additional terms may apply for the media files.</div></div><!--/htdig_noindex--></div>
+    </div>
+    <script src="HTTP%20Status_files/a_004"></script>
+  
+
+</body></html>

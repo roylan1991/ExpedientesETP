@@ -1,0 +1,92 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_centros"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>Editar Centro Politécnico</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div th:if="${error}" class="container-fluid">
+                    <div id="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error" th:text="${mensaje_error}"/></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form th:action="@{/editar_centro(idE=${datos_escuela.getIdCentro()})}" method="post">
+
+                    <div class="col-md-3 col-sm-5">
+                        <label for="codigo"> <strong>Código</strong></label>
+                        <input type="text" class="form-control" id="codigo"
+                               th:placeholder="${datos_escuela.getCodCentro()}"
+                               th:value="${datos_escuela.getCodCentro()}" name="codigo" required>
+                    </div>
+
+                    <div class="col-md-9 col-sm-9 mt-4">
+                        <label for="nombre"><strong>Nombre del centro</strong></label>
+                        <input type="text" class="form-control" id="nombre"
+                               th:placeholder="${datos_escuela.getNombCentro()}"
+                               th:value="${datos_escuela.getNombCentro()}" name="nombre" required>
+                    </div>
+
+                    <div class="col-md-12 mt-4">
+                        <label for="direccion"><strong>Dirección Particular</strong></label>
+                        <input type="text" class="form-control" id="direccion"
+                               th:placeholder="${datos_escuela.getDireccion()}"
+                               th:value="${datos_escuela.getDireccion()}" name="direccion" required>
+                    </div>
+
+                    <div class="container-fluid row">
+                        <div class="col-md-3 col-sm-5 mt-4">
+                            <label for="telefono"> <strong>Teléfono</strong></label>
+                            <input type="text" class="form-control" id="telefono"
+                                   th:placeholder="${datos_escuela.getTelefono()}"
+                                   th:value="${datos_escuela.getTelefono()}" name="telefono">
+                        </div>
+
+                        <div class="col-md-5 col-sm-5 mt-4">
+                            <label for="sectores"> <strong>Sector</strong></label>
+                            <select class="form-control" id="sectores" name="sectores" required>
+                                <option th:text="${datos_escuela.getSector().getTipoSector()} + ' (Seleccionado)'"
+                                        th:value="${datos_escuela.getSector().getIdSector()}">
+                                    Seleccione...
+                                </option>
+                                <option th:each="sector : ${lst_sectores}"
+                                        th:text="${sector.getTipoSector()}"
+                                        th:value="${sector.getIdSector()}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="container text-right col-md-12 mt-3">
+                        <button class="btn btn-primary" type="submit">
+                            <img th:src="@{/img/editar.png}"/> Editar
+                        </button>
+                    </div>
+                </form>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>

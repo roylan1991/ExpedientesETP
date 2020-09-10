@@ -1,0 +1,268 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_captaciones"></th:block>
+
+    <div>
+        <section class="main-footer titulo">
+            <strong><span th:text="'[ Rango de Edades ] - Politécnico ' + ${datos_centro.getNombCentro()}"/></strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div th:if="${error}" class="container-fluid">
+                    <div id="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error" th:text="${mensaje_error}"/></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="text-right col-12">
+
+                            <a th:href="@{/rango_pdf(idE=${datos_centro.getIdCentro()})}"
+                               class="exportar btn-outline-warning" title="Exportar a PDF"><img
+                                    th:src="@{/img/pdf.png}"/>
+                            </a>
+
+                            <a th:href="@{/rango_excel(idE=${datos_centro.getIdCentro()})}"
+                               class="exportar btn-outline-warning" title="Exportar a Excel"><img
+                                    th:src="@{/img/excel.png}"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/rango_edades(idE=${datos_centro.getIdCentro()})}"
+                      method="post">
+
+                    <div class="mt-2 container-fluid">
+                        <div id="tabs4">
+                            <ul>
+                                <li><a href="#tabs4-1">Diurno</a></li>
+                                <li><a href="#tabs4-2">V/Nocturno</a></li>
+                            </ul>
+                            <div id="tabs4-1">
+                                <div class="container-fluid text-center">
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <label for="matriculaTotal"> <strong>Matrícula Total</strong></label>
+                                            <input type="text" class="form-control" id="matriculaTotal"
+                                                   name="matriculaTotal"
+                                                   disabled="true"
+                                                   th:placeholder="${rango.getDiurno().getMatriculaRangoTotal()}"
+                                                   th:value="${rango.getDiurno().getMatriculaRangoTotal()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="menos15"> <strong>Menores de 15 años</strong></label>
+                                            <input type="text" class="form-control" id="menos15"
+                                                   name="menos15"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getDiurno().getTotalMenos15()}"
+                                                   th:value="${rango.getDiurno().getTotalMenos15()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="entre15_16"> <strong>Entre 15 y 16 años</strong></label>
+                                            <input type="text" class="form-control" id="entre15_16"
+                                                   name="entre15_16"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getDiurno().getTotalEntre15_16()}"
+                                                   th:value="${rango.getDiurno().getTotalEntre15_16()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="mas16"> <strong>Mayores de 16 años</strong></label>
+                                            <input type="text" class="form-control" id="mas16"
+                                                   name="mas16"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getDiurno().getTotalMayores16()}"
+                                                   th:value="${rango.getDiurno().getTotalMayores16()}"
+                                                   required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col">
+                                            <label for="matriculaTotalHembras"> <strong>Matrícula Total Hembras</strong></label>
+                                            <input type="text" class="form-control" id="matriculaTotalHembras"
+                                                   name="matriculaTotalHembras"
+                                                   disabled="true"
+                                                   th:placeholder="${rango.getDiurno().getMatriculaRangoTotalHembras()}"
+                                                   th:value="${rango.getDiurno().getMatriculaRangoTotalHembras()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="menos15Hembras"> <strong>Menores de 15 años
+                                                hembras</strong></label>
+                                            <input type="text" class="form-control" id="menos15Hembras"
+                                                   name="menos15Hembras"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getDiurno().getHembrasMenos15()}"
+                                                   th:value="${rango.getDiurno().getHembrasMenos15()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="entre15_16Hembras"> <strong>Entre 15 y 16 años hembras</strong></label>
+                                            <input type="text" class="form-control" id="entre15_16Hembras"
+                                                   name="entre15_16Hembras"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getDiurno().getHembrasEntre15_16()}"
+                                                   th:value="${rango.getDiurno().getHembrasEntre15_16()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="mas16Hembras"> <strong>Mayores de 16 años
+                                                hembras</strong></label>
+                                            <input type="text" class="form-control" id="mas16Hembras"
+                                                   name="mas16Hembras"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getDiurno().getHembrasMayores16()}"
+                                                   th:value="${rango.getDiurno().getHembrasMayores16()}"
+                                                   required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="tabs4-2">
+                                <div class="container-fluid text-center">
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <label for="matriculaTotalCPT"> <strong>Matrícula Total</strong></label>
+                                            <input type="text" class="form-control" id="matriculaTotalCPT"
+                                                   name="matriculaTotalCPT"
+                                                   disabled="true"
+                                                   th:placeholder="${rango.getCpt().getMatriculaRangoTotal()}"
+                                                   th:value="${rango.getCpt().getMatriculaRangoTotal()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="menos15CPT"> <strong>Menores de 15 años</strong></label>
+                                            <input type="text" class="form-control" id="menos15CPT"
+                                                   name="menos15CPT"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getCpt().getTotalMenos15()}"
+                                                   th:value="${rango.getCpt().getTotalMenos15()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="entre15_16CPT"> <strong>Entre 15 y 16 años</strong></label>
+                                            <input type="text" class="form-control" id="entre15_16CPT"
+                                                   name="entre15_16CPT"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getCpt().getTotalEntre15_16()}"
+                                                   th:value="${rango.getCpt().getTotalEntre15_16()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="mas16CPT"> <strong>Mayores de 16 años</strong></label>
+                                            <input type="text" class="form-control" id="mas16CPT"
+                                                   name="mas16CPT"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getCpt().getTotalMayores16()}"
+                                                   th:value="${rango.getCpt().getTotalMayores16()}"
+                                                   required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col">
+                                            <label for="matriculaTotalHembrasCPT"> <strong>Matrícula Total
+                                                Hembras</strong></label>
+                                            <input type="text" class="form-control" id="matriculaTotalHembrasCPT"
+                                                   name="matriculaTotalHembrasCPT"
+                                                   disabled="true"
+                                                   th:placeholder="${rango.getCpt().getMatriculaRangoTotalHembras()}"
+                                                   th:value="${rango.getCpt().getMatriculaRangoTotalHembras()}"
+                                                   required>
+                                        </div>
+
+
+                                        <div class="col">
+                                            <label for="menos15HembrasCPT"> <strong>Menores de 15 años hembras</strong></label>
+                                            <input type="text" class="form-control" id="menos15HembrasCPT"
+                                                   name="menos15HembrasCPT"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getCpt().getHembrasMenos15()}"
+                                                   th:value="${rango.getCpt().getHembrasMenos15()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="entre15_16HembrasCPT"> <strong>Entre 15 y 16 años
+                                                hembras</strong></label>
+                                            <input type="text" class="form-control" id="entre15_16HembrasCPT"
+                                                   name="entre15_16HembrasCPT"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getCpt().getHembrasEntre15_16()}"
+                                                   th:value="${rango.getCpt().getHembrasEntre15_16()}"
+                                                   required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="mas16HembrasCPT"> <strong>Mayores de 16 años
+                                                hembras</strong></label>
+                                            <input type="text" class="form-control" id="mas16HembrasCPT"
+                                                   name="mas16HembrasCPT"
+                                                   th:disabled="${disabled}"
+                                                   th:placeholder="${rango.getCpt().getHembrasMayores16()}"
+                                                   th:value="${rango.getCpt().getHembrasMayores16()}"
+                                                   required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row mt-3">
+                            <div class="text-left col-md-6 col-sm-6">
+                                <a th:href="@{/caratula(idE=${datos_centro.getIdCentro()})}"
+                                   class="btn btn-danger"><img th:src="@{/img/caratula.png}"> Carátula</span>
+                                </a>
+                            </div>
+
+                            <div class="text-right col-md-6 col-sm-6">
+                                <button class="btn btn-primary" th:hidden="${ocultar}" type="submit"><img
+                                        th:src="@{/img/editar.png}"> Editar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </section>
+        </div>
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+

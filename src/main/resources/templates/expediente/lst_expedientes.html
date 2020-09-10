@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina"></div>
+
+    <th:block th:include="plantillas/menu_opciones_captaciones"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>Expedientes de Politécnicos</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <table class="table table-bordered table-hover table-striped text-center tipografia-contenido mt-1"
+                       id="tablaExpedientesETP">
+                    <thead>
+                    <tr class="estilo-tabla btn-primary">
+                        <th>No.</th>
+                        <th>Código</th>
+                        <th>Nombre del Centro</th>
+                        <th>Sector</th>
+                        <th>Localidad</th>
+                        <th>Progreso</th>
+                        <th>Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="lst,i : ${lst_centros}">
+                        <td th:text="${i.index+1}">Datos</td>
+                        <td th:text="${lst.getCodCentro()}">Datos</td>
+                        <td th:text="${lst.getNombCentro()}">Datos</td>
+                        <td th:text="${lst.getSector().getTipoSector()}">Datos</td>
+                        <td th:text="${lst.getLocalidad()}">Datos</td>
+                        <td>
+                            <div class="estilo-barra-progreso progress-striped">
+                                <div class="barra-progreso" role="progressbar" aria-valuemin="0"
+                                     aria-valuemax="100" th:style="'width:' + ${lst.getProgreso()}+ '%'">
+                                    <span class="text-center" th:text="${lst.getProgreso()+'%'}"/>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a th:href="@{/planilla_datos(idE=${lst.getIdCentro()})}"
+                               class="btn_accion btn-warning" title="Planillas de Datos"> <img
+                                    th:src="@{/img/planilla_datos.png}"></a> <a
+                                th:href="@{/caratula(idE=${lst.getIdCentro()})}" class="btn_accion btn-info"
+                                title="Carátula"> <img th:src="@{/img/caratula.png}"> </a> 
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer"></div>
+
+</div>
+</body>
+</html>

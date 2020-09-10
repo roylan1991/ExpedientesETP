@@ -1,0 +1,119 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_error"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>[Ayuda] Especialidad de estudio en un centro</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div class="container-fluid">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong><span
+                                class="tipografia-error">Ejemplo del formulario donde se registran nuevas especialidades a un centro.</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form>
+                    <div class="col-md-18 col-sm-12 col-lg-12">
+                        <label for="especialidades"><strong>Código - Nombre de la especialidad [Nivel]</strong></label>
+                        <select class="form-control" id="especialidades" name="nombre" required>
+                            <option value="">Seleccione...</option>
+                            <option th:each="lst : ${lst_especialidades}"
+                                    th:text="${lst.getDescripcion()}"
+                                    th:value="${lst.getIdEspecialidad()}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-md-4 col-sm-4 col-lg-4 mt-2">
+                                <label for="duraciones"><strong>Duración en Semestres</strong></label>
+                                <select class="form-control" id="duraciones" name="duraciones" required>
+                                    <option value="">Seleccione...</option>
+                                    <option th:each="dur : ${lst_duraciones}"
+                                            th:text="${dur.getTipoDuracion()}"
+                                            th:value="${dur.getIdDuracion()}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-lg-4 mt-2">
+                                <label for="escolaridades"><strong>Escolaridad de Ingreso</strong></label>
+                                <select class="form-control" id="escolaridades" name="escolaridades" required>
+                                    <option value="">Seleccione...</option>
+                                    <option th:each="esc : ${lst_escolaridades}"
+                                            th:text="${esc.getTipoEscolaridad()}"
+                                            th:value="${esc.getIdEscolaridad()}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-lg-4 mt-2">
+                                <label for="cursos"><strong>Tipo de curso</strong></label>
+                                <select class="form-control" id="cursos" name="cursos" required>
+                                    <option value="">Seleccione...</option>
+                                    <option th:each="cur : ${lst_cursos}"
+                                            th:text="${cur.getTipoCurso()}"
+                                            th:value="${cur.getIdCurso()}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="container-fluid mt-4">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error">Para agregar nuevas especialidades a un centro politécnico, cliquea en el menú principal [Politécnicos] y luego en el listado de centros el ícono [Especialidades] del centro correspondiente, una vez ahí [Agregar].
+                                       Es importante conocer que sus respectivos datos serán completados exclusivamente por las personas con rol de Usuario!</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error">Se deben agregar al centro únicamente las especialidades que se estudian en el mismo, las cuales posteriormente serán utilizadas en las planillas de datos. Es cierto que es un proceso molesto pero te aseguramos que solo será una vez, en los próximos cursos será solo actualizar!</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error">Una vez completado los datos correctamente, la especialidad de estudio se visualizará en el listado de especialidades del centro correspondiente!</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+
+
+

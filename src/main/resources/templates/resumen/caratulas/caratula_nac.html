@@ -1,0 +1,682 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_resumen"></th:block>
+
+    <div>
+        <section class="main-footer titulo">
+            <strong><span th:text="'[ Resumen Nacional ] - Carátula'"/></strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <form th:action="@{/caratula_nac}" method="post">
+
+                    <div class="mt-4 container-fluid">
+                        <div id="tabs4">
+                            <ul>
+                                <li><a href="#tabs4-1">Año Escolar Iniciado</a></li>
+                                <li><a href="#tabs4-2">Año Escolar Terminado</a></li>
+                            </ul>
+                            <div id="tabs4-1">
+
+                                <div class="container-fluid mt-2">
+                                    <label><strong>Curso Diurno</strong></label>
+
+                                    <div id="tabs5" class="mt-2 text-center">
+                                        <ul>
+                                            <li><a href="#tabs5-1">Técnico Medio</a></li>
+                                            <li><a href="#tabs5-2">Obrero Calificado</a></li>
+                                            <li><a href="#tabs5-3">Total Politécnico</a></li>
+                                        </ul>
+                                        <div id="tabs5-1">
+                                            <div class="text-center">
+
+                                                <div class="container-fluid">
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_total_tm"> <strong>Matrícula
+                                                                Total</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_total_tm"
+                                                                   disabled="true"
+                                                                   name="matricula_total_tm"
+                                                                   th:placeholder="${caratula.getMatriculaInicialTM().getTotal()}"
+                                                                   th:value="${caratula.getMatriculaInicialTM().getTotal()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label
+                                                                    for="matricula_internos_tm"> <strong>Matrícula
+                                                                Internos</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_internos_tm" disabled="true"
+                                                                   name="matricula_internos_tm"
+                                                                   th:placeholder="${caratula.getRegimenTM().getInternos()}"
+                                                                   th:value="${caratula.getRegimenTM().getInternos()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label
+                                                                    for="matricula_seminternos_tm"> <strong>Matrícula
+                                                                Seminternos</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_seminternos_tm"
+                                                                   disabled="true"
+                                                                   name="matricula_seminternos_tm"
+                                                                   th:placeholder="${caratula.getRegimenTM().getSeminternos()}"
+                                                                   th:value="${caratula.getRegimenTM().getSeminternos()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="nuevo_ingreso_tm"> <strong>Nuevo
+                                                                Ingreso</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="nuevo_ingreso_tm" disabled="true"
+                                                                   name="nuevo_ingreso_tm"
+                                                                   th:placeholder="${caratula.getMatriculaInicialTM().getNuevoIngreso()}"
+                                                                   th:value="${caratula.getMatriculaInicialTM().getNuevoIngreso()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_total_hembras_tm"> <strong>Matrícula
+                                                                Total Hembras</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_total_hembras_tm" disabled="true"
+                                                                   name="matricula_total_hembras_tm"
+                                                                   th:placeholder="${caratula.getMatriculaInicialTM().getTotalHembras()}"
+                                                                   th:value="${caratula.getMatriculaInicialTM().getTotalHembras()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label
+                                                                    for="matricula_internos_hembras_tm"> <strong>Matrícula
+                                                                Internos Hembras</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_internos_hembras_tm"
+                                                                   disabled="true"
+                                                                   name="matricula_internos_hembras_tm"
+                                                                   th:placeholder="${caratula.getRegimenTM().getInternosHembras()}"
+                                                                   th:value="${caratula.getRegimenTM().getInternosHembras()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label
+                                                                    for="matricula_seminternos_hembras_tm"> <strong>Matrícula
+                                                                Seminternos Hembras</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_seminternos_hembras_tm"
+                                                                   disabled="true"
+                                                                   name="matricula_seminternos_hembras_tm"
+                                                                   th:placeholder="${caratula.getRegimenTM().getSeminternosHembras()}"
+                                                                   th:value="${caratula.getRegimenTM().getSeminternosHembras()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="nuevo_ingreso_hembras_tm"> <strong>Nuevo
+                                                                Ingreso Hembras</strong></label>
+                                                            <input type="text" class="form-control" disabled="true"
+                                                                   id="nuevo_ingreso_hembras_tm"
+                                                                   name="nuevo_ingreso_hembras_tm"
+                                                                   th:placeholder="${caratula.getMatriculaInicialTM().getNuevoIngresoHembras()}"
+                                                                   th:value="${caratula.getMatriculaInicialTM().getNuevoIngresoHembras()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div id="tabs5-2">
+                                            <div class="text-center">
+
+                                                <div class="container-fluid">
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_total_oc"> <strong>Matrícula
+                                                                Total</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_total_oc" disabled="true"
+                                                                   name="matricula_total_oc"
+                                                                   th:placeholder="${caratula.getMatriculaInicialOC().getTotal()}"
+                                                                   th:value="${caratula.getMatriculaInicialOC().getTotal()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label
+                                                                    for="matricula_internos_oc"> <strong>Matrícula
+                                                                Internos</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_internos_oc" disabled="true"
+                                                                   name="matricula_internos_oc"
+                                                                   th:placeholder="${caratula.getRegimenOC().getInternos()}"
+                                                                   th:value="${caratula.getRegimenOC().getInternos()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label
+                                                                    for="matricula_seminternos_oc"> <strong>Matrícula
+                                                                Seminternos</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_seminternos_oc"
+                                                                   disabled="true"
+                                                                   name="matricula_seminternos_oc"
+                                                                   th:placeholder="${caratula.getRegimenOC().getSeminternos()}"
+                                                                   th:value="${caratula.getRegimenOC().getSeminternos()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="nuevo_ingreso_oc"> <strong>Nuevo
+                                                                Ingreso</strong></label>
+                                                            <input type="text" class="form-control" disabled="true"
+                                                                   id="nuevo_ingreso_oc"
+                                                                   name="nuevo_ingreso_oc"
+                                                                   th:placeholder="${caratula.getMatriculaInicialOC().getNuevoIngreso()}"
+                                                                   th:value="${caratula.getMatriculaInicialOC().getNuevoIngreso()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_total_hembras_oc"> <strong>Matrícula
+                                                                Total Hembras</strong></label>
+                                                            <input type="text" class="form-control" disabled="true"
+                                                                   id="matricula_total_hembras_oc"
+                                                                   name="matricula_total_hembras_oc"
+                                                                   th:placeholder="${caratula.getMatriculaInicialOC().getTotalHembras()}"
+                                                                   th:value="${caratula.getMatriculaInicialOC().getTotalHembras()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label
+                                                                    for="matricula_internos_hembras_oc"> <strong>Matrícula
+                                                                Internos Hembras</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_internos_hembras_oc"
+                                                                   disabled="true"
+                                                                   name="matricula_internos_hembras_oc"
+                                                                   th:placeholder="${caratula.getRegimenOC().getInternosHembras()}"
+                                                                   th:value="${caratula.getRegimenOC().getInternosHembras()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label
+                                                                    for="matricula_seminternos_hembras_oc"> <strong>Matrícula
+                                                                Seminternos Hembras</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_seminternos_hembras_oc"
+                                                                   disabled="true"
+                                                                   name="matricula_seminternos_hembras_oc"
+                                                                   th:placeholder="${caratula.getRegimenOC().getSeminternosHembras()}"
+                                                                   th:value="${caratula.getRegimenOC().getSeminternosHembras()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="nuevo_ingreso_hembras_oc"> <strong>Nuevo
+                                                                Ingreso Hembras</strong></label>
+                                                            <input type="text" class="form-control" disabled="true"
+                                                                   id="nuevo_ingreso_hembras_oc"
+                                                                   name="nuevo_ingreso_hembras_oc"
+                                                                   th:placeholder="${caratula.getMatriculaInicialOC().getNuevoIngresoHembras()}"
+                                                                   th:value="${caratula.getMatriculaInicialOC().getNuevoIngresoHembras()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tabs5-3">
+                                            <div class="text-center">
+
+                                                <div class="container-fluid">
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_total"> <strong>Matrícula
+                                                                Total</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_total" disabled="true"
+                                                                   name="matricula_total"
+                                                                   th:placeholder="${caratula.getMatriculaInicialOC().getTotal() + caratula.getMatriculaInicialTM().getTotal()}"
+                                                                   th:value="${caratula.getMatriculaInicialOC().getTotal() + caratula.getMatriculaInicialTM().getTotal()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="matricula_internos"> <strong>Matrícula
+                                                                Internos</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_internos" disabled="true"
+                                                                   name="matricula_internos"
+                                                                   th:placeholder="${caratula.getRegimenOC().getInternos() + caratula.getRegimenTM().getInternos()}"
+                                                                   th:value="${caratula.getRegimenOC().getInternos() + caratula.getRegimenTM().getInternos()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="matricula_seminternos"> <strong>Matrícula
+                                                                Seminternos</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_seminternos"
+                                                                   disabled="true"
+                                                                   name="matricula_seminternos"
+                                                                   th:placeholder="${caratula.getRegimenOC().getSeminternos() + caratula.getRegimenTM().getSeminternos()}"
+                                                                   th:value="${caratula.getRegimenOC().getSeminternos()+caratula.getRegimenTM().getSeminternos()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="nuevo_ingreso"> <strong>Nuevo
+                                                                Ingreso</strong></label>
+                                                            <input type="text" class="form-control" disabled="true"
+                                                                   id="nuevo_ingreso"
+                                                                   name="nuevo_ingreso"
+                                                                   th:placeholder="${caratula.getMatriculaInicialOC().getNuevoIngreso() + caratula.getMatriculaInicialTM().getNuevoIngreso()}"
+                                                                   th:value="${caratula.getMatriculaInicialOC().getNuevoIngreso() + caratula.getMatriculaInicialTM().getNuevoIngreso()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_total_hembras"> <strong>Matrícula
+                                                                Total Hembras</strong></label>
+                                                            <input type="text" class="form-control" disabled="true"
+                                                                   id="matricula_total_hembras"
+                                                                   name="matricula_total_hembras"
+                                                                   th:placeholder="${caratula.getMatriculaInicialOC().getTotalHembras() + caratula.getMatriculaInicialTM().getTotalHembras()}"
+                                                                   th:value="${caratula.getMatriculaInicialOC().getTotalHembras() + caratula.getMatriculaInicialTM().getTotalHembras()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="matricula_internos_hembras"> <strong>Matrícula
+                                                                Internos Hembras</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_internos_hembras"
+                                                                   disabled="true"
+                                                                   name="matricula_internos_hembras"
+                                                                   th:placeholder="${caratula.getRegimenOC().getInternosHembras() + caratula.getRegimenTM().getInternosHembras()}"
+                                                                   th:value="${caratula.getRegimenOC().getInternosHembras() + caratula.getRegimenTM().getInternosHembras()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="matricula_seminternos_hembras"> <strong>Matrícula
+                                                                Seminternos Hembras</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_seminternos_hembras"
+                                                                   disabled="true"
+                                                                   name="matricula_seminternos_hembras"
+                                                                   th:placeholder="${caratula.getRegimenOC().getSeminternosHembras() + caratula.getRegimenTM().getSeminternosHembras()}"
+                                                                   th:value="${caratula.getRegimenOC().getSeminternosHembras() + caratula.getRegimenTM().getSeminternosHembras()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="nuevo_ingreso_hembras"> <strong>Nuevo
+                                                                Ingreso Hembras</strong></label>
+                                                            <input type="text" class="form-control" disabled="true"
+                                                                   id="nuevo_ingreso_hembras"
+                                                                   name="nuevo_ingreso_hembras"
+                                                                   th:placeholder="${caratula.getMatriculaInicialOC().getNuevoIngresoHembras() + caratula.getMatriculaInicialTM().getNuevoIngresoHembras()}"
+                                                                   th:value="${caratula.getMatriculaInicialOC().getNuevoIngresoHembras() + caratula.getMatriculaInicialTM().getNuevoIngresoHembras()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="mt-3 rayita">
+
+                                <div class="container-fluid mt-3">
+                                    <label> <strong>Curso Vespertino - Nocturno</strong></label>
+
+                                    <div id="tabs6" class="mt-2">
+                                        <ul>
+                                            <li><a href="#tabs6-1">Técnico Medio</a></li>
+                                        </ul>
+                                        <div id="tabs6-1">
+
+                                            <div class="text-center">
+
+                                                <div class="container-fluid">
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_tm_cpt"> <strong>Matrícula
+                                                            </strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_tm_cpt" disabled="true"
+                                                                   name="matricula_tm_cpt"
+                                                                   th:placeholder="${caratula.getMatriculaInicialCPT_TM().getTotal()}"
+                                                                   th:value="${caratula.getMatriculaInicialCPT_TM().getTotal()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="nuevo_ingreso_tm_cpt"> <strong>Nuevo
+                                                                Ingreso</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="nuevo_ingreso_tm_cpt" disabled="true"
+                                                                   name="nuevo_ingreso_tm_cpt"
+                                                                   th:placeholder="${caratula.getMatriculaInicialCPT_TM().getNuevoIngreso()}"
+                                                                   th:value="${caratula.getMatriculaInicialCPT_TM().getNuevoIngreso()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_tm_hembras_cpt"> <strong>Matrícula
+                                                                Hembras
+                                                            </strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_tm_hembras_cpt" disabled="true"
+                                                                   name="matricula_tm_hembras_cpt"
+                                                                   th:placeholder="${caratula.getMatriculaInicialCPT_TM().getTotalHembras()}"
+                                                                   th:value="${caratula.getMatriculaInicialCPT_TM().getTotalHembras()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="nuevo_ingreso_tm_hembras_cpt"> <strong>Nuevo
+                                                                Ingreso Hembras</strong></label>
+                                                            <input type="text" class="form-control" disabled="true"
+                                                                   id="nuevo_ingreso_tm_hembras_cpt"
+                                                                   name="nuevo_ingreso_tm_hembras_cpt"
+                                                                   th:placeholder="${caratula.getMatriculaInicialCPT_TM().getNuevoIngresoHembras()}"
+                                                                   th:value="${caratula.getMatriculaInicialCPT_TM().getNuevoIngresoHembras()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="tabs4-2">
+
+                                <div class="container-fluid mt-2">
+                                    <label><strong>Curso Diurno</strong></label>
+
+                                    <div id="tabs7" class="mt-2 text-center">
+                                        <ul>
+                                            <li><a href="#tabs7-1">Técnico Medio</a></li>
+                                            <li><a href="#tabs7-2">Obrero Calificado</a></li>
+                                            <li><a href="#tabs7-3">Total Politécnico</a></li>
+                                        </ul>
+                                        <div id="tabs7-1">
+                                            <div class="text-center">
+
+                                                <div class="container-fluid">
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_final_tm"> <strong>Matrícula
+                                                                Final</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_final_tm" disabled="true"
+                                                                   name="matricula_final_tm"
+                                                                   th:placeholder="${caratula.getMatriculaFinalTM().getMatriculaFinal()}"
+                                                                   th:value="${caratula.getMatriculaFinalTM().getMatriculaFinal()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="aprobados_tm">
+                                                                <strong>Aprobados</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="aprobados_tm" disabled="true"
+                                                                   name="aprobados_tm"
+                                                                   th:placeholder="${caratula.getMatriculaFinalTM().getAprobados()}"
+                                                                   th:value="${caratula.getMatriculaFinalTM().getAprobados()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="graduados_tm">
+                                                                <strong>Graduados</strong></label>
+                                                            <input type="text" class="form-control" id="graduados_tm"
+                                                                   name="graduados_tm" disabled="true"
+                                                                   th:placeholder="${caratula.getMatriculaFinalTM().getGraduados()}"
+                                                                   th:value="${caratula.getMatriculaFinalTM().getGraduados()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tabs7-2">
+                                            <div class="text-center">
+
+                                                <div class="container-fluid">
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_final_oc"> <strong>Matrícula
+                                                                Final</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_final_oc" disabled="true"
+                                                                   name="matricula_final_oc"
+                                                                   th:placeholder="${caratula.getMatriculaFinalOC().getMatriculaFinal()}"
+                                                                   th:value="${caratula.getMatriculaFinalOC().getMatriculaFinal()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="aprobados_oc">
+                                                                <strong>Aprobados</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="aprobados_oc" disabled="true"
+                                                                   name="aprobados_oc"
+                                                                   th:placeholder="${caratula.getMatriculaFinalOC().getAprobados()}"
+                                                                   th:value="${caratula.getMatriculaFinalOC().getAprobados()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="graduados_oc">
+                                                                <strong>Graduados</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="graduados_oc" disabled="true"
+                                                                   name="graduados_oc"
+                                                                   th:placeholder="${caratula.getMatriculaFinalOC().getGraduados()}"
+                                                                   th:value="${caratula.getMatriculaFinalOC().getGraduados()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tabs7-3">
+                                            <div class="text-center">
+
+                                                <div class="container-fluid">
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_final"> <strong>Matrícula
+                                                                Final</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_final" disabled="true"
+                                                                   name="matricula_final"
+                                                                   th:placeholder="${caratula.getMatriculaFinalOC().getMatriculaFinal() + caratula.getMatriculaFinalTM().getMatriculaFinal()}"
+                                                                   th:value="${caratula.getMatriculaFinalOC().getMatriculaFinal() + caratula.getMatriculaFinalTM().getMatriculaFinal()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="aprobados">
+                                                                <strong>Aprobados</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="aprobados" disabled="true"
+                                                                   name="aprobados"
+                                                                   th:placeholder="${caratula.getMatriculaFinalOC().getAprobados() + caratula.getMatriculaFinalTM().getAprobados()}"
+                                                                   th:value="${caratula.getMatriculaFinalOC().getAprobados() + caratula.getMatriculaFinalTM().getAprobados()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="graduados">
+                                                                <strong>Graduados</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="graduados" disabled="true"
+                                                                   name="graduados"
+                                                                   th:placeholder="${caratula.getMatriculaFinalOC().getGraduados() + caratula.getMatriculaFinalTM().getGraduados()}"
+                                                                   th:value="${caratula.getMatriculaFinalOC().getGraduados() + caratula.getMatriculaFinalTM().getGraduados()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="mt-3 rayita">
+
+                                <div class="container-fluid mt-3">
+                                    <label> <strong>Curso Vespertino - Nocturno</strong></label>
+
+                                    <div id="tabs8" class="mt-2">
+                                        <ul>
+                                            <li><a href="#tabs8-1">Técnico Medio</a></li>
+                                        </ul>
+                                        <div id="tabs8-1">
+                                            <div class="text-center">
+
+                                                <div class="container-fluid">
+                                                    <div class="row mt-4">
+
+                                                        <div class="col">
+                                                            <label for="matricula_final_tm_cpt"> <strong>Matrícula
+                                                                Final</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matricula_final_tm_cpt" disabled="true"
+                                                                   name="matricula_final_tm_cpt"
+                                                                   th:placeholder="${caratula.getMatriculaFinalCPT_TM().getMatriculaFinal()}"
+                                                                   th:value="${caratula.getMatriculaFinalCPT_TM().getMatriculaFinal()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="aprobados_tm_cpt">
+                                                                <strong>Aprobados</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="aprobados_tm_cpt" disabled="true"
+                                                                   name="aprobados_tm_cpt"
+                                                                   th:placeholder="${caratula.getMatriculaFinalCPT_TM().getAprobados()}"
+                                                                   th:value="${caratula.getMatriculaFinalCPT_TM().getAprobados()}"
+                                                                   required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="graduados_tm_cpt">
+                                                                <strong>Graduados</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="graduados_tm_cpt" disabled="true"
+                                                                   name="graduados_tm_cpt"
+                                                                   th:placeholder="${caratula.getMatriculaFinalCPT_TM().getGraduados()}"
+                                                                   th:value="${caratula.getMatriculaFinalCPT_TM().getGraduados()}"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="container-fluid">
+                        <div class="row mt-2 container">
+                            <a th:href="@{/personal_nac}"
+                               class="btn btn-danger mt-2">
+                                <img th:src="@{/img/personal.png}"> Personal</span>
+                            </a>
+
+                            <a th:href="@{/rango_nac}"
+                               class="btn btn-warning ml-2 mt-2">
+                                <img th:src="@{/img/rangoEdades.png}"> R. Edades</span>
+                            </a>
+
+                            <a th:href="@{/ficha_nac}"
+                               class="btn btn-primary ml-2 mt-2">
+                                <img th:src="@{/img/ficha.png}"> Ficha</span>
+                            </a>
+
+                            <a th:href="@{/ficha_turquino_nac}"
+                               class="btn btn-info ml-2 mt-2">
+                                <img th:src="@{/img/ficha_turquino.png}"> Ficha Turquino</span>
+                            </a>
+
+                            <a th:href="@{/terminado_nac_pdf}"
+                               class="btn btn-outline-danger ml-2 mt-2">
+                                <img th:src="@{/img/graduados.png}"> A. Terminado</span>
+                            </a>
+
+                            <a th:href="@{/iniciado_nac_pdf}"
+                               class="btn btn-outline-success ml-2 mt-2">
+                                <img th:src="@{/img/iniciado.png}"> A. Iniciado</span>
+                            </a>
+
+                            <a th:href="@{/mat_inicial_nac_pdf}"
+                               class="btn btn-outline-info ml-2 mt-2">
+                                <img th:src="@{/img/mat_inicial.png}"> Mat. Inicial</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+

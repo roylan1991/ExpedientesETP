@@ -1,0 +1,61 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <aside class="main-sidebar">
+        <section class="sidebar estilo-menu">
+            <ul class="sidebar-menu estilo-menu mt-1" data-widget="tree">
+                <li class="active"><a th:href="@{/lst_centros}" class="color">
+                    <img th:src="@{/img/centros.png}">
+                    <i class="fa"></i> <span>Politécnicos</span></a>
+                </li>
+
+                <li><a th:href="@{/especialidades}" class="color">
+                    <img th:src="@{/img/especialidades.png}">
+                    <i class="fa"></i> <span>Especialidades</span></a>
+                </li>
+
+                <li><a th:href="@{/expedientes}" class="color">
+                    <img th:src="@{/img/expedientes.png}">
+                    <i class="fa"></i> <span>Expedientes</span></a>
+                </li>
+
+                <li class="treeview">
+                    <a href="" class="color">
+                        <img th:src="@{/img/resumen.png}">
+                        <i class="fa"></i>
+                        <span>Resumen</span>
+                        <span class="pull-right-container">
+                                <i class="fa pull-left"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a th:href="@{/caratula_mcpal}" class="color">
+                            <i class="fa"></i> <span>Municipal</span></a></li>
+                        <li><a th:href="@{/caratula_prov}" class="color">
+                            <i class="fa"></i> <span>Provincial</span></a></li>
+                        <li><a th:href="@{/caratula_nac}" class="color">
+                            <i class="fa"></i> <span>Nacional</span></a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="" class="color">
+                        <img th:src="@{/img/indicadores.png}">
+                        <i class="fa"></i>
+                        <span>Indicadores</span>
+                        <span class="pull-right-container">
+                                <i class="fa pull-left"></i>
+                        </span>
+                    </a>
+
+                    <ul class="treeview-menu">
+                        <li><a th:href="@{/indicadores/mat_ramas}" class="color">
+                            <i class="fa"></i> <span>Matrícula por Ramas</span></a></li>
+                        <li><a th:href="@{/indicadores/retencion}" class="color">
+                            <i class="fa"></i> <span>Retención Escolar</span></a></li>
+                        <li><a th:href="@{/indicadores/grupos_rangos_tm}" class="color">
+                            <i class="fa"></i> <span>Grupos por Rangos</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </aside>
+</div>

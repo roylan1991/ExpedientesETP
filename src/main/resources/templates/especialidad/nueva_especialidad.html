@@ -1,0 +1,84 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_especialidades"></th:block>
+
+    <div>
+        <section class="main-footer titulo">
+            <strong>Agregar Especialidad de Estudio en Politécnico [Resoluciones]</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div th:if="${error}" class="container-fluid">
+                    <div id="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error" th:text="${mensaje_error}"/></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form th:action="@{/nueva_especialidad}" method="post">
+
+                    <div class="col-md-3 col-sm-5">
+                        <label for="codigo"> <strong>Código</strong></label>
+                        <input type="text" class="form-control" id="codigo" name="codigo" th:value="${codigo}"
+                               required>
+                    </div>
+
+                    <div class="col-md-7 col-sm-7 mt-4">
+                        <label for="familias"><strong>Familia</strong></label>
+                        <select class="form-control" id="familias" name="familias" required>
+                            <option value="">Seleccione...</option>
+                            <option th:each="fam : ${lst_familias}"
+                                    th:text="${fam.getTipoFamilia()}"
+                                    th:value="${fam.getIdFamilia()}"></option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-10 mt-4">
+                        <label for="nombreEsp"><strong>Nombre de la especialidad</strong></label>
+                        <input type="text" class="form-control" id="nombreEsp" name="nombreEsp" th:value="${nombreEsp}"
+                               required>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-md-4 col-sm-4 mt-4">
+                                <label for="niveles"><strong>Nivel</strong></label>
+                                <select class="form-control" id="niveles" name="niveles" required>
+                                    <option value="">Seleccione...</option>
+                                    <option th:each="niv : ${lst_niveles}"
+                                            th:text="${niv.getTipoNivel()}"
+                                            th:value="${niv.getIdNivel()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container text-right col-md-12 mt-5">
+                        <button class="btn btn-primary" type="submit">+ Agregar</button>
+                    </div>
+                </form>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+

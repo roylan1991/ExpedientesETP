@@ -1,0 +1,121 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_centros"></th:block>
+
+    <div>
+        <section class="main-footer titulo">
+            <strong><span th:text="'[ Agregar Especialidad ] - Politécnico ' + ${datos_escuela.getNombCentro()}"></span></strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div th:if="${error}" class="container-fluid">
+                    <div id="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error" th:text="${mensaje_error}"></span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form th:action="@{/nueva_especialidad_centro(idE=${datos_escuela.getIdCentro()})}" method="post">
+
+                    <div class="col-md-18 col-sm-12 col-lg-12 mt-4">
+                        <label for="especialidades"><strong>Código - Nombre de la especialidad [Nivel]</strong></label>
+                        <select class="form-control" id="especialidades" name="nombre" required>
+                            <div th:if="${bien}">
+                                <option value="">Seleccione...</option>
+                            </div>
+                            <div th:if="${mal}">
+                                <option th:text="${EspCentro.getDescripcionAlCrear()} + ' (Seleccionado)'"
+                                        th:value="${EspCentro.getEspecialidad().getIdEspecialidad()}">
+                            </div>
+                            <option th:each="lst : ${lst_especialidades}"
+                                    th:text="${lst.getDescripcion()}"
+                                    th:value="${lst.getIdEspecialidad()}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-md-4 col-sm-4 col-lg-4 mt-4">
+                                <label for="duraciones"><strong>Duración en Semestres</strong></label>
+                                <select class="form-control" id="duraciones" name="duraciones" required>
+                                    <div th:if="${bien}">
+                                        <option value="">Seleccione...</option>
+                                    </div>
+                                    <div th:if="${mal}">
+                                        <option th:text="${EspCentro.getDuracion().getTipoDuracion()} + ' (Seleccionado)'"
+                                                th:value="${EspCentro.getDuracion().getIdDuracion()}">
+                                    </div>
+                                    <option th:each="dur : ${lst_duraciones}"
+                                            th:text="${dur.getTipoDuracion()}"
+                                            th:value="${dur.getIdDuracion()}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-lg-4 mt-4">
+                                <label for="escolaridades"><strong>Escolaridad de Ingreso</strong></label>
+                                <select class="form-control" id="escolaridades" name="escolaridades" required>
+                                    <div th:if="${bien}">
+                                        <option value="">Seleccione...</option>
+                                    </div>
+                                    <div th:if="${mal}">
+                                        <option th:text="${EspCentro.getEscolaridad().getTipoEscolaridad()} + ' (Seleccionado)'"
+                                                th:value="${EspCentro.getEscolaridad().getIdEscolaridad()}">
+                                    </div>
+                                    <option th:each="esc : ${lst_escolaridades}"
+                                            th:text="${esc.getTipoEscolaridad()}"
+                                            th:value="${esc.getIdEscolaridad()}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 col-sm-4 col-lg-4 mt-4">
+                                <label for="cursos"><strong>Tipo de curso</strong></label>
+                                <select class="form-control" id="cursos" name="cursos" required>
+                                    <div th:if="${bien}">
+                                        <option value="">Seleccione...</option>
+                                    </div>
+                                    <div th:if="${mal}">
+                                        <option th:text="${EspCentro.getCurso().getTipoCurso()} + ' (Seleccionado)'"
+                                                th:value="${EspCentro.getCurso().getIdCurso()}">
+                                    </div>
+                                    <option th:each="cur : ${lst_cursos}"
+                                            th:text="${cur.getTipoCurso()}"
+                                            th:value="${cur.getIdCurso()}">
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="text-right col-md-12 col-sm-12 mt-5">
+                        <button class="btn btn-success" type="submit">+ Agregar</button>
+                    </div>
+                </form>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+

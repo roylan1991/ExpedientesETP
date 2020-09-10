@@ -1,0 +1,106 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_error"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>[Ayuda] Centro politécnico</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div class="container-fluid">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong><span
+                                class="tipografia-error">Ejemplo del formulario donde se registran nuevos centros.</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form>
+                    <div class="col-md-3 col-sm-5">
+                        <label for="codigo"> <strong>Código</strong></label>
+                        <input type="text" class="form-control" id="codigo" name="codigo" disabled="true" required>
+                    </div>
+
+                    <div class="col-md-9 col-sm-9 mt-2">
+                        <label for="nombre"><strong>Nombre del centro</strong></label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" disabled="true" required>
+                    </div>
+
+                    <div class="col-md-12 mt-2">
+                        <label for="direccion"><strong>Dirección Particular</strong></label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" disabled="true"
+                               required>
+                    </div>
+
+                    <div class="container-fluid row">
+                        <div class="col-md-3 col-sm-5 mt-2 mr-4">
+                            <label for="telefono"> <strong>Teléfono</strong></label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" disabled="true">
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 mt-2">
+                            <label for="sectores"> <strong>Sector</strong></label>
+                            <select class="form-control" id="sectores" name="sectores"
+                                    required>
+                                <option value="">Seleccione...</option>
+                                <option th:each="sector : ${lst_sectores}"
+                                        th:text="${sector.getTipoSector()}"
+                                        th:value="${sector.getIdSector()}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="container-fluid mt-4">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error">Para agregar nuevos centros politécnicos, cliquea en el menú principal [Politécnicos] y luego [Agregar].
+                                       Es importante conocer que sus respectivos datos serán completados exclusivamente por las personas con rol de Usuario!</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error">El código numérico del centro deberá ser único y sus 4 primeros dígitos deben de corresponder con el código de su localidad!</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error">Una vez completado los datos correctamente, el centro se visualizará en el listado de centros del menú principal [Politécnicos]!</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+
+
+

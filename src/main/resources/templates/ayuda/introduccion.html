@@ -1,0 +1,107 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_error"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>[Ayuda] Introducción</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div class="container-fluid">
+                    <table class="table table-bordered table-hover table-striped tipografia-contenido container-fluid">
+                        <tbody>
+                        <tr class="mt-4">
+                            <td class="introduccion" style="vertical-align:middle">Actualmente nuestro país ha
+                                demostrado su interés por el empleo de las Tecnologías de la Información y las
+                                Comunicaciones (TIC) en todas las esferas de la sociedad, tratando de informatizar todo
+                                lo que con anterioridad se realizaba manualmente, en busca de agilizar el trabajo y
+                                obtener mejores resultados con más eficiencia. En este contexto, el Departamento de
+                                Planeamiento y Estadísticas del Ministerio de Educación (MINED) y sus dependencias en
+                                todo el país están modificando su estructura organizativa, calificando el personal, y
+                                automatizando actividades, con el propósito de mejorar la calidad de los procedimientos
+                                que definen su misión.<br>
+                                <br>
+                                <strong>Expedientes ETP</strong> <br>
+                                <br>
+                                Como parte de este proceso de informatización se desarrolló este nuevo sistema para la
+                                gestión de los datos estadísticos de los centros politécnicos del MINED, el cual
+                                posibilitará acceder a dicha información de una manera más rápida y eficiente mediante
+                                la red, almacenando y organizando a la misma en una base de datos protegida y
+                                centralizada. Permitirá además exportar documentos y modelos estadísticos en formatos
+                                PDF y Excel. Proporcionará al usuario un mejor análisis de la información ya que los
+                                datos se muestran de forma intuitiva, gráfica y amigable, facilitando las búsquedas y
+                                ordenación de informes claves. Este sistema a través de su implementación, permitirá de
+                                manera general un acertado y mejor análisis de los indicadores de eficiencia de la
+                                Educación Técnica Profesional (ETP).<br>
+                                <br>
+                                <strong>¿Qué son los datos estadísticos de final e inicio de curso?</strong> <br>
+                                <br>
+                                Al iniciar cada curso escolar, en el Departamento de Planeamiento y Estadísticas a
+                                nivel municipal, es entregado un documento titulado "Formulario 221-404-03",
+                                popularmente conocido como "Expedientes de Politécnicos (Expedientes ETP)", el cual es
+                                confeccionado por el secretario docente y aprobado por el director de cada centro
+                                politécnico. Este documento contiene los datos estadísticos de final e inicio de curso,
+                                o sea matrícula por régimen de estudio, tipo de curso, nuevos ingresos, repetidores,
+                                promovidos por años de estudio, grupo de edades, género, especialidades, niveles y
+                                número de grupos por grado. Además, recoge la composición del personal laborando
+                                físicamente en el centro en cuanto a total de trabajadores docentes fijos y contratados
+                                frente a aulas, género y asignaturas, otros docentes y personal no docente.<br>
+                                <br>
+                                Una vez entregado cada uno de estos formularios, el informático de este departamento se
+                                encarga de digitalizar los datos que integran ese modelo, de manera general y por
+                                especialidades de cada uno de los centros donde se imparte este nivel educativo. De esta
+                                manera se crea un resumen municipal, el cual es entregado a Estadísticas Provincial,
+                                estos a su vez generan un resumen provincial que es enviado al Departamento de
+                                Estadísticas del MINED, los cuales confeccionan un resumen nacional y lo hacen fluir
+                                hacia los Viceministros y finalmente Ministra de Educación.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="container-fluid mt-2">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>
+                            <span class="tipografia-error">Para una mejor experiencia, si lo deseas, puedes presionar en el teclado la Tecla [F11] para visualizar Expedientes ETP a pantalla completa!</span>
+                        </strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>
+                            <span class="tipografia-error">Si deseas hacer alguna recomendación o crítica para ayudar a perfeccionar el sistema, puedes escribir un correo electrónico a: rbresslerc@sc.sc.rimed.cu</span>
+                        </strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,263 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_indicadores"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>Grupos por Rangos - Técnicos Medios</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div class="container-fluid mb-2">
+                    <div class="row">
+                        <div class="text-right col-12">
+
+                            <a th:href="@{/indicadores/gr_rang_tm_pdf}"
+                               class="exportar btn-outline-warning" title="Exportar a PDF"><img
+                                    th:src="@{/img/pdf.png}"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover table-striped text-center tipografia-contenido mt-1">
+                    <thead>
+                    <tr class="estilo-tabla">
+                        <td style="vertical-align:middle" rowspan="2" class="btn-primary">Año</td>
+                        <td style="vertical-align:middle" rowspan="2" class="btn-primary">Concepto</td>
+                        <td style="vertical-align:middle" rowspan="2" class="btn-primary">Total</td>
+                        <td colspan="5" class="table-primary">Rangos de Matrícula</td>
+                    </tr>
+
+                    <tr class="estilo-tabla btn-primary">
+                        <td>1 - 15</td>
+                        <td>16 - 30</td>
+                        <td>31 - 35</td>
+                        <td>35 - 40</td>
+                        <td>+ 40</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="vertical-align:middle" rowspan="4" class="estilo-tabla">I Año</td>
+                        <td class="estilo-tabla">Grupos</td>
+                        <td th:text="${grupos1.getGrupos()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos1.getGrupos()[1]}">Datos</td>
+                        <td th:text="${grupos1.getGrupos()[2]}">Datos</td>
+                        <td th:text="${grupos1.getGrupos()[3]}">Datos</td>
+                        <td th:text="${grupos1.getGrupos()[4]}">Datos</td>
+                        <td th:text="${grupos1.getGrupos()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">Matrícula Atendida</td>
+                        <td th:text="${grupos1.getMatrAtendida()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos1.getMatrAtendida()[1]}">Datos</td>
+                        <td th:text="${grupos1.getMatrAtendida()[2]}">Datos</td>
+                        <td th:text="${grupos1.getMatrAtendida()[3]}">Datos</td>
+                        <td th:text="${grupos1.getMatrAtendida()[4]}">Datos</td>
+                        <td th:text="${grupos1.getMatrAtendida()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">Alumnos/Grupos</td>
+                        <td th:text="${grupos1.getAlumnosGrupo()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos1.getAlumnosGrupo()[1]}">Datos</td>
+                        <td th:text="${grupos1.getAlumnosGrupo()[2]}">Datos</td>
+                        <td th:text="${grupos1.getAlumnosGrupo()[3]}">Datos</td>
+                        <td th:text="${grupos1.getAlumnosGrupo()[4]}">Datos</td>
+                        <td th:text="${grupos1.getAlumnosGrupo()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">% Matrícula Total</td>
+                        <td th:text="${grupos1.getPorcMatr()[0]}+' %'" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos1.getPorcMatr()[1]}+' %'">Datos</td>
+                        <td th:text="${grupos1.getPorcMatr()[2]}+' %'">Datos</td>
+                        <td th:text="${grupos1.getPorcMatr()[3]}+' %'">Datos</td>
+                        <td th:text="${grupos1.getPorcMatr()[4]}+' %'">Datos</td>
+                        <td th:text="${grupos1.getPorcMatr()[5]}+' %'">Datos</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:middle" rowspan="4" class="estilo-tabla">II Año</td>
+                        <td class="estilo-tabla">Grupos</td>
+                        <td th:text="${grupos2.getGrupos()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos2.getGrupos()[1]}">Datos</td>
+                        <td th:text="${grupos2.getGrupos()[2]}">Datos</td>
+                        <td th:text="${grupos2.getGrupos()[3]}">Datos</td>
+                        <td th:text="${grupos2.getGrupos()[4]}">Datos</td>
+                        <td th:text="${grupos2.getGrupos()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">Matrícula Atendida</td>
+                        <td th:text="${grupos2.getMatrAtendida()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos2.getMatrAtendida()[1]}">Datos</td>
+                        <td th:text="${grupos2.getMatrAtendida()[2]}">Datos</td>
+                        <td th:text="${grupos2.getMatrAtendida()[3]}">Datos</td>
+                        <td th:text="${grupos2.getMatrAtendida()[4]}">Datos</td>
+                        <td th:text="${grupos2.getMatrAtendida()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">Alumnos/Grupos</td>
+                        <td th:text="${grupos2.getAlumnosGrupo()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos2.getAlumnosGrupo()[1]}">Datos</td>
+                        <td th:text="${grupos2.getAlumnosGrupo()[2]}">Datos</td>
+                        <td th:text="${grupos2.getAlumnosGrupo()[3]}">Datos</td>
+                        <td th:text="${grupos2.getAlumnosGrupo()[4]}">Datos</td>
+                        <td th:text="${grupos2.getAlumnosGrupo()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">% Matrícula Total</td>
+                        <td th:text="${grupos2.getPorcMatr()[0]}+' %'" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos2.getPorcMatr()[1]}+' %'">Datos</td>
+                        <td th:text="${grupos2.getPorcMatr()[2]}+' %'">Datos</td>
+                        <td th:text="${grupos2.getPorcMatr()[3]}+' %'">Datos</td>
+                        <td th:text="${grupos2.getPorcMatr()[4]}+' %'">Datos</td>
+                        <td th:text="${grupos2.getPorcMatr()[5]}+' %'">Datos</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:middle" rowspan="4" class="estilo-tabla">III Año</td>
+                        <td class="estilo-tabla">Grupos</td>
+                        <td th:text="${grupos3.getGrupos()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos3.getGrupos()[1]}">Datos</td>
+                        <td th:text="${grupos3.getGrupos()[2]}">Datos</td>
+                        <td th:text="${grupos3.getGrupos()[3]}">Datos</td>
+                        <td th:text="${grupos3.getGrupos()[4]}">Datos</td>
+                        <td th:text="${grupos3.getGrupos()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">Matrícula Atendida</td>
+                        <td th:text="${grupos3.getMatrAtendida()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos3.getMatrAtendida()[1]}">Datos</td>
+                        <td th:text="${grupos3.getMatrAtendida()[2]}">Datos</td>
+                        <td th:text="${grupos3.getMatrAtendida()[3]}">Datos</td>
+                        <td th:text="${grupos3.getMatrAtendida()[4]}">Datos</td>
+                        <td th:text="${grupos3.getMatrAtendida()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">Alumnos/Grupos</td>
+                        <td th:text="${grupos3.getAlumnosGrupo()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos3.getAlumnosGrupo()[1]}">Datos</td>
+                        <td th:text="${grupos3.getAlumnosGrupo()[2]}">Datos</td>
+                        <td th:text="${grupos3.getAlumnosGrupo()[3]}">Datos</td>
+                        <td th:text="${grupos3.getAlumnosGrupo()[4]}">Datos</td>
+                        <td th:text="${grupos3.getAlumnosGrupo()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">% Matrícula Total</td>
+                        <td th:text="${grupos3.getPorcMatr()[0]}+' %'" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos3.getPorcMatr()[1]}+' %'">Datos</td>
+                        <td th:text="${grupos3.getPorcMatr()[2]}+' %'">Datos</td>
+                        <td th:text="${grupos3.getPorcMatr()[3]}+' %'">Datos</td>
+                        <td th:text="${grupos3.getPorcMatr()[4]}+' %'">Datos</td>
+                        <td th:text="${grupos3.getPorcMatr()[5]}+' %'">Datos</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:middle" rowspan="4" class="estilo-tabla">IV Año</td>
+                        <td class="estilo-tabla">Grupos</td>
+                        <td th:text="${grupos4.getGrupos()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos4.getGrupos()[1]}">Datos</td>
+                        <td th:text="${grupos4.getGrupos()[2]}">Datos</td>
+                        <td th:text="${grupos4.getGrupos()[3]}">Datos</td>
+                        <td th:text="${grupos4.getGrupos()[4]}">Datos</td>
+                        <td th:text="${grupos4.getGrupos()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">Matrícula Atendida</td>
+                        <td th:text="${grupos4.getMatrAtendida()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos4.getMatrAtendida()[1]}">Datos</td>
+                        <td th:text="${grupos4.getMatrAtendida()[2]}">Datos</td>
+                        <td th:text="${grupos4.getMatrAtendida()[3]}">Datos</td>
+                        <td th:text="${grupos4.getMatrAtendida()[4]}">Datos</td>
+                        <td th:text="${grupos4.getMatrAtendida()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">Alumnos/Grupos</td>
+                        <td th:text="${grupos4.getAlumnosGrupo()[0]}" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos4.getAlumnosGrupo()[1]}">Datos</td>
+                        <td th:text="${grupos4.getAlumnosGrupo()[2]}">Datos</td>
+                        <td th:text="${grupos4.getAlumnosGrupo()[3]}">Datos</td>
+                        <td th:text="${grupos4.getAlumnosGrupo()[4]}">Datos</td>
+                        <td th:text="${grupos4.getAlumnosGrupo()[5]}">Datos</td>
+                    </tr>
+                    <tr>
+                        <td class="estilo-tabla">% Matrícula Total</td>
+                        <td th:text="${grupos4.getPorcMatr()[0]}+' %'" class="estilo-tabla">Datos</td>
+                        <td th:text="${grupos4.getPorcMatr()[1]}+' %'">Datos</td>
+                        <td th:text="${grupos4.getPorcMatr()[2]}+' %'">Datos</td>
+                        <td th:text="${grupos4.getPorcMatr()[3]}+' %'">Datos</td>
+                        <td th:text="${grupos4.getPorcMatr()[4]}+' %'">Datos</td>
+                        <td th:text="${grupos4.getPorcMatr()[5]}+' %'">Datos</td>
+                    </tr>
+                    <tr class="estilo-tabla">
+                        <td style="vertical-align:middle" rowspan="4">Total</td>
+                        <td>Grupos</td>
+                        <td th:text="${grupos5.getGrupos()[0]}">Datos</td>
+                        <td th:text="${grupos5.getGrupos()[1]}">Datos</td>
+                        <td th:text="${grupos5.getGrupos()[2]}">Datos</td>
+                        <td th:text="${grupos5.getGrupos()[3]}">Datos</td>
+                        <td th:text="${grupos5.getGrupos()[4]}">Datos</td>
+                        <td th:text="${grupos5.getGrupos()[5]}">Datos</td>
+                    </tr>
+                    <tr class="estilo-tabla">
+                        <td>Matrícula Atendida</td>
+                        <td th:text="${grupos5.getMatrAtendida()[0]}">Datos</td>
+                        <td th:text="${grupos5.getMatrAtendida()[1]}">Datos</td>
+                        <td th:text="${grupos5.getMatrAtendida()[2]}">Datos</td>
+                        <td th:text="${grupos5.getMatrAtendida()[3]}">Datos</td>
+                        <td th:text="${grupos5.getMatrAtendida()[4]}">Datos</td>
+                        <td th:text="${grupos5.getMatrAtendida()[5]}">Datos</td>
+                    </tr>
+                    <tr class="estilo-tabla">
+                        <td>Alumnos/Grupos</td>
+                        <td th:text="${grupos5.getAlumnosGrupo()[0]}">Datos</td>
+                        <td th:text="${grupos5.getAlumnosGrupo()[1]}">Datos</td>
+                        <td th:text="${grupos5.getAlumnosGrupo()[2]}">Datos</td>
+                        <td th:text="${grupos5.getAlumnosGrupo()[3]}">Datos</td>
+                        <td th:text="${grupos5.getAlumnosGrupo()[4]}">Datos</td>
+                        <td th:text="${grupos5.getAlumnosGrupo()[5]}">Datos</td>
+                    </tr>
+                    <tr class="estilo-tabla">
+                        <td>% Matrícula Total</td>
+                        <td th:text="${grupos5.getPorcMatr()[0]}+' %'">Datos</td>
+                        <td th:text="${grupos5.getPorcMatr()[1]}+' %'">Datos</td>
+                        <td th:text="${grupos5.getPorcMatr()[2]}+' %'">Datos</td>
+                        <td th:text="${grupos5.getPorcMatr()[3]}+' %'">Datos</td>
+                        <td th:text="${grupos5.getPorcMatr()[4]}+' %'">Datos</td>
+                        <td th:text="${grupos5.getPorcMatr()[5]}+' %'">Datos</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="text-right col-12 mt-2">
+                            <a th:href="@{/indicadores/grupos_rangos_oc}"
+                               class="btn btn-success ml-2"> Grupos por Rangos [O.C]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+

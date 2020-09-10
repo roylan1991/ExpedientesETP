@@ -1,0 +1,233 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="plantillas/plantilla :: css-js" th:remove="div"></div>
+
+    <script th:src="@{/bootstrap/graficas/js/jquery.flot.js}"></script>
+    <script th:src="@{/bootstrap/graficas/js/jquery.flot.categories.js}"></script>
+
+    <script>
+        $(function () {
+            var dataTM = [
+                ["I Año", [[${dato1TM}]]], ["II Año", [[${dato2TM}]]], ["III Año", [[${dato3TM}]]], ["IV Año", [[${dato4TM}]]]
+            ];
+            var dataOC = [
+                ["I Año", [[${dato1OC}]]], ["II Año", [[${dato2OC}]]]
+            ];
+
+            $.plot("#graficaTM", [dataTM], {
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.6,
+                        align: "center",
+
+                    }
+                },
+                xaxis: {
+                    mode: "categories",
+                    tickLength: 0
+                }
+            });
+
+            $.plot("#graficaOC", [dataOC], {
+                series: {
+                    bars: {
+                        show: true,
+                        barWidth: 0.6,
+                        align: "center"
+                    }
+                },
+                xaxis: {
+                    mode: "categories",
+                    tickLength: 0
+                }
+            });
+        });
+    </script>
+</head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_indicadores"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>Retención Escolar</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div class="row">
+                    <div class="col-sm-6 container">
+
+                        <table class="table table-bordered table-hover table-striped text-center tipografia-contenido mt-1">
+                            <thead>
+                            <tr class="estilo-tabla">
+                                <td colspan="3" class="table-primary">Técnicos Medios</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="btn-primary">Concepto</td>
+                                <td class="btn-primary">Matrícula</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="2" class="estilo-tabla">Año Terminado</td>
+                                <td class="estilo-tabla">Matrícula Inicial</td>
+                                <td class="estilo-tabla" th:text="${matriculaFinalTM}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Graduados</td>
+                                <td class="estilo-tabla" th:text="${graduadosTM}">Datos</td>
+                            </tr>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="3" class="estilo-tabla">Año Iniciado</td>
+                                <td class="estilo-tabla">Nuevos Ingresos</td>
+                                <td class="estilo-tabla" th:text="${nuevoIngresoTM}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Matrícula Esperada</td>
+                                <td class="estilo-tabla" th:text="${esperadaTM}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Matrícula Inicial</td>
+                                <td class="estilo-tabla" th:text="${matriculaInicialTM}">Datos</td>
+                            </tr>
+
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="3" class="estilo-tabla">Bajas
+                                </td>
+                                <td class="estilo-tabla">Bajas de Inicio - Inicio</td>
+                                <td class="estilo-tabla" th:text="${bajasTM}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Porciento de Bajas</td>
+                                <td class="estilo-tabla" th:text="${porcientoBajasTM}+' %'">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Porciento de Retención</td>
+                                <td class="estilo-tabla" th:text="${porcientoRetencionTM}+' %'">Datos</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="estilo-tabla table-info">Gráfica - Retención por años de
+                                    estudio
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div id="graficaTM" class="disenno_grafica"
+                                                 style="height: 250px; width: 350px"></div>
+                                            <div class="align-self-end disenno_grafica">
+                                                <div class="mb-1 mt-2"><u>Años</u></div>
+                                                <div th:text="'I: '+ ${dato1TM} +' %'" class="mb-1">Datos</div>
+                                                <div th:text="'II: '+ ${dato2TM} +' %'" class="mb-1">Datos</div>
+                                                <div th:text="'III: '+ ${dato3TM} +' %'" class="mb-1">Datos</div>
+                                                <div th:text="'IV: '+ ${dato4TM} +' %'" class="mb-4">Datos</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-sm-6 container">
+                        <table class="table table-bordered table-hover table-striped text-center tipografia-contenido mt-1">
+                            <thead>
+                            <tr class="estilo-tabla">
+                                <td colspan="3" class="table-warning">Obreros Calificados</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="btn-primary">Concepto</td>
+                                <td class="btn-primary">Matrícula</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="2" class="estilo-tabla">Año Terminado</td>
+                                <td class="estilo-tabla">Matrícula Inicial</td>
+                                <td class="estilo-tabla" th:text="${matriculaFinalOC}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Graduados</td>
+                                <td class="estilo-tabla" th:text="${graduadosOC}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="3" class="estilo-tabla">Año Iniciado</td>
+                                <td class="estilo-tabla">Nuevos Ingresos</td>
+                                <td class="estilo-tabla" th:text="${nuevoIngresoOC}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Matrícula Esperada</td>
+                                <td class="estilo-tabla" th:text="${esperadaOC}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Matrícula Inicial</td>
+                                <td class="estilo-tabla" th:text="${matriculaInicialOC}">Datos</td>
+                            </tr>
+
+                            <tr>
+                                <td style="vertical-align:middle" rowspan="3" class="estilo-tabla">Bajas
+                                </td>
+                                <td class="estilo-tabla">Bajas de Inicio - Inicio</td>
+                                <td class="estilo-tabla" th:text="${bajasOC}">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Porciento de Bajas</td>
+                                <td class="estilo-tabla" th:text="${porcientoBajasOC}+' %'">Datos</td>
+                            </tr>
+                            <tr>
+                                <td class="estilo-tabla">Porciento de Retención</td>
+                                <td class="estilo-tabla" th:text="${porcientoRetencionOC}+' %'">Datos</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="table-info estilo-tabla">Gráfica - Retención por años de
+                                    estudio
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div id="graficaOC" class="disenno_grafica"
+                                                 style="height: 250px; width: 270px"></div>
+                                            <div class="align-self-end disenno_grafica">
+                                                <div class="mb-1 mt-2"><u>Años</u></div>
+                                                <div th:text="'I: '+ ${dato1OC} +' %'" class="mb-1">Datos</div>
+                                                <div th:text="'II: '+ ${dato2OC} +' %'" class="mb-4">Datos</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+
+
+</body>
+</html>
+
+
+
+

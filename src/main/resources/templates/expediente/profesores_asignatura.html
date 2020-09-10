@@ -1,0 +1,1627 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_captaciones"></th:block>
+
+    <div>
+        <section class="main-footer titulo">
+            <strong><span
+                    th:text="'[ Profesores por Asignaturas ] - Politécnico ' + ${datos_centro.getNombCentro()}"/></strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div th:if="${error}" class="container-fluid">
+                    <div id="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error" th:text="${mensaje_error}"/></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="text-right col-12">
+
+                            <a th:href="@{/prof_asig_pdf(idE=${datos_centro.getIdCentro()})}"
+                               class="exportar btn-outline-warning" title="Exportar a PDF"><img
+                                    th:src="@{/img/pdf.png}"/>
+                            </a>
+
+                            <a th:href="@{/prof_asig_excel(idE=${datos_centro.getIdCentro()})}"
+                               class="exportar btn-outline-warning" title="Exportar a Excel"><img
+                                    th:src="@{/img/excel.png}"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/profesores_asignatura(idE=${datos_centro.getIdCentro()})}" method="post">
+
+
+                    <div class="mt-4 container-fluid">
+                        <div id="tabs3">
+                            <ul>
+                                <li><a href="#tabs3-1">Profesores Fijos</a></li>
+                                <li><a href="#tabs3-2">Profesores Contratados</a></li>
+                            </ul>
+
+                            <div id="tabs3-1">
+
+                                <div class="text-center">
+
+                                    <div class="container-fluid">
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Español</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosEspanol"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control" id="fijosEspanol"
+                                                       name="fijosEspanol"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEspanol().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorEspanol().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEspanol"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEspanol"
+                                                       name="fijosNoTituladoEspanol"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEspanol().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorEspanol().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoEspanol"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoEspanol"
+                                                       name="fijosNoTituladoEstudiandoEspanol"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEspanol().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorEspanol().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Literatura</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosLiteratura"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosLiteratura"
+                                                       name="fijosLiteratura"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorLiteratura().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorLiteratura().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoLiteratura"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoLiteratura"
+                                                       name="fijosNoTituladoLiteratura"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorLiteratura().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorLiteratura().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoLiteratura"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoLiteratura"
+                                                       name="fijosNoTituladoEstudiandoLiteratura"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorLiteratura().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorLiteratura().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Matemática</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosMatematica"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosMatematica"
+                                                       name="fijosMatematica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorMatematica().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorMatematica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoMatematica"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoMatematica"
+                                                       name="fijosNoTituladoMatematica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorMatematica().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorMatematica().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoMatematica"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoMatematica"
+                                                       name="fijosNoTituladoEstudiandoMatematica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorMatematica().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorMatematica().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Física</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosFisica"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosFisica"
+                                                       name="fijosFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorFisica().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorFisica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoFisica"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoFisica"
+                                                       name="fijosNoTituladoFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorFisica().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorFisica().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoFisica"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoFisica"
+                                                       name="fijosNoTituladoEstudiandoFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorFisica().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorFisica().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Química</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosQuimica"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosQuimica"
+                                                       name="fijosQuimica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorQuimica().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorQuimica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoQuimica"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoQuimica"
+                                                       name="fijosNoTituladoQuimica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorQuimica().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorQuimica().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoQuimica"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoQuimica"
+                                                       name="fijosNoTituladoEstudiandoQuimica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorQuimica().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorQuimica().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Biología</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosBiologia"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosBiologia"
+                                                       name="fijosBiologia"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorBiologia().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorBiologia().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoBiologia"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoBiologia"
+                                                       name="fijosNoTituladoBiologia"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorBiologia().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorBiologia().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoBiologia"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoBiologia"
+                                                       name="fijosNoTituladoEstudiandoBiologia"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorBiologia().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorBiologia().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Historia</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosHistoria"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosHistoria"
+                                                       name="fijosHistoria"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorHistoria().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorHistoria().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoHistoria"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoHistoria"
+                                                       name="fijosNoTituladoHistoria"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorHistoria().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorHistoria().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoHistoria"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoHistoria"
+                                                       name="fijosNoTituladoEstudiandoHistoria"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorHistoria().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorHistoria().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Idioma Extranjero</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosIdiomaExtranjero"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosIdiomaExtranjero"
+                                                       name="fijosIdiomaExtranjero"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorIngles().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorIngles().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoIdiomaExtranjero"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoIdiomaExtranjero"
+                                                       name="fijosNoTituladoIdiomaExtranjero"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorIngles().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorIngles().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoIdiomaExtranjero"> <strong>No
+                                                    Titulados Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoIdiomaExtranjero"
+                                                       name="fijosNoTituladoEstudiandoIdiomaExtranjero"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorIngles().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorIngles().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Educación Física</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosEdcnFisica"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosEdcnFisica"
+                                                       name="fijosEdcnFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEducacionFisica().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorEducacionFisica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEdcnFisica"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEdcnFisica"
+                                                       name="fijosNoTituladoEdcnFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEducacionFisica().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorEducacionFisica().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoEdcnFisica"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoEdcnFisica"
+                                                       name="fijosNoTituladoEstudiandoEdcnFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEducacionFisica().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorEducacionFisica().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Educación Artística</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosEdcnArtistica"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosEdcnArtistica"
+                                                       name="fijosEdcnArtistica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEducacionArtistica().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorEducacionArtistica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEdcnArtistica"> <strong>No Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEdcnArtistica"
+                                                       name="fijosNoTituladoEdcnArtistica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEducacionArtistica().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorEducacionArtistica().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoEdcnArtistica"> <strong>No
+                                                    Titulados Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoEdcnArtistica"
+                                                       name="fijosNoTituladoEstudiandoEdcnArtistica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEducacionArtistica().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorEducacionArtistica().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Marxismo Leninismo</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosMarxismo"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosMarxismo"
+                                                       name="fijosMarxismo"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorMarxismo().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorMarxismo().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoMarxismo"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoMarxismo"
+                                                       name="fijosNoTituladoMarxismo"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorMarxismo().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorMarxismo().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoMarxismo"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoMarxismo"
+                                                       name="fijosNoTituladoEstudiandoMarxismo"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorMarxismo().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorMarxismo().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Fundamento de los Conocimientos
+                                                    Políticos</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosFundamento"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosFundamento"
+                                                       name="fijosFundamento"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorFundamento().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorFundamento().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoFundamento"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoFundamento"
+                                                       name="fijosNoTituladoFundamento"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorFundamento().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorFundamento().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoFundamento"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoFundamento"
+                                                       name="fijosNoTituladoEstudiandoFundamento"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorFundamento().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorFundamento().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Computación</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosComputacion"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosComputacion"
+                                                       name="fijosComputacion"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorComputacion().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorComputacion().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoComputacion"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoComputacion"
+                                                       name="fijosNoTituladoComputacion"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorComputacion().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorComputacion().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoComputacion"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoComputacion"
+                                                       name="fijosNoTituladoEstudiandoComputacion"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorComputacion().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorComputacion().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Preparación Militar</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosMilitar"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosMilitar"
+                                                       name="fijosMilitar"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorMilitar().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorMilitar().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoMilitar"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoMilitar"
+                                                       name="fijosNoTituladoMilitar"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorMilitar().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorMilitar().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoMilitar"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoMilitar"
+                                                       name="fijosNoTituladoEstudiandoMilitar"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorMilitar().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorMilitar().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Enseñanza Práctica</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosPractica"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosPractica"
+                                                       name="fijosPractica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorPractica().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorPractica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoPractica"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoPractica"
+                                                       name="fijosNoTituladoPractica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorPractica().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorPractica().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoPractica"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoPractica"
+                                                       name="fijosNoTituladoEstudiandoPractica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorPractica().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorPractica().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Básicas Específicas</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosBasicas"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosBasicas"
+                                                       name="fijosBasicas"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorBasica().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorBasica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoBasicas"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoBasicas"
+                                                       name="fijosNoTituladoBasicas"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorBasica().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorBasica().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoBasicas"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoBasicas"
+                                                       name="fijosNoTituladoEstudiandoBasicas"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorBasica().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorBasica().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Ejercicio de la Profesión</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosEjercicio"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosEjercicio"
+                                                       name="fijosEjercicio"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEjercicio().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorEjercicio().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEjercicio"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEjercicio"
+                                                       name="fijosNoTituladoEjercicio"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEjercicio().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorEjercicio().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoEjercicio"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoEjercicio"
+                                                       name="fijosNoTituladoEstudiandoEjercicio"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorEjercicio().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorEjercicio().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Instructor</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosInstructor"> <strong>Total Fijos</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosInstructor"
+                                                       name="fijosInstructor"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorInstructor().getTotalProfesores()}"
+                                                       th:value="${fijos.getProfesorInstructor().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoInstructor"> <strong>No
+                                                    Titulados</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoInstructor"
+                                                       name="fijosNoTituladoInstructor"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorInstructor().getNoTitulados()}"
+                                                       th:value="${fijos.getProfesorInstructor().getNoTitulados()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="fijosNoTituladoEstudiandoInstructor"> <strong>No Titulados
+                                                    Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="fijosNoTituladoEstudiandoInstructor"
+                                                       name="fijosNoTituladoEstudiandoInstructor"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${fijos.getProfesorInstructor().getNoTituladosEstudiando()}"
+                                                       th:value="${fijos.getProfesorInstructor().getNoTituladosEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div id="tabs3-2">
+
+                                <div class="text-center">
+
+                                    <div class="container-fluid">
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Español</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosEspanol"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosEspanol"
+                                                       name="contratadosEspanol"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEspanol().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorEspanol().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEspanol"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEspanol"
+                                                       name="contratadosNoProfesionalesEspanol"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEspanol().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorEspanol().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoEspanol"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoEspanol"
+                                                       name="contratadosNoProfesionalesEstudiandoEspanol"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEspanol().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorEspanol().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Literatura</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosLiteratura"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosLiteratura"
+                                                       name="contratadosLiteratura"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorLiteratura().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorLiteratura().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesLiteratura"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesLiteratura"
+                                                       name="contratadosNoProfesionalesLiteratura"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorLiteratura().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorLiteratura().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoLiteratura"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoLiteratura"
+                                                       name="contratadosNoProfesionalesEstudiandoLiteratura"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorLiteratura().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorLiteratura().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Matemática</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosMatematica"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosMatematica"
+                                                       name="contratadosMatematica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorMatematica().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorMatematica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesMatematica"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesMatematica"
+                                                       name="contratadosNoProfesionalesMatematica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorMatematica().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorMatematica().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoMatematica"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoMatematica"
+                                                       name="contratadosNoProfesionalesEstudiandoMatematica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorMatematica().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorMatematica().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Física</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosFisica"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosFisica"
+                                                       name="contratadosFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorFisica().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorFisica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesFisica"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesFisica"
+                                                       name="contratadosNoProfesionalesFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorFisica().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorFisica().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoFisica"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoFisica"
+                                                       name="contratadosNoProfesionalesEstudiandoFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorFisica().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorFisica().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Química</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosQuimica"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosQuimica"
+                                                       name="contratadosQuimica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorQuimica().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorQuimica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesQuimica"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesQuimica"
+                                                       name="contratadosNoProfesionalesQuimica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorQuimica().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorQuimica().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoQuimica"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoQuimica"
+                                                       name="contratadosNoProfesionalesEstudiandoQuimica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorQuimica().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorQuimica().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Biología</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosBiologia"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosBiologia"
+                                                       name="contratadosBiologia"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorBiologia().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorBiologia().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesBiologia"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesBiologia"
+                                                       name="contratadosNoProfesionalesBiologia"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorBiologia().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorBiologia().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoBiologia"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoBiologia"
+                                                       name="contratadosNoProfesionalesEstudiandoBiologia"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorBiologia().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorBiologia().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Historia</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosHistoria"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosHistoria"
+                                                       name="contratadosHistoria"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorHistoria().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorHistoria().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesHistoria"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesHistoria"
+                                                       name="contratadosNoProfesionalesHistoria"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorHistoria().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorHistoria().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoHistoria"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoHistoria"
+                                                       name="contratadosNoProfesionalesEstudiandoHistoria"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorHistoria().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorHistoria().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Idioma Extranjero</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosIdiomaExtranjero">
+                                                    <strong>Total Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosIdiomaExtranjero"
+                                                       name="contratadosIdiomaExtranjero"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorIngles().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorIngles().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesIdiomaExtranjero"> <strong>Total
+                                                    No Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesIdiomaExtranjero"
+                                                       name="contratadosNoProfesionalesIdiomaExtranjero"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorIngles().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorIngles().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoIdiomaExtranjero">
+                                                    <strong>No Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoIdiomaExtranjero"
+                                                       name="contratadosNoProfesionalesEstudiandoIdiomaExtranjero"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorIngles().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorIngles().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Educación Física</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosEdcionFisica">
+                                                    <strong>Total Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosEdcionFisica"
+                                                       name="contratadosEdcionFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEducacionFisica().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorEducacionFisica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEdcionFisica"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEdcionFisica"
+                                                       name="contratadosNoProfesionalesEdcionFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEducacionFisica().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorEducacionFisica().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoEdcionFisica"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoEdcionFisica"
+                                                       name="contratadosNoProfesionalesEstudiandoEdcionFisica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEducacionFisica().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorEducacionFisica().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Educación Artística</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosEdcionArtistica">
+                                                    <strong>Total Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosEdcionArtistica"
+                                                       name="contratadosEdcionArtistica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEducacionArtistica().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorEducacionArtistica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEdcionArtistica"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEdcionArtistica"
+                                                       name="contratadosNoProfesionalesEdcionArtistica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEducacionArtistica().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorEducacionArtistica().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoEdcionArtistica">
+                                                    <strong>No Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoEdcionArtistica"
+                                                       name="contratadosNoProfesionalesEstudiandoEdcionArtistica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEducacionArtistica().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorEducacionArtistica().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Marxismo Leninismo</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosMarxismo"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosMarxismo"
+                                                       name="contratadosMarxismo"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorMarxismo().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorMarxismo().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesMarxismo"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesMarxismo"
+                                                       name="contratadosNoProfesionalesMarxismo"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorMarxismo().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorMarxismo().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoMarxismo"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoMarxismo"
+                                                       name="contratadosNoProfesionalesEstudiandoMarxismo"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorMarxismo().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorMarxismo().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Fundamento de los Conocimientos
+                                                    Políticos</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosFundamento"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosFundamento"
+                                                       name="contratadosFundamento"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorFundamento().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorFundamento().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesFundamento"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesFundamento"
+                                                       name="contratadosNoProfesionalesFundamento"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorFundamento().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorFundamento().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoFundamento"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoFundamento"
+                                                       name="contratadosNoProfesionalesEstudiandoFundamento"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorFundamento().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorFundamento().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Computación</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosComputacion">
+                                                    <strong>Total Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosComputacion"
+                                                       name="contratadosComputacion"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorComputacion().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorComputacion().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesComputacion"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesComputacion"
+                                                       name="contratadosNoProfesionalesComputacion"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorComputacion().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorComputacion().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoComputacion"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoComputacion"
+                                                       name="contratadosNoProfesionalesEstudiandoComputacion"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorComputacion().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorComputacion().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+                                         
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Preparación Militar</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosMilitar"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosMilitar"
+                                                       name="contratadosMilitar"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorMilitar().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorMilitar().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesMilitar"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesMilitar"
+                                                       name="contratadosNoProfesionalesMilitar"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorMilitar().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorMilitar().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoMilitar"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoMilitar"
+                                                       name="contratadosNoProfesionalesEstudiandoMilitar"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorMilitar().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorMilitar().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+                                         
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Enseñanza Práctica</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosPractica"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosPractica"
+                                                       name="contratadosPractica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorPractica().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorPractica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesPractica"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesPractica"
+                                                       name="contratadosNoProfesionalesPractica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorPractica().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorPractica().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoPractica"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoPractica"
+                                                       name="contratadosNoProfesionalesEstudiandoPractica"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorPractica().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorPractica().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Básicas Específicas</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosBasicas"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosBasicas"
+                                                       name="contratadosBasicas"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorBasica().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorBasica().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesBasicas"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesBasicas"
+                                                       name="contratadosNoProfesionalesBasicas"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorBasica().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorBasica().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoBasicas"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoBasicas"
+                                                       name="contratadosNoProfesionalesEstudiandoBasicas"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorBasica().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorBasica().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Ejercicio de la Profesión</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosEjercicio"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosEjercicio"
+                                                       name="contratadosEjercicio"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEjercicio().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorEjercicio().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEjercicio"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEjercicio"
+                                                       name="contratadosNoProfesionalesEjercicio"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEjercicio().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorEjercicio().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoEjercicio"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoEjercicio"
+                                                       name="contratadosNoProfesionalesEstudiandoEjercicio"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorEjercicio().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorEjercicio().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-1 marco">
+
+                                            <div class="col-3 mt-4">
+                                                <label><strong>Instructor</strong></label>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosInstructor"> <strong>Total
+                                                    Contratados</strong></label>
+                                                <input type="text" class="form-control" id="contratadosInstructor"
+                                                       name="contratadosInstructor"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorInstructor().getTotalProfesores()}"
+                                                       th:value="${contratados.getProfesorInstructor().getTotalProfesores()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesInstructor"> <strong>No
+                                                    Profesionales</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesInstructor"
+                                                       name="contratadosNoProfesionalesInstructor"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorInstructor().getNoProfesionales()}"
+                                                       th:value="${contratados.getProfesorInstructor().getNoProfesionales()}"
+                                                       required>
+                                            </div>
+
+                                            <div class="col mt-2 mb-2">
+                                                <label for="contratadosNoProfesionalesEstudiandoInstructor"> <strong>No
+                                                    Profesionales Estudiando</strong></label>
+                                                <input type="text" class="form-control"
+                                                       id="contratadosNoProfesionalesEstudiandoInstructor"
+                                                       name="contratadosNoProfesionalesEstudiandoInstructor"
+                                                       th:disabled="${disabled}"
+                                                       th:placeholder="${contratados.getProfesorInstructor().getNoProfesionalesEstudiando()}"
+                                                       th:value="${contratados.getProfesorInstructor().getNoProfesionalesEstudiando()}"
+                                                       required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="container-fluid">
+                        <div class="row mt-3">
+                            <div class="col-md-8 col-sm-8 text-left">
+                                <a th:href="@{/personal(idE=${datos_centro.getIdCentro()})}"
+                                   class="btn btn-danger mr-2"><img th:src="@{/img/personal.png}"> Personal</span>
+                                </a>
+
+                                <a th:href="@{/caratula(idE=${datos_centro.getIdCentro()})}"
+                                   class="btn btn-warning"><img th:src="@{/img/caratula.png}"> Carátula</span>
+                                </a>
+                            </div>
+
+                            <div class="text-right col-md-4 col-sm-4">
+                                <button class="btn btn-primary" th:hidden="${ocultar}" type="submit"><img
+                                        th:src="@{/img/editar.png}"> Editar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+

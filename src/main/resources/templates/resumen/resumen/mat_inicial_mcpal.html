@@ -1,0 +1,87 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_resumen"></th:block>
+
+    <div>
+        <section class="main-footer titulo">
+            <strong><span th:text="'[ Resumen Municipal ] - Matrícula Inicial'"></span></strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <form th:action="@{mat_inicial_mcpal}" method="post">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-9 col-lg-9">
+                                <label for="mcpios"><strong>Municipio</strong></label>
+                                <select class="form-control" id="mcpios" name="mcpios" required>
+                                    <option value="">Seleccione...</option>
+                                    <option th:each="mcpio : ${municipios}"
+                                            th:text="${mcpio.getNombMunicipio()} + ' ['+ ${mcpio.getProv().getNombProvincia()} + ']'"
+                                            th:value="${mcpio.getIdMunicipio()}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-lg-3">
+                                <button class="text-right btn btn-outline-info mt-4" type="submit">
+                                    <img th:src="@{/img/mat_inicial.png}"> Mat. Inicial</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row mt-4 container">
+                            <a th:href="@{/caratula_mcpal}"
+                               class="btn btn-success ml-2">
+                                <img th:src="@{/img/caratula.png}"> Carátula</span>
+                            </a>
+
+                            <a th:href="@{/personal_mcpal}"
+                               class="btn btn-danger ml-2">
+                                <img th:src="@{/img/personal.png}"> Personal</span>
+                            </a>
+
+                            <a th:href="@{/rango_mcpal}"
+                               class="btn btn-warning ml-2">
+                                <img th:src="@{/img/rangoEdades.png}"> R. Edades</span>
+                            </a>
+
+                            <a th:href="@{/ficha_mcpal}"
+                               class="btn btn-primary ml-2">
+                                <img th:src="@{/img/ficha.png}"> Ficha</span>
+                            </a>
+
+                            <a th:href="@{/ficha_turquino_mcpal}"
+                               class="btn btn-info ml-2">
+                                <img th:src="@{/img/ficha_turquino.png}"> Ficha Turquino</span>
+                            </a>
+
+                            <a th:href="@{/terminado_mcpal}"
+                               class="btn btn-outline-danger ml-2">
+                                <img th:src="@{/img/graduados.png}"> A. Terminado</span>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+

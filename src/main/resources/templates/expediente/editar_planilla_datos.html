@@ -1,0 +1,798 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_captaciones"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong><span
+                    th:text="'[ Editar Planilla de Datos ] - Politécnico ' + ${datos_centro.getNombCentro()}"/></strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div th:if="${error}" class="container-fluid">
+                    <div id="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error" th:text="${mensaje_error}"/></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form th:action="@{/editar_planilla_datos(idP=${planilla.getIdPlanilla()})}" method="post">
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-11 col-sm-11 col-lg-11">
+                                <label for="especialidades"><strong>[Nivel] Especialidad [Tipo Curso]
+                                    [Duración]</strong></label>
+                                <select class="form-control" id="especialidades" name="especialidades" required>
+                                    <option th:text="${planilla.getEspecialidadCentro().getEspecialidad().getNivel().getTipoNivel()} + ' ' + ${planilla.getEspecialidadCentro().getEspecialidad().getNombEspecialidad()} + ' [' + ${planilla.getEspecialidadCentro().getCurso().getTipoCurso()} + ']'  + ' [' + ${planilla.getEspecialidadCentro().getDuracion().getTipoDuracion()} + ' Semestres'+']'"
+                                            th:value="${planilla.getEspecialidadCentro().getIdEspecialidad()}">
+                                        Seleccione...
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 container-fluid">
+                        <div id="tabs9">
+                            <ul>
+                                <li><a href="#tabs9-1">Año Escolar Terminado</a></li>
+                                <li><a href="#tabs9-2">Año Escolar Iniciado</a></li>
+                            </ul>
+
+                            <div id="tabs9-1">
+                                <div class="mt-4 container-fluid">
+                                    <div id="tabs10">
+                                        <ul>
+                                            <li><a href="#tabs10-1">I Año</a></li>
+                                            <li><a href="#tabs10-2">II Año</a></li>
+                                            <li><a href="#tabs10-3">III Año</a></li>
+                                            <li><a href="#tabs10-4">IV Año</a></li>
+                                        </ul>
+                                        <div id="tabs10-1">
+                                            <div class="text-center">
+
+                                                <div class="row mt-2">
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_inicial1"> <strong>Matrícula
+                                                            Inicial</strong></label>
+                                                        <input type="text" class="form-control" id="matr_inicial1"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(0).getMatriculaInicial()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(0).getMatriculaInicial()}"
+                                                               name="matr_inicial1" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="altas1"> <strong>Total Altas</strong></label>
+                                                        <input type="text" class="form-control" id="altas1"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(0).getAltasTotal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(0).getAltasTotal()}"
+                                                               name="altas1" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="altas_traslado1"> <strong>Altas Por
+                                                            Traslado</strong></label>
+                                                        <input type="text" class="form-control" id="altas_traslado1"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(0).getAltasPorTraslado()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(0).getAltasPorTraslado()}"
+                                                               name="altas_traslado1" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_inicial_aj1"> <strong>Matrícula Inicial
+                                                            Ajustada</strong></label>
+                                                        <input type="text" class="form-control" id="matr_inicial_aj1"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(0).getMatricInicialAjustada()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(0).getMatricInicialAjustada()}"
+                                                               name="matr_inicial_aj1" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mt-4">
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_final1"> <strong>Matrícula
+                                                            Final</strong></label>
+                                                        <input type="text" class="form-control" id="matr_final1"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(0).getMatriculaFinal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(0).getMatriculaFinal()}"
+                                                               name="matr_final1" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="aprobados1"> <strong>Aprobados</strong></label>
+                                                        <input type="text" class="form-control" id="aprobados1"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(0).getAprobados()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(0).getAprobados()}"
+                                                               name="aprobados1" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="bajas1"> <strong>Total Bajas</strong></label>
+                                                        <input type="text" class="form-control" id="bajas1"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(0).getBajasTotal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(0).getBajasTotal()}"
+                                                               name="bajas1" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="bajas_traslado1"> <strong>Bajas Por
+                                                            Traslado</strong></label>
+                                                        <input type="text" class="form-control" id="bajas_traslado1"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(0).getBajasPorTraslado()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(0).getBajasPorTraslado()}"
+                                                               name="bajas_traslado1" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tabs10-2">
+                                            <div class="text-center">
+
+                                                <div class="row mt-2">
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_inicial2"> <strong>Matrícula
+                                                            Inicial</strong></label>
+                                                        <input type="text" class="form-control" id="matr_inicial2"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(1).getMatriculaInicial()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(1).getMatriculaInicial()}"
+                                                               name="matr_inicial2" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="altas2"> <strong>Total Altas</strong></label>
+                                                        <input type="text" class="form-control" id="altas2"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(1).getAltasTotal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(1).getAltasTotal()}"
+                                                               name="altas2" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="altas_traslado2"> <strong>Altas Por
+                                                            Traslado</strong></label>
+                                                        <input type="text" class="form-control" id="altas_traslado2"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(1).getAltasPorTraslado()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(1).getAltasPorTraslado()}"
+                                                               name="altas_traslado2" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_inicial_aj2"> <strong>Matrícula Inicial
+                                                            Ajustada</strong></label>
+                                                        <input type="text" class="form-control" id="matr_inicial_aj2"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(1).getMatricInicialAjustada()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(1).getMatricInicialAjustada()}"
+                                                               name="matr_inicial_aj2" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mt-4">
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_final2"> <strong>Matrícula
+                                                            Final</strong></label>
+                                                        <input type="text" class="form-control" id="matr_final2"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(1).getMatriculaFinal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(1).getMatriculaFinal()}"
+                                                               name="matr_final2" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="aprobados2"> <strong>Aprobados</strong></label>
+                                                        <input type="text" class="form-control" id="aprobados2"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(1).getAprobados()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(1).getAprobados()}"
+                                                               name="aprobados2" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="bajas2"> <strong>Total Bajas</strong></label>
+                                                        <input type="text" class="form-control" id="bajas2"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(1).getBajasTotal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(1).getBajasTotal()}"
+                                                               name="bajas2" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="bajas_traslado2"> <strong>Bajas Por
+                                                            Traslado</strong></label>
+                                                        <input type="text" class="form-control" id="bajas_traslado2"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(1).getBajasPorTraslado()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(1).getBajasPorTraslado()}"
+                                                               name="bajas_traslado2" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tabs10-3">
+                                            <div class="text-center">
+
+                                                <div class="row mt-2">
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_inicial3"> <strong>Matrícula
+                                                            Inicial</strong></label>
+                                                        <input type="text" class="form-control" id="matr_inicial3"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(2).getMatriculaInicial()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(2).getMatriculaInicial()}"
+                                                               name="matr_inicial3" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="altas3"> <strong>Total Altas</strong></label>
+                                                        <input type="text" class="form-control" id="altas3"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(2).getAltasTotal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(2).getAltasTotal()}"
+                                                               name="altas3" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="altas_traslado3"> <strong>Altas Por
+                                                            Traslado</strong></label>
+                                                        <input type="text" class="form-control" id="altas_traslado3"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(2).getAltasPorTraslado()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(2).getAltasPorTraslado()}"
+                                                               name="altas_traslado3" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_inicial_aj3"> <strong>Matrícula Inicial
+                                                            Ajustada</strong></label>
+                                                        <input type="text" class="form-control" id="matr_inicial_aj3"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(2).getMatricInicialAjustada()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(2).getMatricInicialAjustada()}"
+                                                               name="matr_inicial_aj3" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mt-4">
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_final3"> <strong>Matrícula
+                                                            Final</strong></label>
+                                                        <input type="text" class="form-control" id="matr_final3"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(2).getMatriculaFinal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(2).getMatriculaFinal()}"
+                                                               name="matr_final3" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="aprobados3"> <strong>Aprobados</strong></label>
+                                                        <input type="text" class="form-control" id="aprobados3"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(2).getAprobados()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(2).getAprobados()}"
+                                                               name="aprobados3" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="bajas3"> <strong>Total Bajas</strong></label>
+                                                        <input type="text" class="form-control" id="bajas3"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(2).getBajasTotal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(2).getBajasTotal()}"
+                                                               name="bajas3" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="bajas_traslado3"> <strong>Bajas Por
+                                                            Traslado</strong></label>
+                                                        <input type="text" class="form-control" id="bajas_traslado3"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(2).getBajasPorTraslado()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(2).getBajasPorTraslado()}"
+                                                               name="bajas_traslado3" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tabs10-4">
+                                            <div class="text-center">
+
+                                                <div class="row mt-2">
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_inicial4"> <strong>Matrícula
+                                                            Inicial</strong></label>
+                                                        <input type="text" class="form-control" id="matr_inicial4"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(3).getMatriculaInicial()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(3).getMatriculaInicial()}"
+                                                               name="matr_inicial4" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="altas4"> <strong>Total Altas</strong></label>
+                                                        <input type="text" class="form-control" id="altas4"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(3).getAltasTotal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(3).getAltasTotal()}"
+                                                               name="altas4" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="altas_traslado4"> <strong>Altas Por
+                                                            Traslado</strong></label>
+                                                        <input type="text" class="form-control" id="altas_traslado4"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(3).getAltasPorTraslado()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(3).getAltasPorTraslado()}"
+                                                               name="altas_traslado4" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_inicial_aj4"> <strong>Matrícula Inicial
+                                                            Ajustada</strong></label>
+                                                        <input type="text" class="form-control" id="matr_inicial_aj4"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(3).getMatricInicialAjustada()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(3).getMatricInicialAjustada()}"
+                                                               name="matr_inicial_aj4" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mt-4">
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="matr_final4"> <strong>Matrícula
+                                                            Final</strong></label>
+                                                        <input type="text" class="form-control" id="matr_final4"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(3).getMatriculaFinal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(3).getMatriculaFinal()}"
+                                                               name="matr_final4" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="aprobados4"> <strong>Aprobados</strong></label>
+                                                        <input type="text" class="form-control" id="aprobados4"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(3).getAprobados()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(3).getAprobados()}"
+                                                               name="aprobados4" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="bajas4"> <strong>Total Bajas</strong></label>
+                                                        <input type="text" class="form-control" id="bajas4"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(3).getBajasTotal()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(3).getBajasTotal()}"
+                                                               name="bajas4" required>
+                                                    </div>
+
+                                                    <div class="col-md-3 col-sm-3">
+                                                        <label for="bajas_traslado4"> <strong>Bajas Por
+                                                            Traslado</strong></label>
+                                                        <input type="text" class="form-control" id="bajas_traslado4"
+                                                               th:value="${planilla.getEspecialidadesAnteriores().get(3).getBajasPorTraslado()}"
+                                                               th:placeholder="${planilla.getEspecialidadesAnteriores().get(3).getBajasPorTraslado()}"
+                                                               name="bajas_traslado4" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tabs9-2">
+                                <div class="text-center">
+
+                                    <div class="mt-4 container-fluid">
+                                        <div id="tabs11">
+                                            <ul>
+                                                <li><a href="#tabs11-1">I Año</a></li>
+                                                <li><a href="#tabs11-2">II Año</a></li>
+                                                <li><a href="#tabs11-3">III Año</a></li>
+                                                <li><a href="#tabs11-4">IV Año</a></li>
+                                            </ul>
+
+                                            <div id="tabs11-1">
+                                                <div class="text-center">
+
+                                                    <div class="row mt-2">
+                                                        <div class="col">
+                                                            <label for="grupos1"> <strong>Total Grupos</strong></label>
+                                                            <input type="text" class="form-control" id="grupos1"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(0).getCantGrupos()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(0).getCantGrupos()}"
+                                                                   name="grupos1" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="n_igr1"> <strong>Total N.
+                                                                Ing/Promovidos</strong></label>
+                                                            <input type="text" class="form-control" id="n_igr1"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(0).getnIngPromovidosTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(0).getnIngPromovidosTotal()}"
+                                                                   name="n_igr1" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="n_igr_traslado1"> <strong>N. Ing/Promovidos Por
+                                                                Traslado</strong></label>
+                                                            <input type="text" class="form-control" id="n_igr_traslado1"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(0).getnIngPromovidosPorTraslado()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(0).getnIngPromovidosPorTraslado()}"
+                                                                   name="n_igr_traslado1" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="repitentes1"> <strong>Total
+                                                                Repitentes</strong></label>
+                                                            <input type="text" class="form-control" id="repitentes1"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(0).getRepitentesTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(0).getRepitentesTotal()}"
+                                                                   name="repitentes1" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-4">
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="repitentes_traslado1"> <strong>Repitentes Por
+                                                                Traslado</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="repitentes_traslado1"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(0).getRepitentesPorTraslado()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(0).getRepitentesPorTraslado()}"
+                                                                   name="repitentes_traslado1" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="reingresos1">
+                                                                <strong>Reingresos</strong></label>
+                                                            <input type="text" class="form-control" id="reingresos1"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(0).getReingresos()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(0).getReingresos()}"
+                                                                   name="reingresos1" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="matr_actual1"> <strong>Total Matrícula
+                                                                Actual</strong></label>
+                                                            <input type="text" class="form-control" id="matr_actual1"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(0).getMatriculaActualTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(0).getMatriculaActualTotal()}"
+                                                                   name="matr_actual1" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="matr_actual_hembras1"> <strong>Matrícula Actual
+                                                                Hembras</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matr_actual_hembras1"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(0).getMatriculaActualHembras()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(0).getMatriculaActualHembras()}"
+                                                                   name="matr_actual_hembras1" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tabs11-2">
+                                                <div class="text-center">
+
+                                                    <div class="row mt-2">
+                                                        <div class="col">
+                                                            <label for="grupos2"> <strong>Total Grupos</strong></label>
+                                                            <input type="text" class="form-control" id="grupos2"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(1).getCantGrupos()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(1).getCantGrupos()}"
+                                                                   name="grupos2" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="n_igr2"> <strong>Total N.
+                                                                Ing/Promovidos</strong></label>
+                                                            <input type="text" class="form-control" id="n_igr2"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(1).getnIngPromovidosTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(1).getnIngPromovidosTotal()}"
+                                                                   name="n_igr2" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="n_igr_traslado2"> <strong>N. Ing/Promovidos Por
+                                                                Traslado</strong></label>
+                                                            <input type="text" class="form-control" id="n_igr_traslado2"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(1).getnIngPromovidosPorTraslado()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(1).getnIngPromovidosPorTraslado()}"
+                                                                   name="n_igr_traslado2" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="repitentes2"> <strong>Total
+                                                                Repitentes</strong></label>
+                                                            <input type="text" class="form-control" id="repitentes2"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(1).getRepitentesTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(1).getRepitentesTotal()}"
+                                                                   name="repitentes2" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-4">
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="repitentes_traslado2"> <strong>Repitentes Por
+                                                                Traslado</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="repitentes_traslado2"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(1).getRepitentesPorTraslado()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(1).getRepitentesPorTraslado()}"
+                                                                   name="repitentes_traslado2" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="reingresos2">
+                                                                <strong>Reingresos</strong></label>
+                                                            <input type="text" class="form-control" id="reingresos2"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(1).getReingresos()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(1).getReingresos()}"
+                                                                   name="reingresos2" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="matr_actual2"> <strong>Total Matrícula
+                                                                Actual</strong></label>
+                                                            <input type="text" class="form-control" id="matr_actual2"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(1).getMatriculaActualTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(1).getMatriculaActualTotal()}"
+                                                                   name="matr_actual2" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="matr_actual_hembras2"> <strong>Matrícula Actual
+                                                                Hembras</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matr_actual_hembras2"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(1).getMatriculaActualHembras()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(1).getMatriculaActualHembras()}"
+                                                                   name="matr_actual_hembras2" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tabs11-3">
+                                                <div class="text-center">
+
+                                                    <div class="row mt-2">
+                                                        <div class="col">
+                                                            <label for="grupos3"> <strong>Total Grupos</strong></label>
+                                                            <input type="text" class="form-control" id="grupos3"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(2).getCantGrupos()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(2).getCantGrupos()}"
+                                                                   name="grupos3" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="n_igr3"> <strong>Total N.
+                                                                Ing/Promovidos</strong></label>
+                                                            <input type="text" class="form-control" id="n_igr3"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(2).getnIngPromovidosTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(2).getnIngPromovidosTotal()}"
+                                                                   name="n_igr3" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="n_igr_traslado3"> <strong>N. Ing/Promovidos Por
+                                                                Traslado</strong></label>
+                                                            <input type="text" class="form-control" id="n_igr_traslado3"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(2).getnIngPromovidosPorTraslado()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(2).getnIngPromovidosPorTraslado()}"
+                                                                   name="n_igr_traslado3" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="repitentes3"> <strong>Total
+                                                                Repitentes</strong></label>
+                                                            <input type="text" class="form-control" id="repitentes3"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(2).getRepitentesTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(2).getRepitentesTotal()}"
+                                                                   name="repitentes3" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-4">
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="repitentes_traslado3"> <strong>Repitentes Por
+                                                                Traslado</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="repitentes_traslado3"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(2).getRepitentesPorTraslado()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(2).getRepitentesPorTraslado()}"
+                                                                   name="repitentes_traslado3" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="reingresos3">
+                                                                <strong>Reingresos</strong></label>
+                                                            <input type="text" class="form-control" id="reingresos3"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(2).getReingresos()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(2).getReingresos()}"
+                                                                   name="reingresos3" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="matr_actual3"> <strong>Total Matrícula
+                                                                Actual</strong></label>
+                                                            <input type="text" class="form-control" id="matr_actual3"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(2).getMatriculaActualTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(2).getMatriculaActualTotal()}"
+                                                                   name="matr_actual3" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="matr_actual_hembras3"> <strong>Matrícula Actual
+                                                                Hembras</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matr_actual_hembras3"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(2).getMatriculaActualHembras()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(2).getMatriculaActualHembras()}"
+                                                                   name="matr_actual_hembras3" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tabs11-4">
+                                                <div class="text-center">
+
+                                                    <div class="row mt-2">
+                                                        <div class="col">
+                                                            <label for="grupos4"> <strong>Total Grupos</strong></label>
+                                                            <input type="text" class="form-control" id="grupos4"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(3).getCantGrupos()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(3).getCantGrupos()}"
+                                                                   name="grupos4" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="n_igr4"> <strong>Total N.
+                                                                Ing/Promovidos</strong></label>
+                                                            <input type="text" class="form-control" id="n_igr4"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(3).getnIngPromovidosTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(3).getnIngPromovidosTotal()}"
+                                                                   name="n_igr4" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="n_igr_traslado4"> <strong>N. Ing/Promovidos Por
+                                                                Traslado</strong></label>
+                                                            <input type="text" class="form-control" id="n_igr_traslado4"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(3).getnIngPromovidosPorTraslado()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(3).getnIngPromovidosPorTraslado()}"
+                                                                   name="n_igr_traslado4" required>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label for="repitentes4"> <strong>Total
+                                                                Repitentes</strong></label>
+                                                            <input type="text" class="form-control" id="repitentes4"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(3).getRepitentesTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(3).getRepitentesTotal()}"
+                                                                   name="repitentes4" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-4">
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="repitentes_traslado4"> <strong>Repitentes Por
+                                                                Traslado</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="repitentes_traslado4"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(3).getRepitentesPorTraslado()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(3).getRepitentesPorTraslado()}"
+                                                                   name="repitentes_traslado4" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="reingresos4">
+                                                                <strong>Reingresos</strong></label>
+                                                            <input type="text" class="form-control" id="reingresos4"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(3).getReingresos()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(3).getReingresos()}"
+                                                                   name="reingresos4" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="matr_actual4"> <strong>Total Matrícula
+                                                                Actual</strong></label>
+                                                            <input type="text" class="form-control" id="matr_actual4"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(3).getMatriculaActualTotal()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(3).getMatriculaActualTotal()}"
+                                                                   name="matr_actual4" required>
+                                                        </div>
+
+                                                        <div class="col-md-3 col-sm-3">
+                                                            <label for="matr_actual_hembras4"> <strong>Matrícula Actual
+                                                                Hembras</strong></label>
+                                                            <input type="text" class="form-control"
+                                                                   id="matr_actual_hembras4"
+                                                                   th:value="${planilla.getEspecialidadesActuales().get(3).getMatriculaActualHembras()}"
+                                                                   th:placeholder="${planilla.getEspecialidadesActuales().get(3).getMatriculaActualHembras()}"
+                                                                   name="matr_actual_hembras4" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 container-fluid">
+                        <div id="tabs2">
+                            <ul>
+                                <li><a href="#tabs2-1">Procedencia Territorial</a></li>
+                            </ul>
+                            <div id="tabs2-1">
+                                <div class="text-center">
+
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <label for="total_graduados"> <strong>Total Graduados del
+                                                Año Terminado</strong></label>
+                                            <input type="text" class="form-control" id="total_graduados"
+                                                   th:value="${planilla.getProcdGraduados()}"
+                                                   name="total_graduados" required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="total_posibles_graduados"> <strong>Total Posibles Graduados
+                                                del Año Iniciado</strong></label>
+                                            <input type="text" class="form-control" id="total_posibles_graduados"
+                                                   th:value="${planilla.getProcdPosiblesGraduados()}"
+                                                   name="total_posibles_graduados" required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="total_nuevo_ingreso"> <strong>Total Nuevos
+                                                Ingresos</strong></label>
+                                            <input type="text" class="form-control" id="total_nuevo_ingreso"
+                                                   th:value="${planilla.getProcdNuevosIngresos()}"
+                                                   name="total_nuevo_ingreso" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col">
+                                            <label for="hembras_graduadas"> <strong>Hembras Graduadas del
+                                                Año Terminado</strong></label>
+                                            <input type="text" class="form-control" id="hembras_graduadas"
+                                                   th:value="${planilla.getHembProcdGraduados()}"
+                                                   name="hembras_graduadas" required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="hembras_posibles_graduadas"> <strong>Hembras Posibles Graduadas
+                                                del Año Iniciado</strong></label>
+                                            <input type="text" class="form-control" id="hembras_posibles_graduadas"
+                                                   th:value="${planilla.getHembProcdPosiblesGraduados()}"
+                                                   name="hembras_posibles_graduadas" required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="hembras_nuevo_ingreso"> <strong>Hembras Nuevos
+                                                Ingresos</strong></label>
+                                            <input type="text" class="form-control" id="hembras_nuevo_ingreso"
+                                                   th:value="${planilla.getHembProcdNuevosIngresos()}"
+                                                   name="hembras_nuevo_ingreso" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="text-right col-md-12 col-sm-12 mt-5">
+                        <button class="btn btn-primary" type="submit"><img th:src="@{/img/editar.png}"/> Editar
+                        </button>
+                    </div>
+
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer"></div>
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina"></div>
+
+    <th:block th:include="plantillas/menu_opciones_error"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>Advertencia: Error 500</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido d-flex justify-content-center">
+
+                <div class="text-center mt-4">
+                    <div>
+                        <img th:src="@{/img/error500.png}">
+                    </div>
+
+                    <div class="acceso-denegado mt-4">
+                        <label>[ERROR INTERNO]</label>
+                    </div>
+
+                    <div class="h4 mt-4">
+                        <hr>
+                        <label>¡Está intentando eliminar un recurso utilizado por otros usuarios!</label>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer"></div>
+
+</div>
+</body>
+</html>

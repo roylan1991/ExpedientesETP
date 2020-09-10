@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_error"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong>Envíar correo</strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div th:if="${error}" class="container-fluid">
+                    <div id="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error" th:text="${mensaje_error}"/></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div th:if="${exito}" class="container-fluid">
+                    <div id="exito" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><span class="tipografia-error">Se ha enviado el mensaje correctamente. Verifique luego su buzón de correo personal!</span></strong>
+                        <button type="button" class="close tipografia-cerrar-error" data-dismiss="alert"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <form th:action="@{/nuevo_correo(idC=${idContacto})}" method="post">
+
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <label for="destinatario"> <strong>Destinatario</strong></label>
+                            <input id="destinatario" name="destinatario" type="text" th:placeholder="${destinatario}"
+                                   class="form-control" th:value="${destinatario}" disabled="true" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <label for="asunto"> <strong>Asunto</strong></label>
+                            <input id="asunto" name="asunto" type="text" th:placeholder="${asunto}"
+                                   class="form-control" th:value="${asunto}" disabled="true" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8 mt-4">
+                            <label for="mensaje"> <strong>Mensaje</strong></label>
+                            <textarea class="form-control" id="mensaje" name="mensaje" th:placeholder="${mensaje}"
+                                      rows="7" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="container text-right col-md-12 col-lg-12 mt-3">
+                        <button class="btn btn-success" type="submit"><img th:src="@{/img/correo.png}"/> Enviar</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
+
+
+
+

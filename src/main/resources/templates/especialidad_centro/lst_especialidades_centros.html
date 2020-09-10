@@ -1,0 +1,86 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla :: css-js"></head>
+
+<body class="hold-transition skin-red sidebar-mini tipografia-contenido">
+<div class="wrapper">
+
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+
+    <th:block th:include="plantillas/menu_opciones_centros"></th:block>
+
+    <!-- CONTENIDO DE LA PAGINA -->
+    <div>
+        <section class="main-footer titulo">
+            <strong><span
+                    th:text="'[ Especialidades ] - Politécnico ' + ${datos_escuela.getNombCentro()}"></span></strong>
+        </section>
+
+        <div class="content-wrapper">
+            <section class="container-fluid padding-contenido">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="text-right col-12">
+
+                            <a th:href="@{/especialidades_centros_pdf(idE=${datos_escuela.getIdCentro()})}"
+                               class="exportar btn-outline-warning" title="Exportar a PDF"><img
+                                    th:src="@{/img/pdf.png}">
+                            </a>
+
+                            <a th:href="@{/especialidades_centros_excel(idE=${datos_escuela.getIdCentro()})}"
+                               class="exportar btn-outline-warning" title="Exportar a Excel"><img
+                                    th:src="@{/img/excel.png}">
+                            </a>
+
+                            <a th:href="@{/nueva_especialidad_centro(idE=${datos_escuela.getIdCentro()})}"
+                               class="ml-2 btn btn-success" title="Agregar especialidad al centro"
+                               th:hidden="${ocultar}">+ Agregar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-hover table-striped text-center tipografia-contenido mt-1"
+                       id="tablaEspecialidadesCentros">
+                    <thead>
+                    <tr class="estilo-tabla btn-primary">
+                        <th>No.</th>
+                        <th>Código</th>
+                        <th>Nombre Especialidad</th>
+                        <th>Duración</th>
+                        <th>Escolaridad</th>
+                        <th>Nivel</th>
+                        <th>Curso</th>
+                        <th>Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr class="text-truncate" th:each="lst,i : ${especialidades_centro}">
+                        <td th:text="${i.index+1}">Datos</td>
+                        <td th:text="${lst.getEspecialidad().getCodEspecialidad()}">Datos</td>
+                        <td th:text="${lst.getEspecialidad().getNombEspecialidad()}">Datos</td>
+                        <td th:text="${lst.getDuracion().getTipoDuracion()}">Datos</td>
+                        <td th:text="${lst.getEscolaridad().getTipoEscolaridad()}">Datos</td>
+                        <td th:text="${lst.getEspecialidad().getNivel().getTipoNivel()}">Datos</td>
+                        <td th:text="${lst.getCurso().getTipoCurso()}">Datos</td>
+                        <td>
+                            <a th:href="@{/del_especialidad_centro(idEsp=${lst.getIdEspecialidad()})}"
+                               class="btn_accion btn-danger" onclick="return confirmarEliminar()" title="Eliminar"><img
+                                    th:src="@{/img/eliminar.png}"/>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </section>
+        </div>
+
+    </div>
+
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
+
+</div>
+</body>
+</html>
