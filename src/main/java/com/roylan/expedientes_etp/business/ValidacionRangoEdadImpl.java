@@ -4,6 +4,7 @@ import com.roylan.expedientes_etp.database.entities.Caratula;
 import com.roylan.expedientes_etp.database.entities.Rango;
 import com.roylan.expedientes_etp.database.entities.RangoEdad;
 import com.roylan.expedientes_etp.database.services.GestionarRangoEdadImpl;
+import com.roylan.expedientes_etp.excepciones.RecursoNoEncontrado_Excepcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,14 +39,14 @@ public class ValidacionRangoEdadImpl implements IValidacion<RangoEdad> {
      *
      * @param idR Identificador del rango de edades.
      * @return <code>RangoEdad</code> Rango de Edades obtenido.
-     * @throws Exception Si el rango de edades no se encuentra registrado.
+     * @throws RecursoNoEncontrado_Excepcion Si el rango de edades no se encuentra registrado.
      */
-    public RangoEdad validarObtenerId(long idR) throws Exception {
+    public RangoEdad validarObtenerId(long idR) throws RecursoNoEncontrado_Excepcion {
 
         RangoEdad r = r_serv.obtenerId(idR);
 
         if (r == null) {
-            throw new Exception("Este rango de edad no se encuentra registrado!");
+            throw new RecursoNoEncontrado_Excepcion();
         }
 
         return r;
@@ -116,12 +117,12 @@ public class ValidacionRangoEdadImpl implements IValidacion<RangoEdad> {
      * Esta funcionalidad elimina un rango de edad luego de comprobar que se encuentra registrado.
      *
      * @param idR Identificador del rango de edad que será eliminado.
-     * @throws Exception Si el rango de edad no se encuentra registrado.
+     * @throws RecursoNoEncontrado_Excepcion Si el rango de edad no se encuentra registrado.
      */
-    public void validarEliminar(long idR) throws Exception {
+    public void validarEliminar(long idR) throws RecursoNoEncontrado_Excepcion {
 
         if (r_serv.obtenerId(idR) == null) {
-            throw new Exception("Este rango de edad no se encuentra registrado!");
+            throw new RecursoNoEncontrado_Excepcion();
         }
         r_serv.eliminar(idR);
     }

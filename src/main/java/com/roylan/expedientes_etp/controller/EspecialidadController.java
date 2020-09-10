@@ -78,7 +78,6 @@ public class EspecialidadController {
 
             return nuevaEspecialidad(m);
         }
-
         return "redirect:/especialidades";
     }
 

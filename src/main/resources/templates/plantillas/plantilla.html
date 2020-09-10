@@ -36,8 +36,17 @@
 
     <script type="text/javascript">
         function confirmarEliminar() {
-
             var respuesta = confirm("¿Estás seguro de eliminar este elemento?");
+
+            if (respuesta == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function confirmarVaciar() {
+            var respuesta = confirm("¿Estás seguro de eliminar todas las planillas de datos de este centro?");
 
             if (respuesta == true) {
                 return true;
@@ -78,6 +87,7 @@
 
         setInterval(hide, 13000);
     </script>
+    
     <script>
         function hide() {
             document.getElementById("exito").style = "display:none";
@@ -210,6 +220,79 @@
                 </div>
             </nav>
         </header>
+
+        <!-- Control Sidebar -->
+        <div>
+            <aside class="control-sidebar control-sidebar-dark">
+                <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                    <li class="active">
+                        <a href="#control-sidebar-home-tab" data-toggle="tab">
+                            <i class="fa fa-home">
+                            </i>
+                            <hr class="rayita_b">
+                        </a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="control-sidebar-home-tab">
+                        <ul class="control-sidebar-menu" data-widget="tree">
+                            <li>
+                                <a th:href="@{/ayuda_introduccion}" class="control-sidebar-subheading">
+                                     <span class="mr-2">
+                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
+                                     </span>Introducción
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/ayuda_roles}" class="control-sidebar-subheading">
+                                     <span class="mr-2">
+                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
+                                     </span>Roles de usuarios
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/ayuda_cuentas}" class="control-sidebar-subheading">
+                                     <span class="mr-2">
+                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
+                                     </span>Cuentas de usuarios
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/ayuda_centro}" class="control-sidebar-subheading">
+                                     <span class="mr-2">
+                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
+                                     </span>Centros
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/ayuda_esp_centro}" class="control-sidebar-subheading">
+                                     <span class="mr-2">
+                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
+                                     </span>Especialidad de centro
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/ayuda_especialidad}" class="control-sidebar-subheading">
+                                     <span class="mr-2">
+                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
+                                     </span>Especialidad
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/ayuda_flujo}" class="control-sidebar-subheading">
+                                     <span class="mr-2">
+                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
+                                     </span>Flujo de trabajo
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="control-sidebar-bg"></div>
+        </div>
     </div>
 
     <div th:fragment="footer">
@@ -221,77 +304,6 @@
                 <a href="https://www.mined.gob.cu" target="_blank">Ministerio de Educación</a> [2020]
             </strong>
         </footer>
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-                <li class="active">
-                    <a href="#control-sidebar-home-tab" data-toggle="tab">
-                        <i class="fa fa-home">
-                        </i>
-                        <hr class="rayita_b">
-                    </a>
-                </li>
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="control-sidebar-home-tab">
-                    <ul class="control-sidebar-menu" data-widget="tree">
-                        <li>
-                            <a th:href="@{/ayuda_introduccion}" class="control-sidebar-subheading">
-                                     <span class="mr-2">
-                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
-                                     </span>Introducción
-                            </a>
-                        </li>
-                        <li>
-                            <a th:href="@{/ayuda_roles}" class="control-sidebar-subheading">
-                                     <span class="mr-2">
-                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
-                                     </span>Roles de usuarios
-                            </a>
-                        </li>
-                        <li>
-                            <a th:href="@{/ayuda_cuentas}" class="control-sidebar-subheading">
-                                     <span class="mr-2">
-                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
-                                     </span>Cuentas de usuarios
-                            </a>
-                        </li>
-                        <li>
-                            <a th:href="@{/ayuda_centro}" class="control-sidebar-subheading">
-                                     <span class="mr-2">
-                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
-                                     </span>Centros
-                            </a>
-                        </li>
-                        <li>
-                            <a th:href="@{/ayuda_esp_centro}" class="control-sidebar-subheading">
-                                     <span class="mr-2">
-                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
-                                     </span>Especialidad de centro
-                            </a>
-                        </li>
-                        <li>
-                            <a th:href="@{/ayuda_especialidad}" class="control-sidebar-subheading">
-                                     <span class="mr-2">
-                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
-                                     </span>Especialidad
-                            </a>
-                        </li>
-                        <li>
-                            <a th:href="@{/ayuda_flujo}" class="control-sidebar-subheading">
-                                     <span class="mr-2">
-                                        <img class="btn_accion btn-warning" th:src="@{/img/help.png}">
-                                     </span>Flujo de trabajo
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </aside>
-
-        <div class="control-sidebar-bg"></div>
     </div>
 </div>
 </body>

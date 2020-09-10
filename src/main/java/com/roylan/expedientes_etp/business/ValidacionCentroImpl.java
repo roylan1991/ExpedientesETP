@@ -5,6 +5,8 @@ import com.roylan.expedientes_etp.database.entities.Municipio;
 import com.roylan.expedientes_etp.database.entities.Provincia;
 import com.roylan.expedientes_etp.database.entities.Usuario;
 import com.roylan.expedientes_etp.database.services.GestionarCentroImpl;
+import com.roylan.expedientes_etp.excepciones.RecursoDenegado_Excepcion;
+import com.roylan.expedientes_etp.excepciones.RecursoNoEncontrado_Excepcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +20,7 @@ import java.util.regex.Pattern;
  * @since 1.0
  */
 @Component
-public class ValidacionCentroImpl implements IValidacion<Centro> {
+public class ValidacionCentroImpl {
 
     @Autowired
     private GestionarCentroImpl e_serv;
@@ -50,15 +52,27 @@ public class ValidacionCentroImpl implements IValidacion<Centro> {
     /**
      * Esta funcionalidad devuelve un centro luego de comprobar que se encuentra registrado.
      *
-     * @param idE Identificador del centro.
+     * @param idE                Identificador del centro.
+     * @param usuarioAutenticado Usuario autenticado.
      * @return <code>Centro</code> Centro obtenido.
-     * @throws Exception Si el centro no se encuentra registrado.
+     * @throws RecursoNoEncontrado_Excepcion Si el centro no se encuentra registrado.
+     * @throws RecursoDenegado_Excepcion     No tiene acceso a los datos del centro.
      */
-    public Centro validarObtenerId(long idE) throws Exception {
+    public Centro validarObtenerId(long idE, Usuario usuarioAutenticado) throws RecursoNoEncontrado_Excepcion, RecursoDenegado_Excepcion {
         Centro c = e_serv.obtenerId(idE);
 
         if (c == null) {
-            throw new Exception("Este centro no se encuentra registrado!");
+            throw new RecursoNoEncontrado_Excepcion();
+        } else {
+            if (usuarioAutenticado.getRol().getTipoRol().equals("Supervisor")) {
+                if (c.getMcpio().getProv().getIdProvincia() != usuarioAutenticado.getMcpio().getProv().getIdProvincia()) {
+                    throw new RecursoDenegado_Excepcion();
+                }
+            } else if (usuarioAutenticado.getRol().getTipoRol().equals("Usuario")) {
+                if (c.getMcpio().getIdMunicipio() != usuarioAutenticado.getMcpio().getIdMunicipio()) {
+                    throw new RecursoDenegado_Excepcion();
+                }
+            }
         }
         return c;
     }
@@ -68,13 +82,13 @@ public class ValidacionCentroImpl implements IValidacion<Centro> {
      *
      * @param codE Código del centro.
      * @return <code>Centro</code> Centro obtenido.
-     * @throws Exception Si el centro no se encuentra registrado.
+     * @throws RecursoNoEncontrado_Excepcion Si el centro no se encuentra registrado.
      */
     public Centro validarObtenerCodigo(String codE) throws Exception {
         Centro c = e_serv.obtenerCodigo(codE);
 
         if (c == null) {
-            throw new Exception("Este centro no se encuentra registrado!");
+            throw new RecursoNoEncontrado_Excepcion();
         }
         return c;
     }
@@ -109,13 +123,9 @@ public class ValidacionCentroImpl implements IValidacion<Centro> {
      * Esta funcionalidad elimina un centro luego de comprobar que se encuentra registrado.
      *
      * @param idE Identificador del centro que será eliminado.
-     * @throws Exception Si el centro no se encuentra registrado.
+     * @throws RecursoNoEncontrado_Excepcion Si el centro no se encuentra registrado.
      */
-    public void validarEliminar(long idE) throws Exception {
-
-        if (e_serv.obtenerId(idE) == null) {
-            throw new Exception("Este centro no se encuentra registrado!");
-        }
+    public void validarEliminar(long idE) {
 
         e_serv.eliminar(idE);
     }
