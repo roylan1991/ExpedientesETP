@@ -1,10 +1,8 @@
 package com.roylan.expedientes_etp.business;
 
-import com.roylan.expedientes_etp.database.entities.AnnoEstudio;
-import com.roylan.expedientes_etp.database.entities.EspecialidadActual;
-import com.roylan.expedientes_etp.database.entities.EspecialidadAnterior;
-import com.roylan.expedientes_etp.database.entities.PlanillaDatos;
+import com.roylan.expedientes_etp.database.entities.*;
 import com.roylan.expedientes_etp.database.services.GestionarPlanillaDatosImpl;
+import com.roylan.expedientes_etp.excepciones.RecursoNoEncontrado_Excepcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -49,14 +47,14 @@ public class ValidacionPlanillaDatosImpl implements IValidacion<PlanillaDatos> {
      *
      * @param idP Identificador de la planilla.
      * @return <code>PlanillaDatos</code> Planilla obtenida.
-     * @throws Exception Si la planilla no se encuentra registrada.
+     * @throws RecursoNoEncontrado_Excepcion Si la planilla no se encuentra registrada.
      */
-    public PlanillaDatos validarObtenerId(long idP) throws Exception {
+    public PlanillaDatos validarObtenerId(long idP) throws RecursoNoEncontrado_Excepcion {
 
         PlanillaDatos pd = p_serv.obtenerId(idP);
 
         if (pd == null) {
-            throw new Exception("Esta planilla de datos no se encuentra registrada!");
+            throw new RecursoNoEncontrado_Excepcion();
         }
 
         return pd;
@@ -85,12 +83,12 @@ public class ValidacionPlanillaDatosImpl implements IValidacion<PlanillaDatos> {
      * Esta funcionalidad elimina una planilla de datos luego de comprobar que se encuentra registrada.
      *
      * @param idP Identificador de la planilla que será eliminada.
-     * @throws Exception Si la planilla no se encuentra registrada.
+     * @throws RecursoNoEncontrado_Excepcion Si la planilla no se encuentra registrada.
      */
-    public void validarEliminar(long idP) throws Exception {
+    public void validarEliminar(long idP) throws RecursoNoEncontrado_Excepcion {
 
         if (p_serv.obtenerId(idP) == null) {
-            throw new Exception("Esta planilla de datos no se encuentra registrada!");
+            throw new RecursoNoEncontrado_Excepcion();
         }
 
         p_serv.eliminar(idP);
@@ -113,6 +111,15 @@ public class ValidacionPlanillaDatosImpl implements IValidacion<PlanillaDatos> {
      */
     public List<PlanillaDatos> validarListarPlanillasDatosCentro(long idC) {
         return p_serv.listarPlanillasDatosCentro(idC);
+    }
+
+    /**
+     * Esta funcionalidad elimina todas las planillas de datos de un centro.
+     *
+     * @param centro Centro.
+     */
+    public void validarVaciarPlanillasDatosCentro(Centro centro) {
+        p_serv.vaciarPlanillasDatosCentro(centro.getIdCentro());
     }
 
     /**

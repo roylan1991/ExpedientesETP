@@ -2,6 +2,7 @@ package com.roylan.expedientes_etp.business;
 
 import com.roylan.expedientes_etp.database.entities.Especialidad;
 import com.roylan.expedientes_etp.database.services.GestionarEspecialidadImpl;
+import com.roylan.expedientes_etp.excepciones.RecursoNoEncontrado_Excepcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,14 +46,14 @@ public class ValidacionEspecialidadImpl implements IValidacion<Especialidad> {
      *
      * @param idE Identificador de la especialidad.
      * @return <code>Especialidad</code> Especialidad obtenida.
-     * @throws Exception Si la especialidad no se encuentra registrada.
+     * @throws RecursoNoEncontrado_Excepcion Si la especialidad no se encuentra registrada.
      */
-    public Especialidad validarObtenerId(long idE) throws Exception {
+    public Especialidad validarObtenerId(long idE) throws RecursoNoEncontrado_Excepcion {
 
         Especialidad e = e_serv.obtenerId(idE);
 
         if (e == null) {
-            throw new Exception("Esta especialidad no se encuentra registrada!");
+            throw new RecursoNoEncontrado_Excepcion();
         }
 
         return e;
@@ -85,12 +86,12 @@ public class ValidacionEspecialidadImpl implements IValidacion<Especialidad> {
      * Esta funcionalidad elimina un especialidad luego de comprobar que se encuentra registrada.
      *
      * @param idE Identificador de la especialidad que será eliminada.
-     * @throws Exception Si la especialidad no se encuentra registrada.
+     * @throws RecursoNoEncontrado_Excepcion Si la especialidad no se encuentra registrada.
      */
-    public void validarEliminar(long idE) throws Exception {
+    public void validarEliminar(long idE) throws RecursoNoEncontrado_Excepcion {
 
         if (e_serv.obtenerId(idE) == null) {
-            throw new Exception("Esta especialidad no se encuentra registrada!");
+            throw new RecursoNoEncontrado_Excepcion();
         }
         e_serv.eliminar(idE);
     }

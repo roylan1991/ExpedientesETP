@@ -58,7 +58,7 @@ public class GestionarEspecialidadCentroImpl implements IGestionarService<Especi
     }
 
     /**
-     * Esta funcionalidad permite editar una especialidad de un centro.
+     * Esta funcionalidad permite editar una especialidad de estudio de un centro.
      *
      * @param idEsp   Identificador de la especialidad a editar.
      * @param n_datos Nuevos datos de la especialidad.
@@ -66,6 +66,17 @@ public class GestionarEspecialidadCentroImpl implements IGestionarService<Especi
     @CacheEvict(cacheNames = {"lst_esp_centro", "esp_centro_id", "lst_esp_centro_sde", "lst_esp_centro_sc", "lst_esp_centro_scap", "lst_centro", "lst_centro_mcpio", "lst_centro_prov"}, allEntries = true)
     public void update(long idEsp, EspecialidadCentro n_datos) {
         e_repo.updateCaptadaEspecialidadCentro(idEsp, n_datos.getFueCaptada());
+    }
+
+    /**
+     * Esta funcionalidad permite editar todas las especialidades de estudio de un centro.
+     *
+     * @param idC     Identificador del centro.
+     * @param captada <true> Si ya fueron captadas.
+     */
+    @CacheEvict(cacheNames = {"lst_esp_centro", "esp_centro_id", "lst_esp_centro_sde", "lst_esp_centro_sc", "lst_esp_centro_scap", "lst_centro", "lst_centro_mcpio", "lst_centro_prov"}, allEntries = true)
+    public void updateCaptadaTodo(long idC, boolean captada) {
+        e_repo.updateCaptadaTodasEspecialidadCentro(idC, captada);
     }
 
     /**

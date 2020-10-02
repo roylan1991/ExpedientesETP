@@ -39,9 +39,7 @@ public class MatriculaFinal {
     }
 
     public MatriculaFinal(Nivel nivel, Curso curso) {
-        this.matriculaFinal = 0;
-        this.aprobados = 0;
-        this.graduados = 0;
+        setParametros();
         this.nivel = nivel;
         this.curso = curso;
     }
@@ -103,5 +101,11 @@ public class MatriculaFinal {
 
     public void setCaratula(Caratula caratula) {
         this.caratula = caratula;
+    }
+
+    public void setParametros() {
+        this.matriculaFinal = 0;
+        this.aprobados = 0;
+        this.graduados = 0;
     }
 }

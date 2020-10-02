@@ -1,10 +1,8 @@
 package com.roylan.expedientes_etp.business;
 
-import com.roylan.expedientes_etp.database.entities.ComposicionPersonal;
-import com.roylan.expedientes_etp.database.entities.ProfesorAsignatura;
-import com.roylan.expedientes_etp.database.entities.ProfesorContrato;
-import com.roylan.expedientes_etp.database.entities.ProfesorFijo;
+import com.roylan.expedientes_etp.database.entities.*;
 import com.roylan.expedientes_etp.database.services.GestionarComposicionPersonalImpl;
+import com.roylan.expedientes_etp.excepciones.RecursoNoEncontrado_Excepcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,12 +39,12 @@ public class ValidacionComposicionPersonalImpl implements IValidacion<Composicio
      * @return <code>ComposicionPersonal</code> Personal obtenido.
      * @throws Exception Si el personal no se encuentra registrado.
      */
-    public ComposicionPersonal validarObtenerId(long idP) throws Exception {
+    public ComposicionPersonal validarObtenerId(long idP) throws RecursoNoEncontrado_Excepcion {
 
         ComposicionPersonal p = p_serv.obtenerId(idP);
 
         if (p == null) {
-            throw new Exception("Este Personal no se encuentra registrado!");
+            throw new RecursoNoEncontrado_Excepcion();
         }
 
         return p;
@@ -97,12 +95,12 @@ public class ValidacionComposicionPersonalImpl implements IValidacion<Composicio
      * Esta funcionalidad elimina un personal luego de comprobar que se encuentra registrado.
      *
      * @param idP Identificador del personal.
-     * @throws Exception Si el personal no se encuentra registrado.
+     * @throws RecursoNoEncontrado_Excepcion Si el personal no se encuentra registrado.
      */
-    public void validarEliminar(long idP) throws Exception {
+    public void validarEliminar(long idP) throws RecursoNoEncontrado_Excepcion {
 
         if (p_serv.obtenerId(idP) == null) {
-            throw new Exception("Este personal no se encuentra registrado!");
+            throw new RecursoNoEncontrado_Excepcion();
         }
 
         p_serv.eliminar(idP);
@@ -125,7 +123,7 @@ public class ValidacionComposicionPersonalImpl implements IValidacion<Composicio
         ProfesorAsignatura pfa = n_datos.getProfesoresFijos();
         ProfesorFijo pf = ((ProfesorFijo) pfa.getProfesorEspanol());
 
-        if (pf.getTotalProfesores() < pf.getNoTitulados()  || pf.getNoTitulados() < pf.getNoTituladosEstudiando()) {
+        if (pf.getTotalProfesores() < pf.getNoTitulados() || pf.getNoTitulados() < pf.getNoTituladosEstudiando()) {
             throw new Exception("Verifique en los [Profesores Fijos] los totales de profesores de Español!");
         }
         pf = ((ProfesorFijo) pfa.getProfesorLiteratura());

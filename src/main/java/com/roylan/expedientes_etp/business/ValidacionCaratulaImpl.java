@@ -2,6 +2,7 @@ package com.roylan.expedientes_etp.business;
 
 import com.roylan.expedientes_etp.database.entities.Caratula;
 import com.roylan.expedientes_etp.database.services.GestionarCaratulaImpl;
+import com.roylan.expedientes_etp.excepciones.RecursoNoEncontrado_Excepcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,15 +37,16 @@ public class ValidacionCaratulaImpl implements IValidacion<Caratula> {
      *
      * @param idC Identificador de la carátula.
      * @return <code>Caratula</code> Carátula obtenida.
-     * @throws Exception Si la carátula no se encuentra registrada.
+     * @throws RecursoNoEncontrado_Excepcion Si la carátula no se encuentra registrada.
      */
-    public Caratula validarObtenerId(long idC) throws Exception {
+    public Caratula validarObtenerId(long idC) throws RecursoNoEncontrado_Excepcion {
 
         Caratula c = c_serv.obtenerId(idC);
 
         if (c == null) {
-            throw new Exception("Esta carátula no se encuentra registrada!");
+            throw new RecursoNoEncontrado_Excepcion();
         }
+
         return c;
     }
 

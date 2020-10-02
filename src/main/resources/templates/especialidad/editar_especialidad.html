@@ -60,7 +60,6 @@
 
                     <div class="container-fluid">
                         <div class="row">
-
                             <div class="col-md-4 col-sm-4 mt-4">
                                 <label for="niveles"><strong>Nivel</strong></label>
                                 <select class="form-control" id="niveles" name="niveles" required>
@@ -71,19 +70,6 @@
                                     <option th:each="niv : ${lst_niveles}"
                                             th:text="${niv.getTipoNivel()}"
                                             th:value="${niv.getIdNivel()}"></option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-4 col-sm-4 mt-4">
-                                <label for="cursos"><strong>Curso</strong></label>
-                                <select class="form-control" id="cursos" name="cursos" required>
-                                    <option th:text="${datos_especialidad.getCurso().getTipoCurso()} + ' (Seleccionado)'"
-                                            th:value="${datos_especialidad.getCurso().getIdTipoCurso()}">
-                                        Seleccione...
-                                    </option>
-                                    <option th:each="cur : ${lst_cursos}"
-                                            th:text="${cur.getTipoCurso()}"
-                                            th:value="${cur.getIdTipoCurso()}"></option>
                                 </select>
                             </div>
                         </div>

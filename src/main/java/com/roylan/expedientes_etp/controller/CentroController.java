@@ -3,6 +3,8 @@ package com.roylan.expedientes_etp.controller;
 import com.roylan.expedientes_etp.business.ValidacionCentroImpl;
 import com.roylan.expedientes_etp.database.entities.*;
 import com.roylan.expedientes_etp.database.services.GestionarSector;
+import com.roylan.expedientes_etp.excepciones.RecursoDenegado_Excepcion;
+import com.roylan.expedientes_etp.excepciones.RecursoNoEncontrado_Excepcion;
 import com.roylan.expedientes_etp.exportacion.GenerarDocumentoExcelImpl;
 import com.roylan.expedientes_etp.exportacion.GenerarDocumentoPDFImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,13 +86,16 @@ public class CentroController {
     public String editarCentro(@RequestParam(name = "idE") long idE, Model m) {
 
         try {
-            Centro esc = centros.validarObtenerId(idE);
+            Centro esc = centros.validarObtenerId(idE, getUsuarioAutenticado());
+
             m.addAttribute("datos_escuela", esc);
             m.addAttribute("lst_sectores", lstSectores());
 
             return "centro/editar_centro";
-        } catch (Exception e) {
+        } catch (RecursoNoEncontrado_Excepcion recursoNoEncontrado_excepcion) {
             return "redirect:/error";
+        } catch (RecursoDenegado_Excepcion recursoDenegado_excepcion) {
+            return "redirect:/error403";
         }
     }
 
@@ -124,11 +129,14 @@ public class CentroController {
     public String eliminarCentro(@RequestParam(name = "idE") long idE) {
 
         try {
-            centros.validarEliminar(idE);
+            Centro esc = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            centros.validarEliminar(esc.getIdCentro());
 
             return "redirect:/lst_centros";
-        } catch (Exception e) {
+        } catch (RecursoNoEncontrado_Excepcion recursoNoEncontrado_excepcion) {
             return "redirect:/error";
+        } catch (RecursoDenegado_Excepcion recursoDenegado_excepcion) {
+            return "redirect:/error403";
         }
     }
 

@@ -19,5 +19,7 @@ public interface PlanillaDatosRepository extends JpaRepository<PlanillaDatos, Lo
 
     List<PlanillaDatos> findAllByCentroIdCentroOrderByIdPlanilla(long idC);
 
-    PlanillaDatos findByEspecialidadCentroIdEspecialidad(long idE);
+    void deleteAllByCentroIdCentro(long idC);
+
+    PlanillaDatos findByEspecialidadCentroIdEspecialidad(long idEsp);
 }
