@@ -1,13 +1,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="/plantillas/plantilla :: css-js"></head>
+<head th:replace="plantillas/plantilla :: css-js"></head>
 
 <body class="hold-transition skin-red sidebar-mini tipografia-contenido">
 <div class="wrapper">
 
-    <div th:replace="/plantillas/plantilla :: diseño_pagina"></div>
+    <div th:replace="plantillas/plantilla :: diseño_pagina"></div>
 
-    <th:block th:include="/plantillas/menu_opciones_captaciones"></th:block>
+    <th:block th:include="plantillas/menu_opciones_captaciones"></th:block>
 
     <!-- CONTENIDO DE LA PAGINA -->
     <div>
@@ -17,19 +17,6 @@
 
         <div class="content-wrapper">
             <section class="container-fluid padding-contenido">
-
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="text-right col-12">
-
-                            <a th:href="@{/vaciar_planillas_datos(idC=${datos_centro.getIdCentro()})}"
-                               class="btn btn-danger" title="Eliminar todo" onclick="return confirmarVaciar()"
-                               th:hidden="${ocultar}">
-                                <img th:src="@{/img/vaciar.png}"> Eliminar todo
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
                 <table class="table table-bordered table-hover table-striped text-center tipografia-contenido mt-1"
                        id="tablaPlanillasDatos">
@@ -64,12 +51,13 @@
                     </tr>
                     </tbody>
                 </table>
+
             </section>
         </div>
 
     </div>
 
-    <div th:replace="/plantillas/plantilla :: footer"></div>
+    <div th:replace="plantillas/plantilla :: footer"></div>
 
 </div>
 </body>

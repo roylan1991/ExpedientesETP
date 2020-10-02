@@ -3,7 +3,6 @@ package com.roylan.expedientes_etp.business;
 import com.roylan.expedientes_etp.database.entities.Provincia;
 import com.roylan.expedientes_etp.database.entities.Usuario;
 import com.roylan.expedientes_etp.database.services.GestionarUsuarioImpl;
-import com.roylan.expedientes_etp.excepciones.RecursoNoEncontrado_Excepcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,12 +50,12 @@ public class ValidacionUsuarioImpl implements IValidacion<Usuario> {
      * @return <code>Usuario</code> Usuario obtenido.
      * @throws Exception Si el usuario no se encuentra registrado.
      */
-    public Usuario validarObtenerId(long idU) throws RecursoNoEncontrado_Excepcion {
+    public Usuario validarObtenerId(long idU) throws Exception {
 
         Usuario u = u_serv.obtenerId(idU);
 
         if (u == null) {
-            throw new RecursoNoEncontrado_Excepcion();
+            throw new Exception("Este usuario no se encuentra registrado!");
         }
         return u;
     }
@@ -92,12 +91,12 @@ public class ValidacionUsuarioImpl implements IValidacion<Usuario> {
      * Esta funcionalidad elimina un usuario luego de comprobar que se encuentra registrado.
      *
      * @param idU Identificador del usuario que será eliminado.
-     * @throws RecursoNoEncontrado_Excepcion Si el usuario no se encuentra registrado.
+     * @throws Exception Si el usuario no se encuentra registrado.
      */
-    public void validarEliminar(long idU) throws RecursoNoEncontrado_Excepcion {
+    public void validarEliminar(long idU) throws Exception {
 
         if (u_serv.obtenerId(idU) == null) {
-            throw new RecursoNoEncontrado_Excepcion();
+            throw new Exception("Este usuario no se encuentra registrado!");
         }
 
         u_serv.eliminar(idU);

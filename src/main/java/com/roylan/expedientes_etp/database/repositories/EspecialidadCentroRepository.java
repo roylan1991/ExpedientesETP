@@ -21,10 +21,6 @@ public interface EspecialidadCentroRepository extends JpaRepository<Especialidad
     @Query("update EspecialidadCentro set fueCaptada=?2 where idEspecialidad=?1")
     void updateCaptadaEspecialidadCentro(long idEsp, boolean fueCaptada);
 
-    @Modifying
-    @Query("update EspecialidadCentro set fueCaptada=?2 where centro.idCentro=?1")
-    void updateCaptadaTodasEspecialidadCentro(long idC, boolean fueCaptada);
-
     EspecialidadCentro findByCentroAndEspecialidad_CodEspecialidadAndDuracionAndEscolaridad(Centro centro, String codEsp, Duracion dur, Escolaridad esc);
 
     @Query("select ec FROM EspecialidadCentro as ec inner join Especialidad as esp on ec.especialidad.idEspecialidad=esp.idEspecialidad where ec.centro=?1 order by ec.curso.idCurso asc, esp.nivel.idNivel asc, ec.escolaridad.idEscolaridad asc, esp.nombEspecialidad asc")

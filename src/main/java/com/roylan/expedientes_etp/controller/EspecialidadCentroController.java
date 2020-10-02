@@ -66,7 +66,7 @@ public class EspecialidadCentroController {
     public String nuevaEspecialidadCentro(@RequestParam(name = "idE") long idE, Model m) {
 
         try {
-            Centro esc = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro esc = centros.validarObtenerId(idE);
             m.addAttribute("datos_escuela", esc);
             m.addAttribute("lst_especialidades", lstEspecialidades());
             m.addAttribute("lst_duraciones", lstDuraciones());
@@ -93,7 +93,7 @@ public class EspecialidadCentroController {
         EspecialidadCentro esp = null;
 
         try {
-            Centro centro = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro centro = centros.validarObtenerId(idE);
             int idEsp = Integer.parseInt(request.getParameter("nombre"));
             int idDuracion = Integer.parseInt(request.getParameter("duraciones"));
             Duracion duracion = duraciones.obtenerId(idDuracion);
@@ -138,7 +138,7 @@ public class EspecialidadCentroController {
     public String lstEspecialidadesCentros(@RequestParam(name = "idE") long idE, Model m) {
 
         try {
-            Centro centro = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro centro = centros.validarObtenerId(idE);
 
             m.addAttribute("datos_escuela", centro);
             m.addAttribute("especialidades_centro", lstEspecialidadesCentro(centro));
@@ -178,7 +178,7 @@ public class EspecialidadCentroController {
 
     private String generarDocumento(long idE, HttpServletResponse response, String tipoDocumento) {
         try {
-            Centro cen = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro cen = centros.validarObtenerId(idE);
             if (tipoDocumento.equals("PDF")) {
                 generarDocumentoPDF.generarDocumentoPdf_EspecialidadesCentros(cen, lstEspecialidadesCentro(cen), response);
             } else if (tipoDocumento.equals("EXCEL")) {

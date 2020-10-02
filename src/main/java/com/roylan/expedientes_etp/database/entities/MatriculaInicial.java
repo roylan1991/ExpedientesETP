@@ -42,7 +42,10 @@ public class MatriculaInicial {
     }
 
     public MatriculaInicial(Nivel nivel, Curso curso) {
-        setParametros();
+        this.total = 0;
+        this.totalHembras = 0;
+        this.nuevoIngreso = 0;
+        this.nuevoIngresoHembras = 0;
         this.nivel = nivel;
         this.curso = curso;
     }
@@ -112,12 +115,5 @@ public class MatriculaInicial {
 
     public void setCaratula(Caratula caratula) {
         this.caratula = caratula;
-    }
-
-    public void setParametros() {
-        this.total = 0;
-        this.totalHembras = 0;
-        this.nuevoIngreso = 0;
-        this.nuevoIngresoHembras = 0;
     }
 }

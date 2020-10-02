@@ -49,7 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/del_especialidad").hasAuthority("Administrador")
                 .antMatchers("/editar_planilla_datos").hasAuthority("Usuario")
                 .antMatchers("/del_planilla_datos").hasAuthority("Usuario")
-                .antMatchers("/vaciar_planillas_datos").hasAuthority("Usuario")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -78,7 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // http.requiresChannel().anyRequest().requiresSecure().and().portMapper().http(8080).mapsTo(8443).;
     }
 
-    //Para garantizar que las sesiones expiradas se limpien cuando se usa maxSessionsPreventsLogin
+    //Para garantizar que las sesiones expiradas se limpien cuando se usa maxSessionsPreventsLogin(true)
     @Bean
     public static HttpSessionEventPublisher httpSessionEventPublisher() {
         return new HttpSessionEventPublisher();

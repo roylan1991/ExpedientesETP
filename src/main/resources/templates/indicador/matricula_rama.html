@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="/plantillas/plantilla :: css-js" th:remove="div"></div>
+    <div th:replace="plantillas/plantilla :: css-js" th:remove="div"></div>
 
     <script th:src="@{/bootstrap/graficas/js/jquery.flot.js}"></script>
     <script th:src="@{/bootstrap/graficas/js/jquery.flot.categories.js}"></script>
@@ -49,9 +49,9 @@
 <body class="hold-transition skin-red sidebar-mini tipografia-contenido">
 <div class="wrapper">
 
-    <div th:replace="/plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
 
-    <th:block th:include="/plantillas/menu_opciones_indicadores"></th:block>
+    <th:block th:include="plantillas/menu_opciones_indicadores"></th:block>
 
     <!-- CONTENIDO DE LA PAGINA -->
     <div>
@@ -310,7 +310,7 @@
 
     </div>
 
-    <div th:replace="/plantillas/plantilla :: footer">&nbsp;</div>
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
 
 </div>
 

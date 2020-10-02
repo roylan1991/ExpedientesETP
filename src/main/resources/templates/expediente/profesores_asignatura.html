@@ -1,12 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/plantillas/plantilla :: css-js"></head>
+<head th:replace="plantillas/plantilla :: css-js"></head>
 
 <body class="hold-transition skin-red sidebar-mini tipografia-contenido">
 <div class="wrapper">
 
-    <div th:replace="/plantillas/plantilla :: diseño_pagina">&nbsp;</div>
+    <div th:replace="plantillas/plantilla :: diseño_pagina">&nbsp;</div>
 
-    <th:block th:include="/plantillas/menu_opciones_captaciones"></th:block>
+    <th:block th:include="plantillas/menu_opciones_captaciones"></th:block>
 
     <div>
         <section class="main-footer titulo">
@@ -1618,7 +1618,7 @@
 
     </div>
 
-    <div th:replace="/plantillas/plantilla :: footer">&nbsp;</div>
+    <div th:replace="plantillas/plantilla :: footer">&nbsp;</div>
 
 </div>
 </body>

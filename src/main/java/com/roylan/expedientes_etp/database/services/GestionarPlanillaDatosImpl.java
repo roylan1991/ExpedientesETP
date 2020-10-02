@@ -144,37 +144,6 @@ public class GestionarPlanillaDatosImpl implements IGestionarService<PlanillaDat
     }
 
     /**
-     * Esta funcionalidad permite eliminar todas las planillas de datos registradas en un centro.
-     *
-     * @param idC Identificador del Centro.
-     */
-    public void vaciarPlanillasDatosCentro(long idC) {
-
-        esp_centro_serv.updateCaptadaTodo(idC, false);
-        p_repo.deleteAllByCentroIdCentro(idC);
-
-        Centro centro = centro_serv.obtenerId(idC);
-        Caratula car = centro.getCaratula();
-
-        MatriculaInicial matrTM = car.getMatriculaInicialTM();
-        matrTM.setParametros();
-        MatriculaInicial matrOC = car.getMatriculaInicialOC();
-        matrOC.setParametros();
-        MatriculaInicial matrCPT_TM = car.getMatriculaInicialCPT_TM();
-        matrCPT_TM.setParametros();
-        MatriculaFinal mfTM = car.getMatriculaFinalTM();
-        mfTM.setParametros();
-        MatriculaFinal mfOC = car.getMatriculaFinalOC();
-        mfOC.setParametros();
-        MatriculaFinal mfCPT_TM = car.getMatriculaFinalCPT_TM();
-        mfCPT_TM.setParametros();
-
-        caratula_serv.update(car.getIdCaratula(), car);
-
-        actualizarProgreso(centro);
-    }
-
-    /**
      * Esta funcionalidad actualiza los datos de la carátula de un centro.
      *
      * @param pd Planilla de datos.

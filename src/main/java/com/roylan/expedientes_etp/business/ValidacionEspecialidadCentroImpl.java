@@ -4,7 +4,6 @@ import com.roylan.expedientes_etp.database.entities.Centro;
 import com.roylan.expedientes_etp.database.entities.Especialidad;
 import com.roylan.expedientes_etp.database.entities.EspecialidadCentro;
 import com.roylan.expedientes_etp.database.services.GestionarEspecialidadCentroImpl;
-import com.roylan.expedientes_etp.excepciones.RecursoNoEncontrado_Excepcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -48,14 +47,14 @@ public class ValidacionEspecialidadCentroImpl implements IValidacion<Especialida
      *
      * @param idE Identificador de la especialidad.
      * @return <code>EspecialidadCentro</code> Especialidad obtenida.
-     * @throws RecursoNoEncontrado_Excepcion Si la especialidad no se encuentra registrada.
+     * @throws Exception Si la especialidad no se encuentra registrada.
      */
-    public EspecialidadCentro validarObtenerId(long idE) throws RecursoNoEncontrado_Excepcion {
+    public EspecialidadCentro validarObtenerId(long idE) throws Exception {
 
         EspecialidadCentro e = e_serv.obtenerId(idE);
 
         if (e == null) {
-            throw new RecursoNoEncontrado_Excepcion();
+            throw new Exception("Esta especialidad no se encuentra registrada!");
         }
         return e;
     }
@@ -76,12 +75,12 @@ public class ValidacionEspecialidadCentroImpl implements IValidacion<Especialida
      * Esta funcionalidad elimina la especialidad de un centro luego de comprobar que se encuentra registrada.
      *
      * @param idE Identificador de la especialidad que será eliminada.
-     * @throws RecursoNoEncontrado_Excepcion Si la especialidad no se encuentra registrada.
+     * @throws Exception Si la especialidad no se encuentra registrada.
      */
-    public void validarEliminar(long idE) throws RecursoNoEncontrado_Excepcion {
+    public void validarEliminar(long idE) throws Exception {
 
         if (e_serv.obtenerId(idE) == null) {
-            throw new RecursoNoEncontrado_Excepcion();
+            throw new Exception("Esta especialidad no se encuentra registrada!");
         }
         e_serv.eliminar(idE);
     }

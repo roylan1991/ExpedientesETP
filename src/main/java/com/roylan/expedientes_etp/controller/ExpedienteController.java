@@ -95,7 +95,7 @@ public class ExpedienteController {
     public String fichaCentro(@RequestParam(name = "idE") long idE, Model m) {
 
         try {
-            Centro centro = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro centro = centros.validarObtenerId(idE);
 
             m.addAttribute("lst_fichas", datosFicha(centro));
             m.addAttribute("datos_centro", centro);
@@ -111,7 +111,7 @@ public class ExpedienteController {
 
         Validaciones.ValoresIncorrectos = false;
         try {
-            Centro centro = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro centro = centros.validarObtenerId(idE);
 
             if (!m.containsAttribute("CaratulaError")) {
                 m.addAttribute("caratula", centro.getCaratula());
@@ -129,7 +129,7 @@ public class ExpedienteController {
     @PostMapping(path = {"/caratula"})
     public String editarCaratulaPOST(HttpServletRequest request, @RequestParam(name = "idE") long idE, RedirectAttributes r, Model m) throws Exception {
 
-        Caratula caratula = centros.validarObtenerId(idE, getUsuarioAutenticado()).getCaratula();
+        Caratula caratula = centros.validarObtenerId(idE).getCaratula();
         long idC = caratula.getIdCaratula();
         Caratula n_datos = null;
 
@@ -174,7 +174,7 @@ public class ExpedienteController {
         Validaciones.ValoresIncorrectos = false;
 
         try {
-            Centro c = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro c = centros.validarObtenerId(idE);
 
             if (!m.containsAttribute("ProfesorAsignaturaError")) {
 
@@ -316,7 +316,7 @@ public class ExpedienteController {
             pc = new ProfesorAsignatura(new ProfesorContrato(contratadosEspanol, contratadosNoProfesionalesEspanol, contratadosNoProfesionalesEstudiandoEspanol), new ProfesorContrato(contratadosLiteratura, contratadosNoProfesionalesLiteratura, contratadosNoProfesionalesEstudiandoLiteratura), new ProfesorContrato(contratadosMatematica, contratadosNoProfesionalesMatematica, contratadosNoProfesionalesEstudiandoMatematica), new ProfesorContrato(contratadosFisica, contratadosNoProfesionalesFisica, contratadosNoProfesionalesEstudiandoFisica), new ProfesorContrato(contratadosQuimica, contratadosNoProfesionalesQuimica, contratadosNoProfesionalesEstudiandoQuimica), new ProfesorContrato(contratadosBiologia, contratadosNoProfesionalesBiologia, contratadosNoProfesionalesEstudiandoBiologia), new ProfesorContrato(contratadosHistoria, contratadosNoProfesionalesHistoria, contratadosNoProfesionalesEstudiandoHistoria), new ProfesorContrato(contratadosIdiomaExtranjero, contratadosNoProfesionalesIdiomaExtranjero, contratadosNoProfesionalesEstudiandoIdiomaExtranjero), new ProfesorContrato(contratadosEdcionFisica, contratadosNoProfesionalesEdcionFisica, contratadosNoProfesionalesEstudiandoEdcionFisica), new ProfesorContrato(contratadosEdcionArtistica, contratadosNoProfesionalesEdcionArtistica, contratadosNoProfesionalesEstudiandoEdcionArtistica), new ProfesorContrato(contratadosMarxismo, contratadosNoProfesionalesMarxismo, contratadosNoProfesionalesEstudiandoMarxismo), new ProfesorContrato(contratadosFundamento, contratadosNoProfesionalesFundamento, contratadosNoProfesionalesEstudiandoFundamento), new ProfesorContrato(contratadosComputacion, contratadosNoProfesionalesComputacion, contratadosNoProfesionalesEstudiandoComputacion), new ProfesorContrato(contratadosMilitar, contratadosNoProfesionalesMilitar, contratadosNoProfesionalesEstudiandoMilitar), new ProfesorContrato(contratadosPractica, contratadosNoProfesionalesPractica, contratadosNoProfesionalesEstudiandoPractica), new ProfesorContrato(contratadosBasicas, contratadosNoProfesionalesBasicas, contratadosNoProfesionalesEstudiandoBasicas), new ProfesorContrato(contratadosEjercicio, contratadosNoProfesionalesEjercicio, contratadosNoProfesionalesEstudiandoEjercicio), new ProfesorContrato(contratadosInstructor, contratadosNoProfesionalesInstructor, contratadosNoProfesionalesEstudiandoInstructor));
             ComposicionPersonal n_datos = new ComposicionPersonal(pf, pc);
 
-            Centro c = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro c = centros.validarObtenerId(idE);
             long idP = c.getComposicionPersonal().getIdPersonal();
 
             if (Validaciones.ValoresIncorrectos) {
@@ -346,7 +346,7 @@ public class ExpedienteController {
         Validaciones.ValoresIncorrectos = false;
 
         try {
-            Centro c = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro c = centros.validarObtenerId(idE);
 
             if (!m.containsAttribute("PersonalError")) {
                 m.addAttribute("personal", c.getComposicionPersonal());
@@ -391,7 +391,7 @@ public class ExpedienteController {
             int otrosDocentesInactivos = v.numeroValido(request.getParameter("otrosDocentesInactivos"));
             int noDocentesInactivos = v.numeroValido(request.getParameter("noDocentesInactivos"));
 
-            Centro centro = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro centro = centros.validarObtenerId(idE);
 
             n_datos = new ComposicionPersonal(new Personal(0, totalProfesoresHembras), new Personal(totalBibliotecarios, totalBibliotecariosHembras), new Personal(totalInstructoresArte, totalInstructoresArteHembras), new Personal(totalPsicopedagogos, totalPsicopedagogosHembras), alumnosMaestro, new Personal(totalNoDocente, totalNoDocenteHembras), totalProfesoresInactivos, otrosDocentesInactivos, noDocentesInactivos);
 
@@ -428,7 +428,7 @@ public class ExpedienteController {
         Validaciones.ValoresIncorrectos = false;
 
         try {
-            Centro centro = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro centro = centros.validarObtenerId(idE);
 
             if (!m.containsAttribute("RangoEdadesError")) {
                 m.addAttribute("rango", centro.getRangosEdades());
@@ -446,7 +446,7 @@ public class ExpedienteController {
     @PostMapping(path = {"/rango_edades"})
     public String editarRangoEdadesPOST(HttpServletRequest request, @RequestParam(name = "idE") long idE, RedirectAttributes r, Model m) throws Exception {
 
-        Centro centro = centros.validarObtenerId(idE, getUsuarioAutenticado());
+        Centro centro = centros.validarObtenerId(idE);
         RangoEdad re = centro.getRangosEdades();
         long idR = re.getIdRangoEdad();
         RangoEdad n_datos = null;
@@ -500,7 +500,7 @@ public class ExpedienteController {
         Validaciones.ValoresIncorrectos = false;
 
         try {
-            Centro c = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro c = centros.validarObtenerId(idE);
             m.addAttribute("datos_centro", c);
             m.addAttribute("especialidades", especialidadesCentros.validarListarSinCaptar(idE));
             PlanillaDatos pd;
@@ -544,7 +544,7 @@ public class ExpedienteController {
         PlanillaDatos pd = null;
 
         try {
-            Centro centro = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro centro = centros.validarObtenerId(idE);
 
             long idEspecialidad = Integer.parseInt(request.getParameter("especialidades"));
             EspecialidadCentro espCentro = especialidadesCentros.validarObtenerId(idEspecialidad);
@@ -668,13 +668,9 @@ public class ExpedienteController {
     public String lstPlanillasDatos(@RequestParam(name = "idE") long idE, Model m) {
 
         try {
-            Centro c = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro c = centros.validarObtenerId(idE);
             m.addAttribute("planillas", planillas.validarListarPlanillasDatosCentro(c.getIdCentro()));
             m.addAttribute("datos_centro", c);
-
-            if (!getUsuarioAutenticado().getRol().getTipoRol().equals("Usuario")) {
-                m.addAttribute("ocultar", true);
-            }
 
             return "expediente/lst_planillas_datos";
         } catch (Exception e) {
@@ -690,21 +686,6 @@ public class ExpedienteController {
             planillas.validarEliminar(idP);
 
             r.addAttribute("idE", p.getCentro().getIdCentro());
-            return "redirect:/lst_planillas";
-        } catch (Exception e) {
-            return "redirect:/error";
-        }
-    }
-
-    @GetMapping(path = {"/vaciar_planillas_datos"})
-    public String vaciarPlanillaDatos(@RequestParam(name = "idC") long idC, RedirectAttributes r) {
-
-        try {
-            Centro centro = centros.validarObtenerId(idC, getUsuarioAutenticado());
-
-            planillas.validarVaciarPlanillasDatosCentro(centro);
-
-            r.addAttribute("idE", idC);
             return "redirect:/lst_planillas";
         } catch (Exception e) {
             return "redirect:/error";
@@ -880,7 +861,7 @@ public class ExpedienteController {
     public String lstEspecialidadesAnteriores(@RequestParam(name = "idE") long idE, Model m) {
 
         try {
-            Centro c = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro c = centros.validarObtenerId(idE);
             m.addAttribute("especialidades", especialidadesAnteriores.especialidadesAnterioresCentro(idE));
             m.addAttribute("datos_centro", c);
 
@@ -893,7 +874,7 @@ public class ExpedienteController {
     @GetMapping(path = {"/lst_esp_actuales"})
     public String lstEspecialidadesActuales(@RequestParam(name = "idE") long idE, Model m) {
         try {
-            Centro c = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro c = centros.validarObtenerId(idE);
             m.addAttribute("especialidades", especialidadesActuales.especialidadesActualesCentro(idE));
             m.addAttribute("datos_centro", c);
 
@@ -906,7 +887,7 @@ public class ExpedienteController {
     @RequestMapping("/prof_asig_pdf")
     public String generarProfAsigPdf(HttpServletResponse response, @RequestParam(name = "idE") long idE) {
         try {
-            Centro cen = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro cen = centros.validarObtenerId(idE);
             generarDocumentoPDF.generarDocumentoPdf_ProfAsignatura(cen, response);
             return null;
         } catch (Exception e) {
@@ -917,7 +898,7 @@ public class ExpedienteController {
     @RequestMapping("/prof_asig_excel")
     public String generarProfAsigExcel(HttpServletResponse response, @RequestParam(name = "idE") long idE) {
         try {
-            Centro cen = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro cen = centros.validarObtenerId(idE);
             generarDocumentoExcel.generarDocumentoExcel_ProfAsignatura(cen, response);
             return null;
         } catch (Exception e) {
@@ -928,7 +909,7 @@ public class ExpedienteController {
     @RequestMapping("/rango_pdf")
     public String generarRangoEdadPdf(HttpServletResponse response, @RequestParam(name = "idE") long idE) {
         try {
-            Centro cen = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro cen = centros.validarObtenerId(idE);
             generarDocumentoPDF.generarDocumentoPdf_RangoEdad(cen, response);
             return null;
         } catch (Exception e) {
@@ -939,7 +920,7 @@ public class ExpedienteController {
     @RequestMapping("/rango_excel")
     public String generarCentrosExcel(HttpServletResponse response, @RequestParam(name = "idE") long idE) {
         try {
-            Centro cen = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro cen = centros.validarObtenerId(idE);
             generarDocumentoExcel.generarDocumentoExcel_RangoEdad(cen, response);
             return null;
         } catch (Exception e) {
@@ -971,7 +952,7 @@ public class ExpedienteController {
 
     private String generarDocumento(long idE, HttpServletResponse response, String tipoDocumento) {
         try {
-            Centro cen = centros.validarObtenerId(idE, getUsuarioAutenticado());
+            Centro cen = centros.validarObtenerId(idE);
             if (tipoDocumento.equals("PDF")) {
                 generarDocumentoPDF.generarDocumentoPdf_FichaCentro(cen, datosFicha(cen), response);
             } else if (tipoDocumento.equals("EXCEL")) {

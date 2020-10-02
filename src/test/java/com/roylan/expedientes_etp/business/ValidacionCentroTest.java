@@ -28,12 +28,6 @@ public class ValidacionCentroTest {
     private GestionarMunicipio mcpios;
 
     @Autowired
-    private GestionarUsuarioImpl usuarios;
-
-    @Autowired
-    private GestionarRolUsuario rol_usuario;
-
-    @Autowired
     private GestionarSector sector;
 
     @Autowired
@@ -43,10 +37,6 @@ public class ValidacionCentroTest {
 
     @Before
     public void init() {
-        RolUsuario r = new RolUsuario();
-        r.setTipoRol("Usuario");
-        rol_usuario.adicionar(r);
-
         Provincia prov = new Provincia();
         prov.setCodProvincia("34");
         prov.setNombProvincia("Santiago de Cuba");
@@ -62,13 +52,6 @@ public class ValidacionCentroTest {
         c.setDireccion("La Risueña s/n");
         c.setSector(sector.obtenerId(1));
         c.setMcpio(mcpios.obtenerId(1));
-
-        Usuario user = new Usuario();
-        user.setNombUsuario("scu");
-        user.setRol(rol_usuario.obtenerId(1));
-        user.setEstado(true);
-        user.setMcpio(mcpios.obtenerId(1));
-        usuarios.adicionar(user);
     }
 
     @Test
@@ -112,7 +95,7 @@ public class ValidacionCentroTest {
         c.setNombCentro("Pepito Tey");
         centros.validarActualizar(1, c);
 
-        cBD = centros.validarObtenerId(1, usuarios.obtenerId(1));
+        cBD = centros.validarObtenerId(1);
         assertEquals(cBD.getNombCentro(), c.getNombCentro());
         assertEquals(cBD.getCodCentro(), c.getCodCentro());
 
@@ -122,7 +105,7 @@ public class ValidacionCentroTest {
         centros.validarEliminar(2);
 
         try {
-            centros.validarObtenerId(1, usuarios.obtenerId(1));
+            centros.validarObtenerId(1);
         } catch (Exception e) {
             System.out.println("Centro ya eliminado: Prueba Exitosa");
         }
